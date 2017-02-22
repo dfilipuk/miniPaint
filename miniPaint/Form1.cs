@@ -22,7 +22,7 @@ namespace miniPaint
 
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
-            CTwoDFigure fig = new CCircle(Color.Blue, new Point[] { new Point(200, 200), new Point(100, 100) }, PictureBox.CreateGraphics());
+            CTwoDFigure fig = new CCircle(Color.Blue, new Point[] { new Point(200, 200), new Point(100, 100) }, gCanvas);
             fig.Draw();
         }
     }
