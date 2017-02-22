@@ -130,7 +130,7 @@ namespace miniPaint
 
         public override void Draw()
         {
-            gCanvas.FillEllipse(brush, coordinates[0].X - radius, coordinates[0].Y - radius, radius, radius);
+            gCanvas.FillEllipse(brush, coordinates[0].X - radius, coordinates[0].Y - radius, 2 * radius, 2 * radius);
         }
     }
 }

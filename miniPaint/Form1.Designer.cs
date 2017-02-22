@@ -28,8 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.pColors = new System.Windows.Forms.Panel();
+            this.btnEllipse = new System.Windows.Forms.Button();
+            this.btnCircle = new System.Windows.Forms.Button();
+            this.btnTriangle = new System.Windows.Forms.Button();
+            this.btnRectangle = new System.Windows.Forms.Button();
+            this.btnLine = new System.Windows.Forms.Button();
+            this.lCurColor = new System.Windows.Forms.Label();
             this.btnBrown = new System.Windows.Forms.Button();
             this.btnPink = new System.Windows.Forms.Button();
             this.btnBlue = new System.Windows.Forms.Button();
@@ -40,7 +47,6 @@
             this.btnRed = new System.Windows.Forms.Button();
             this.btnWhite = new System.Windows.Forms.Button();
             this.btnBlack = new System.Windows.Forms.Button();
-            this.lCurColor = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +66,11 @@
             // 
             // pColors
             // 
+            this.pColors.Controls.Add(this.btnEllipse);
+            this.pColors.Controls.Add(this.btnCircle);
+            this.pColors.Controls.Add(this.btnTriangle);
+            this.pColors.Controls.Add(this.btnRectangle);
+            this.pColors.Controls.Add(this.btnLine);
             this.pColors.Controls.Add(this.lCurColor);
             this.pColors.Controls.Add(this.btnBrown);
             this.pColors.Controls.Add(this.btnPink);
@@ -75,6 +86,70 @@
             this.pColors.Name = "pColors";
             this.pColors.Size = new System.Drawing.Size(70, 629);
             this.pColors.TabIndex = 1;
+            // 
+            // btnEllipse
+            // 
+            this.btnEllipse.BackColor = System.Drawing.Color.White;
+            this.btnEllipse.Image = ((System.Drawing.Image)(resources.GetObject("btnEllipse.Image")));
+            this.btnEllipse.Location = new System.Drawing.Point(10, 473);
+            this.btnEllipse.Name = "btnEllipse";
+            this.btnEllipse.Size = new System.Drawing.Size(55, 55);
+            this.btnEllipse.TabIndex = 15;
+            this.btnEllipse.UseVisualStyleBackColor = false;
+            this.btnEllipse.Click += new System.EventHandler(this.btnEllipse_Click);
+            // 
+            // btnCircle
+            // 
+            this.btnCircle.BackColor = System.Drawing.Color.White;
+            this.btnCircle.Image = ((System.Drawing.Image)(resources.GetObject("btnCircle.Image")));
+            this.btnCircle.Location = new System.Drawing.Point(10, 417);
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.Size = new System.Drawing.Size(55, 55);
+            this.btnCircle.TabIndex = 14;
+            this.btnCircle.UseVisualStyleBackColor = false;
+            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
+            // 
+            // btnTriangle
+            // 
+            this.btnTriangle.BackColor = System.Drawing.Color.White;
+            this.btnTriangle.Image = ((System.Drawing.Image)(resources.GetObject("btnTriangle.Image")));
+            this.btnTriangle.Location = new System.Drawing.Point(10, 361);
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.Size = new System.Drawing.Size(55, 55);
+            this.btnTriangle.TabIndex = 13;
+            this.btnTriangle.UseVisualStyleBackColor = false;
+            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
+            // 
+            // btnRectangle
+            // 
+            this.btnRectangle.BackColor = System.Drawing.Color.White;
+            this.btnRectangle.Image = ((System.Drawing.Image)(resources.GetObject("btnRectangle.Image")));
+            this.btnRectangle.Location = new System.Drawing.Point(10, 305);
+            this.btnRectangle.Name = "btnRectangle";
+            this.btnRectangle.Size = new System.Drawing.Size(55, 55);
+            this.btnRectangle.TabIndex = 12;
+            this.btnRectangle.UseVisualStyleBackColor = false;
+            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
+            // 
+            // btnLine
+            // 
+            this.btnLine.BackColor = System.Drawing.Color.Bisque;
+            this.btnLine.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnLine.Image")));
+            this.btnLine.Location = new System.Drawing.Point(10, 249);
+            this.btnLine.Name = "btnLine";
+            this.btnLine.Size = new System.Drawing.Size(55, 55);
+            this.btnLine.TabIndex = 11;
+            this.btnLine.UseVisualStyleBackColor = false;
+            this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
+            // 
+            // lCurColor
+            // 
+            this.lCurColor.BackColor = System.Drawing.Color.Black;
+            this.lCurColor.Location = new System.Drawing.Point(12, 180);
+            this.lCurColor.Name = "lCurColor";
+            this.lCurColor.Size = new System.Drawing.Size(50, 50);
+            this.lCurColor.TabIndex = 10;
             // 
             // btnBrown
             // 
@@ -216,14 +291,6 @@
             this.btnBlack.UseVisualStyleBackColor = false;
             this.btnBlack.Click += new System.EventHandler(this.btnBlack_Click);
             // 
-            // lCurColor
-            // 
-            this.lCurColor.BackColor = System.Drawing.Color.Black;
-            this.lCurColor.Location = new System.Drawing.Point(10, 180);
-            this.lCurColor.Name = "lCurColor";
-            this.lCurColor.Size = new System.Drawing.Size(50, 50);
-            this.lCurColor.TabIndex = 10;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -259,6 +326,11 @@
         private System.Windows.Forms.Button btnOrange;
         private System.Windows.Forms.Button btnRed;
         private System.Windows.Forms.Label lCurColor;
+        private System.Windows.Forms.Button btnLine;
+        private System.Windows.Forms.Button btnEllipse;
+        private System.Windows.Forms.Button btnCircle;
+        private System.Windows.Forms.Button btnTriangle;
+        private System.Windows.Forms.Button btnRectangle;
     }
 }
 
