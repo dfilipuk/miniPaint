@@ -10,6 +10,7 @@ namespace miniPaint
     abstract class CTwoDFigureFactory
     {
         public abstract CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv);
+        public abstract bool isFigureFull(int pointsAmo);
     }
 
     class CLineFactory : CTwoDFigureFactory
@@ -17,6 +18,11 @@ namespace miniPaint
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CLine(color, points, canv);
+        }
+
+        public override bool isFigureFull(int pointsAmo)
+        {
+            return pointsAmo == 2;
         }
     }
 
@@ -26,6 +32,11 @@ namespace miniPaint
         {
             return new CRectangle(color, points, canv);
         }
+
+        public override bool isFigureFull(int pointsAmo)
+        {
+            return pointsAmo == 2;
+        }
     }
 
     class CTriangleFactory : CTwoDFigureFactory
@@ -33,6 +44,11 @@ namespace miniPaint
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CTriangle(color, points, canv);
+        }
+
+        public override bool isFigureFull(int pointsAmo)
+        {
+            return pointsAmo == 3;
         }
     }
 
@@ -42,6 +58,11 @@ namespace miniPaint
         {
             return new CCircle(color, points, canv);
         }
+
+        public override bool isFigureFull(int pointsAmo)
+        {
+            return pointsAmo == 2;
+        }
     }
 
     class CEllipseFactory : CTwoDFigureFactory
@@ -49,6 +70,11 @@ namespace miniPaint
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CEllipse(color, points, canv);
+        }
+
+        public override bool isFigureFull(int pointsAmo)
+        {
+            return pointsAmo == 2;
         }
     }
 }

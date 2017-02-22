@@ -40,6 +40,7 @@
             this.btnRed = new System.Windows.Forms.Button();
             this.btnWhite = new System.Windows.Forms.Button();
             this.btnBlack = new System.Windows.Forms.Button();
+            this.lCurColor = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // pColors
             // 
+            this.pColors.Controls.Add(this.lCurColor);
             this.pColors.Controls.Add(this.btnBrown);
             this.pColors.Controls.Add(this.btnPink);
             this.pColors.Controls.Add(this.btnBlue);
@@ -86,6 +88,7 @@
             this.btnBrown.Size = new System.Drawing.Size(25, 25);
             this.btnBrown.TabIndex = 9;
             this.btnBrown.UseVisualStyleBackColor = false;
+            this.btnBrown.Click += new System.EventHandler(this.btnBrown_Click);
             // 
             // btnPink
             // 
@@ -99,6 +102,7 @@
             this.btnPink.Size = new System.Drawing.Size(25, 25);
             this.btnPink.TabIndex = 8;
             this.btnPink.UseVisualStyleBackColor = false;
+            this.btnPink.Click += new System.EventHandler(this.btnPink_Click);
             // 
             // btnBlue
             // 
@@ -112,6 +116,7 @@
             this.btnBlue.Size = new System.Drawing.Size(25, 25);
             this.btnBlue.TabIndex = 7;
             this.btnBlue.UseVisualStyleBackColor = false;
+            this.btnBlue.Click += new System.EventHandler(this.btnBlue_Click);
             // 
             // btnAqua
             // 
@@ -125,6 +130,7 @@
             this.btnAqua.Size = new System.Drawing.Size(25, 25);
             this.btnAqua.TabIndex = 6;
             this.btnAqua.UseVisualStyleBackColor = false;
+            this.btnAqua.Click += new System.EventHandler(this.btnAqua_Click);
             // 
             // btnLime
             // 
@@ -138,6 +144,7 @@
             this.btnLime.Size = new System.Drawing.Size(25, 25);
             this.btnLime.TabIndex = 5;
             this.btnLime.UseVisualStyleBackColor = false;
+            this.btnLime.Click += new System.EventHandler(this.btnLime_Click);
             // 
             // btnYellow
             // 
@@ -151,6 +158,7 @@
             this.btnYellow.Size = new System.Drawing.Size(25, 25);
             this.btnYellow.TabIndex = 4;
             this.btnYellow.UseVisualStyleBackColor = false;
+            this.btnYellow.Click += new System.EventHandler(this.btnYellow_Click);
             // 
             // btnOrange
             // 
@@ -164,6 +172,7 @@
             this.btnOrange.Size = new System.Drawing.Size(25, 25);
             this.btnOrange.TabIndex = 3;
             this.btnOrange.UseVisualStyleBackColor = false;
+            this.btnOrange.Click += new System.EventHandler(this.btnOrange_Click);
             // 
             // btnRed
             // 
@@ -177,6 +186,7 @@
             this.btnRed.Size = new System.Drawing.Size(25, 25);
             this.btnRed.TabIndex = 2;
             this.btnRed.UseVisualStyleBackColor = false;
+            this.btnRed.Click += new System.EventHandler(this.btnRed_Click);
             // 
             // btnWhite
             // 
@@ -190,6 +200,7 @@
             this.btnWhite.Size = new System.Drawing.Size(25, 25);
             this.btnWhite.TabIndex = 1;
             this.btnWhite.UseVisualStyleBackColor = false;
+            this.btnWhite.Click += new System.EventHandler(this.btnWhite_Click);
             // 
             // btnBlack
             // 
@@ -203,6 +214,15 @@
             this.btnBlack.Size = new System.Drawing.Size(25, 25);
             this.btnBlack.TabIndex = 0;
             this.btnBlack.UseVisualStyleBackColor = false;
+            this.btnBlack.Click += new System.EventHandler(this.btnBlack_Click);
+            // 
+            // lCurColor
+            // 
+            this.lCurColor.BackColor = System.Drawing.Color.Black;
+            this.lCurColor.Location = new System.Drawing.Point(10, 180);
+            this.lCurColor.Name = "lCurColor";
+            this.lCurColor.Size = new System.Drawing.Size(50, 50);
+            this.lCurColor.TabIndex = 10;
             // 
             // frmMain
             // 
@@ -238,6 +258,7 @@
         private System.Windows.Forms.Button btnYellow;
         private System.Windows.Forms.Button btnOrange;
         private System.Windows.Forms.Button btnRed;
+        private System.Windows.Forms.Label lCurColor;
     }
 }
 
