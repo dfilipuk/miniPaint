@@ -47,8 +47,16 @@
             this.btnRed = new System.Windows.Forms.Button();
             this.btnWhite = new System.Windows.Forms.Button();
             this.btnBlack = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCancelCurrentFigure = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteLastFigure = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteAll = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PictureBox
@@ -57,9 +65,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PictureBox.BackColor = System.Drawing.Color.White;
-            this.PictureBox.Location = new System.Drawing.Point(12, 12);
+            this.PictureBox.Location = new System.Drawing.Point(12, 42);
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(1072, 629);
+            this.PictureBox.Size = new System.Drawing.Size(1072, 599);
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             this.PictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
@@ -82,9 +90,9 @@
             this.pColors.Controls.Add(this.btnRed);
             this.pColors.Controls.Add(this.btnWhite);
             this.pColors.Controls.Add(this.btnBlack);
-            this.pColors.Location = new System.Drawing.Point(1100, 12);
+            this.pColors.Location = new System.Drawing.Point(1100, 42);
             this.pColors.Name = "pColors";
-            this.pColors.Size = new System.Drawing.Size(70, 629);
+            this.pColors.Size = new System.Drawing.Size(70, 599);
             this.pColors.TabIndex = 1;
             // 
             // btnEllipse
@@ -291,6 +299,68 @@
             this.btnBlack.UseVisualStyleBackColor = false;
             this.btnBlack.Click += new System.EventHandler(this.btnBlack_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFile,
+            this.tsmiEdit});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1182, 28);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "msMenu";
+            // 
+            // tsmiFile
+            // 
+            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiExit});
+            this.tsmiFile.Name = "tsmiFile";
+            this.tsmiFile.Size = new System.Drawing.Size(57, 24);
+            this.tsmiFile.Text = "Файл";
+            // 
+            // tsmiEdit
+            // 
+            this.tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCancelCurrentFigure,
+            this.tsmiDeleteLastFigure,
+            this.tsmiDeleteAll});
+            this.tsmiEdit.Name = "tsmiEdit";
+            this.tsmiEdit.Size = new System.Drawing.Size(72, 24);
+            this.tsmiEdit.Text = "Правка";
+            // 
+            // tsmiExit
+            // 
+            this.tsmiExit.Name = "tsmiExit";
+            this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsmiExit.Size = new System.Drawing.Size(181, 26);
+            this.tsmiExit.Text = "Выход";
+            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
+            // 
+            // tsmiCancelCurrentFigure
+            // 
+            this.tsmiCancelCurrentFigure.Name = "tsmiCancelCurrentFigure";
+            this.tsmiCancelCurrentFigure.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.tsmiCancelCurrentFigure.Size = new System.Drawing.Size(329, 26);
+            this.tsmiCancelCurrentFigure.Text = "Отменить текущую фигуру";
+            this.tsmiCancelCurrentFigure.Click += new System.EventHandler(this.tsmiCancelCurrentFigure_Click);
+            // 
+            // tsmiDeleteLastFigure
+            // 
+            this.tsmiDeleteLastFigure.Name = "tsmiDeleteLastFigure";
+            this.tsmiDeleteLastFigure.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.tsmiDeleteLastFigure.Size = new System.Drawing.Size(329, 26);
+            this.tsmiDeleteLastFigure.Text = "Удалить последнюю фигуру";
+            this.tsmiDeleteLastFigure.Click += new System.EventHandler(this.tsmiDeleteLastFigure_Click);
+            // 
+            // tsmiDeleteAll
+            // 
+            this.tsmiDeleteAll.Name = "tsmiDeleteAll";
+            this.tsmiDeleteAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.tsmiDeleteAll.Size = new System.Drawing.Size(329, 26);
+            this.tsmiDeleteAll.Text = "Удалить всё";
+            this.tsmiDeleteAll.Click += new System.EventHandler(this.tsmiDeleteAll_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -299,15 +369,20 @@
             this.ClientSize = new System.Drawing.Size(1182, 653);
             this.Controls.Add(this.pColors);
             this.Controls.Add(this.PictureBox);
+            this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "miniPaint";
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.pColors.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -331,6 +406,13 @@
         private System.Windows.Forms.Button btnCircle;
         private System.Windows.Forms.Button btnTriangle;
         private System.Windows.Forms.Button btnRectangle;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCancelCurrentFigure;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteLastFigure;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteAll;
     }
 }
 

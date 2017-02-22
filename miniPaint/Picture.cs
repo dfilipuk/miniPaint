@@ -16,6 +16,7 @@ namespace miniPaint
         Graphics gCanvas;
         CTwoDFigureFactory curFigure;
         int pointsAmo;
+        readonly Color canvasColor;
 
         public Color curColor { get; set; }
         
@@ -25,6 +26,7 @@ namespace miniPaint
             points = new List<Point>();
 
             curColor = Color.Black;
+            canvasColor = Color.White;
             curFigure = new CLineFactory();
             pointsAmo = 0;
             gCanvas = canv;
@@ -46,10 +48,25 @@ namespace miniPaint
                 addFigure(); 
         }
 
-        void deletePoints()
+        public void deletePoints()
         {
             points.Clear();
             pointsAmo = 0;
+        }
+
+        public void Clear()
+        {
+            deletePoints();
+            figures.Clear();
+            gCanvas.Clear(canvasColor);
+        }
+
+        public void deleteLastFigure()
+        {
+            deletePoints();
+            if (figures.Count > 0)
+                figures.RemoveAt(figures.Count - 1);
+            Redraw();
         }
 
         void addFigure()
@@ -57,6 +74,13 @@ namespace miniPaint
             figures.Add(curFigure.CreateFigure(curColor, points.ToArray(), gCanvas));
             points.Clear();
             pointsAmo = 0;
+        }
+
+        void Redraw()
+        {
+            gCanvas.Clear(canvasColor);
+            for (int i = 0; i < figures.Count; i++)
+                figures[i].Draw();
         }
 
         public CTwoDFigureFactory currentFigure

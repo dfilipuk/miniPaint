@@ -137,5 +137,25 @@ namespace miniPaint
             btnCircle.BackColor = standartBtnColor;
             btnEllipse.BackColor = pressedBtnColor;
         }
+
+        private void tsmiExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void tsmiCancelCurrentFigure_Click(object sender, EventArgs e)
+        {
+            picture.deletePoints();
+        }
+
+        private void tsmiDeleteAll_Click(object sender, EventArgs e)
+        {
+            picture.Clear();
+        }
+
+        private void tsmiDeleteLastFigure_Click(object sender, EventArgs e)
+        {
+            picture.deleteLastFigure();
+        }
     }
 }
