@@ -14,6 +14,7 @@ namespace miniPaint
         {
             deltX = Math.Abs(coordinates[0].X - coordinates[1].X);
             deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
+            changeCoordinates();
             Draw();
         }
         public override double getPerimeter()
@@ -24,6 +25,20 @@ namespace miniPaint
         public override void Draw()
         {
             gCanvas.FillRectangle(brush, coordinates[0].X, coordinates[0].Y, deltX, deltY);
+        }
+
+        void changeCoordinates()
+        {
+            int x1 = coordinates[0].X;
+            int x2 = coordinates[1].X;
+            int y1 = coordinates[0].Y;
+            int y2 = coordinates[1].Y;
+
+            coordinates[0].X = x1 < x2 ? x1 : x2;
+            coordinates[0].Y = y1 < y2 ? y1 : y2;
+
+            coordinates[1].X = x1 > x2 ? x1 : x2;
+            coordinates[1].Y = y1 > y2 ? y1 : y2;
         }
     }
 }
