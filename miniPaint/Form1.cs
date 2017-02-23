@@ -18,7 +18,7 @@ namespace miniPaint
         public frmMain()
         {
             InitializeComponent();
-            picture = CPicture.getPicture(PictureBox.CreateGraphics());
+            picture = new CPicture(PictureBox.CreateGraphics());
             standartBtnColor = Color.White;
             pressedBtnColor = Color.Bisque;
         }
@@ -90,7 +90,7 @@ namespace miniPaint
 
         private void btnLine_Click(object sender, EventArgs e)
         {
-            picture.currentFigure = new CLineFactory();
+            picture.currentFigure = CLineFactory.getFactory();
             btnLine.BackColor = pressedBtnColor;
             btnRectangle.BackColor = standartBtnColor;
             btnTriangle.BackColor = standartBtnColor;
@@ -100,7 +100,7 @@ namespace miniPaint
 
         private void btnRectangle_Click(object sender, EventArgs e)
         {
-            picture.currentFigure = new CRectangleFactory();
+            picture.currentFigure = CRectangleFactory.getFactory();
             btnLine.BackColor = standartBtnColor;
             btnRectangle.BackColor = pressedBtnColor;
             btnTriangle.BackColor = standartBtnColor;
@@ -110,7 +110,7 @@ namespace miniPaint
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
-            picture.currentFigure = new CTriangleFactory();
+            picture.currentFigure = CTriangleFactory.getFactory();
             btnLine.BackColor = standartBtnColor;
             btnRectangle.BackColor = standartBtnColor;
             btnTriangle.BackColor = pressedBtnColor;
@@ -120,7 +120,7 @@ namespace miniPaint
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
-            picture.currentFigure = new CCircleFactory();
+            picture.currentFigure = CCircleFactory.getFactory();
             btnLine.BackColor = standartBtnColor;
             btnRectangle.BackColor = standartBtnColor;
             btnTriangle.BackColor = standartBtnColor;
@@ -130,7 +130,7 @@ namespace miniPaint
 
         private void btnEllipse_Click(object sender, EventArgs e)
         {
-            picture.currentFigure = new CEllipseFactory();
+            picture.currentFigure = CEllipseFactory.getFactory();
             btnLine.BackColor = standartBtnColor;
             btnRectangle.BackColor = standartBtnColor;
             btnTriangle.BackColor = standartBtnColor;

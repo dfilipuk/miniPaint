@@ -15,6 +15,16 @@ namespace miniPaint
 
     class CLineFactory : CTwoDFigureFactory
     {
+        static CLineFactory factory;
+
+        CLineFactory() { }
+
+        public static CLineFactory getFactory()
+        {
+            if (factory == null)
+                factory = new CLineFactory();
+            return factory;
+        }
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CLine(color, points, canv);
@@ -28,6 +38,17 @@ namespace miniPaint
 
     class CRectangleFactory : CTwoDFigureFactory
     {
+        static CRectangleFactory factory;
+
+        CRectangleFactory()
+        { }
+
+        public static CRectangleFactory getFactory()
+        {
+            if (factory == null)
+                factory = new CRectangleFactory();
+            return factory;
+        }
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CRectangle(color, points, canv);
@@ -41,6 +62,17 @@ namespace miniPaint
 
     class CTriangleFactory : CTwoDFigureFactory
     {
+        static CTriangleFactory factory;
+
+        CTriangleFactory()
+        { }
+
+        public static CTriangleFactory getFactory()
+        {
+            if (factory == null)
+                factory = new CTriangleFactory();
+            return factory;
+        }
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CTriangle(color, points, canv);
@@ -54,6 +86,17 @@ namespace miniPaint
 
     class CCircleFactory : CTwoDFigureFactory
     {
+        static CCircleFactory factory;
+
+        CCircleFactory()
+        { }
+
+        public static CCircleFactory getFactory()
+        {
+            if (factory == null)
+                factory = new CCircleFactory();
+            return factory;
+        }
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CCircle(color, points, canv);
@@ -67,6 +110,17 @@ namespace miniPaint
 
     class CEllipseFactory : CTwoDFigureFactory
     {
+        static CEllipseFactory factory;
+
+        CEllipseFactory()
+        { }
+
+        public static CEllipseFactory getFactory()
+        {
+            if (factory == null)
+                factory = new CEllipseFactory();
+            return factory;
+        }
         public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
         {
             return new CEllipse(color, points, canv);

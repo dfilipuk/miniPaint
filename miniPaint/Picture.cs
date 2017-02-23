@@ -9,8 +9,6 @@ namespace miniPaint
 {
     class CPicture
     {
-        static CPicture instanse;
-
         List<CTwoDFigure> figures;
         List<Point> points;
         Graphics gCanvas;
@@ -20,23 +18,16 @@ namespace miniPaint
 
         public Color curColor { get; set; }
         
-        CPicture(Graphics canv) 
+        public CPicture(Graphics canv) 
         {
             figures = new List<CTwoDFigure>();
             points = new List<Point>();
 
             curColor = Color.Black;
             canvasColor = Color.White;
-            curFigure = new CLineFactory();
+            curFigure = CLineFactory.getFactory();
             pointsAmo = 0;
             gCanvas = canv;
-        }
-
-        public static CPicture getPicture(Graphics canv)
-        {
-            if (instanse == null)
-                instanse = new CPicture(canv);
-            return instanse;
         }
 
         public void addPoint(int x, int y)
