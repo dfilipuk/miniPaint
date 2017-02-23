@@ -68,13 +68,15 @@
             this.PictureBox.BackColor = System.Drawing.Color.White;
             this.PictureBox.Location = new System.Drawing.Point(12, 42);
             this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(1072, 599);
+            this.PictureBox.Size = new System.Drawing.Size(1372, 749);
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             this.PictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
             // 
             // pColors
             // 
+            this.pColors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pColors.Controls.Add(this.btnBezier);
             this.pColors.Controls.Add(this.btnEllipse);
             this.pColors.Controls.Add(this.btnCircle);
@@ -92,16 +94,17 @@
             this.pColors.Controls.Add(this.btnRed);
             this.pColors.Controls.Add(this.btnWhite);
             this.pColors.Controls.Add(this.btnBlack);
-            this.pColors.Location = new System.Drawing.Point(1100, 42);
+            this.pColors.Location = new System.Drawing.Point(1400, 42);
             this.pColors.Name = "pColors";
-            this.pColors.Size = new System.Drawing.Size(70, 599);
+            this.pColors.Size = new System.Drawing.Size(70, 749);
             this.pColors.TabIndex = 1;
             // 
             // btnEllipse
             // 
+            this.btnEllipse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEllipse.BackColor = System.Drawing.Color.White;
             this.btnEllipse.Image = ((System.Drawing.Image)(resources.GetObject("btnEllipse.Image")));
-            this.btnEllipse.Location = new System.Drawing.Point(10, 473);
+            this.btnEllipse.Location = new System.Drawing.Point(10, 623);
             this.btnEllipse.Name = "btnEllipse";
             this.btnEllipse.Size = new System.Drawing.Size(55, 55);
             this.btnEllipse.TabIndex = 15;
@@ -110,9 +113,10 @@
             // 
             // btnCircle
             // 
+            this.btnCircle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCircle.BackColor = System.Drawing.Color.White;
             this.btnCircle.Image = ((System.Drawing.Image)(resources.GetObject("btnCircle.Image")));
-            this.btnCircle.Location = new System.Drawing.Point(10, 417);
+            this.btnCircle.Location = new System.Drawing.Point(10, 567);
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(55, 55);
             this.btnCircle.TabIndex = 14;
@@ -121,9 +125,10 @@
             // 
             // btnTriangle
             // 
+            this.btnTriangle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTriangle.BackColor = System.Drawing.Color.White;
             this.btnTriangle.Image = ((System.Drawing.Image)(resources.GetObject("btnTriangle.Image")));
-            this.btnTriangle.Location = new System.Drawing.Point(10, 361);
+            this.btnTriangle.Location = new System.Drawing.Point(10, 511);
             this.btnTriangle.Name = "btnTriangle";
             this.btnTriangle.Size = new System.Drawing.Size(55, 55);
             this.btnTriangle.TabIndex = 13;
@@ -132,9 +137,10 @@
             // 
             // btnRectangle
             // 
+            this.btnRectangle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRectangle.BackColor = System.Drawing.Color.White;
             this.btnRectangle.Image = ((System.Drawing.Image)(resources.GetObject("btnRectangle.Image")));
-            this.btnRectangle.Location = new System.Drawing.Point(10, 305);
+            this.btnRectangle.Location = new System.Drawing.Point(10, 455);
             this.btnRectangle.Name = "btnRectangle";
             this.btnRectangle.Size = new System.Drawing.Size(55, 55);
             this.btnRectangle.TabIndex = 12;
@@ -143,10 +149,11 @@
             // 
             // btnLine
             // 
+            this.btnLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLine.BackColor = System.Drawing.Color.Bisque;
             this.btnLine.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnLine.Image")));
-            this.btnLine.Location = new System.Drawing.Point(10, 249);
+            this.btnLine.Location = new System.Drawing.Point(10, 399);
             this.btnLine.Name = "btnLine";
             this.btnLine.Size = new System.Drawing.Size(55, 55);
             this.btnLine.TabIndex = 11;
@@ -309,7 +316,7 @@
             this.tsmiEdit});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1182, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1482, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "msMenu";
             // 
@@ -365,9 +372,10 @@
             // 
             // btnBezier
             // 
+            this.btnBezier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBezier.BackColor = System.Drawing.Color.White;
             this.btnBezier.Image = ((System.Drawing.Image)(resources.GetObject("btnBezier.Image")));
-            this.btnBezier.Location = new System.Drawing.Point(10, 529);
+            this.btnBezier.Location = new System.Drawing.Point(10, 679);
             this.btnBezier.Name = "btnBezier";
             this.btnBezier.Size = new System.Drawing.Size(55, 55);
             this.btnBezier.TabIndex = 16;
@@ -379,7 +387,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1182, 653);
+            this.ClientSize = new System.Drawing.Size(1482, 803);
             this.Controls.Add(this.pColors);
             this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.menuStrip1);
