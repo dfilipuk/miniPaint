@@ -120,14 +120,14 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnBezier.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAFqSURBVFhH5ZfBSgJRFIZHfQbFTe1cpDEDWVupiGqqVSCuTLJFGUH7SiLwAVy0aGX5CAXmspVD
-        r+EbtG11+85wamU1QZwCf/gW/2HmfpeZO4LeVGbOL70IWu3zHzbQglCrfZB3oaDVPsiHkNJqG8Qz0NNq
-        H+QdqGi1DeIsDLTaB3kfFrXaBvERtLXaBnEN7sD25CNMwwXcQEbHNkFYhkdo6uh3s72zFl21T1xzv+qK
-        wfxIZshyUId7uIZ8fPF34cIInqGRhKAcNC7Pj91GuOLo74zhFZ7gFCbeq4gr3nQcSpINyKKyuEjGe/Xd
-        D/n65rLzF/xJ93yGuCLVfx0uzIM8zgeQx5uTeTEoRTx6x6tw4dZqssV+GmQHIAdpSUc2QZgB+XTkE0rr
-        2CYIU3ALNR3ZBvEZHGq1DWL58ehrtQ/yAWS12gZxBTpa7YO8B7NabYNYTv5Qq32QF6Cr1T7IQ2hptQ/y
-        Kf+v9nfxvDdlmZGIB4FWDQAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAWpJREFUWEfl
+        l8FKAlEUhkd9BsVN7VykMQNZW6mIaqpVIK5MskUZQftKIvABXLRoZfkIBeaylUOv4Ru0bXX7znBqZTVB
+        nAJ/+Bb/YeZ+l5k7gt5UZs4vvQha7fMfNtCCUKt9kHehoNU+yIeQ0mobxDPQ02of5B2oaLUN4iwMtNoH
+        eR8WtdoG8RG0tdoGcQ3uwPbkI0zDBdxARsc2QViGR2jq6HezvbMWXbVPXHO/6orB/EhmyHJQh3u4hnx8
+        8XfhwgieoZGEoBw0Ls+P3Ua44ujvjOEVnuAUJt6riCvedBxKkg3IorK4SMZ79d0P+frmsvMX/En3fIa4
+        ItV/HS7MgzzOB5DHm5N5MShFPHrHq3Dh1mqyxX4aZAcgB2lJRzZBmAH5dOQTSuvYJghTcAs1HdkG8Rkc
+        arUNYvnx6Gu1D/IBZLXaBnEFOlrtg7wHs1ptg1hO/lCrfZAXoKvVPshDaGm1D/Ip/6/2d/G8N2WZkYgH
+        gVYNAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnEllipse.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -182,8 +182,11 @@
         PEAs4gB8nC25l4LS4AAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="msMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="timerRedraw.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>133, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

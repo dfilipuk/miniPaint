@@ -21,6 +21,7 @@ namespace miniPaint
             picture = new CPicture(PictureBox.CreateGraphics());
             standartBtnColor = Color.White;
             pressedBtnColor = Color.Bisque;
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
@@ -172,6 +173,25 @@ namespace miniPaint
         private void tsmiDeleteLastFigure_Click(object sender, EventArgs e)
         {
             picture.deleteLastFigure();
+        }
+
+        private void frmMain_SizeChanged(object sender, EventArgs e)
+        {
+            if (((this.WindowState == FormWindowState.Maximized) || (this.WindowState == FormWindowState.Normal)) && (picture != null))
+            {
+                timerRedraw.Enabled = true;
+            }
+        }
+
+        private void PictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            picture.Redraw();
+        }
+
+        private void timerRedraw_Tick(object sender, EventArgs e)
+        {
+            picture.Redraw();
+            timerRedraw.Enabled = false;
         }
     }
 }

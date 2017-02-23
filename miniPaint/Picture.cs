@@ -67,7 +67,7 @@ namespace miniPaint
             pointsAmo = 0;
         }
 
-        void Redraw()
+        public void Redraw()
         {
             gCanvas.Clear(canvasColor);
             for (int i = 0; i < figures.Count; i++)

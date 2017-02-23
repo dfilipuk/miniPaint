@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.pColors = new System.Windows.Forms.Panel();
+            this.btnBezier = new System.Windows.Forms.Button();
             this.btnEllipse = new System.Windows.Forms.Button();
             this.btnCircle = new System.Windows.Forms.Button();
             this.btnTriangle = new System.Windows.Forms.Button();
@@ -47,17 +49,17 @@
             this.btnRed = new System.Windows.Forms.Button();
             this.btnWhite = new System.Windows.Forms.Button();
             this.btnBlack = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.msMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCancelCurrentFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteLastFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnBezier = new System.Windows.Forms.Button();
+            this.timerRedraw = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // PictureBox
@@ -71,6 +73,7 @@
             this.PictureBox.Size = new System.Drawing.Size(1372, 749);
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
+            this.PictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_Paint);
             this.PictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
             // 
             // pColors
@@ -98,6 +101,18 @@
             this.pColors.Name = "pColors";
             this.pColors.Size = new System.Drawing.Size(70, 749);
             this.pColors.TabIndex = 1;
+            // 
+            // btnBezier
+            // 
+            this.btnBezier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBezier.BackColor = System.Drawing.Color.White;
+            this.btnBezier.Image = ((System.Drawing.Image)(resources.GetObject("btnBezier.Image")));
+            this.btnBezier.Location = new System.Drawing.Point(10, 679);
+            this.btnBezier.Name = "btnBezier";
+            this.btnBezier.Size = new System.Drawing.Size(55, 55);
+            this.btnBezier.TabIndex = 16;
+            this.btnBezier.UseVisualStyleBackColor = false;
+            this.btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
             // 
             // btnEllipse
             // 
@@ -308,17 +323,16 @@
             this.btnBlack.UseVisualStyleBackColor = false;
             this.btnBlack.Click += new System.EventHandler(this.btnBlack_Click);
             // 
-            // menuStrip1
+            // msMenu
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
             this.tsmiEdit});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1482, 28);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "msMenu";
+            this.msMenu.Location = new System.Drawing.Point(0, 0);
+            this.msMenu.Name = "msMenu";
+            this.msMenu.Size = new System.Drawing.Size(1482, 28);
+            this.msMenu.TabIndex = 2;
             // 
             // tsmiFile
             // 
@@ -370,17 +384,9 @@
             this.tsmiDeleteAll.Text = "Удалить всё";
             this.tsmiDeleteAll.Click += new System.EventHandler(this.tsmiDeleteAll_Click);
             // 
-            // btnBezier
+            // timerRedraw
             // 
-            this.btnBezier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBezier.BackColor = System.Drawing.Color.White;
-            this.btnBezier.Image = ((System.Drawing.Image)(resources.GetObject("btnBezier.Image")));
-            this.btnBezier.Location = new System.Drawing.Point(10, 679);
-            this.btnBezier.Name = "btnBezier";
-            this.btnBezier.Size = new System.Drawing.Size(55, 55);
-            this.btnBezier.TabIndex = 16;
-            this.btnBezier.UseVisualStyleBackColor = false;
-            this.btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
+            this.timerRedraw.Tick += new System.EventHandler(this.timerRedraw_Tick);
             // 
             // frmMain
             // 
@@ -390,19 +396,20 @@
             this.ClientSize = new System.Drawing.Size(1482, 803);
             this.Controls.Add(this.pColors);
             this.Controls.Add(this.PictureBox);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.msMenu);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.msMenu;
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "miniPaint";
+            this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.pColors.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.msMenu.ResumeLayout(false);
+            this.msMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,7 +435,7 @@
         private System.Windows.Forms.Button btnCircle;
         private System.Windows.Forms.Button btnTriangle;
         private System.Windows.Forms.Button btnRectangle;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
@@ -436,6 +443,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteLastFigure;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteAll;
         private System.Windows.Forms.Button btnBezier;
+        private System.Windows.Forms.Timer timerRedraw;
     }
 }
 
