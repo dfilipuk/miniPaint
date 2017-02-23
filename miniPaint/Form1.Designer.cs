@@ -49,11 +49,12 @@
             this.btnBlack = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCancelCurrentFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteLastFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnBezier = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -74,6 +75,7 @@
             // 
             // pColors
             // 
+            this.pColors.Controls.Add(this.btnBezier);
             this.pColors.Controls.Add(this.btnEllipse);
             this.pColors.Controls.Add(this.btnCircle);
             this.pColors.Controls.Add(this.btnTriangle);
@@ -319,6 +321,14 @@
             this.tsmiFile.Size = new System.Drawing.Size(57, 24);
             this.tsmiFile.Text = "Файл";
             // 
+            // tsmiExit
+            // 
+            this.tsmiExit.Name = "tsmiExit";
+            this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.tsmiExit.Size = new System.Drawing.Size(181, 26);
+            this.tsmiExit.Text = "Выход";
+            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
+            // 
             // tsmiEdit
             // 
             this.tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -328,14 +338,6 @@
             this.tsmiEdit.Name = "tsmiEdit";
             this.tsmiEdit.Size = new System.Drawing.Size(72, 24);
             this.tsmiEdit.Text = "Правка";
-            // 
-            // tsmiExit
-            // 
-            this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.tsmiExit.Size = new System.Drawing.Size(181, 26);
-            this.tsmiExit.Text = "Выход";
-            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
             // tsmiCancelCurrentFigure
             // 
@@ -361,6 +363,17 @@
             this.tsmiDeleteAll.Text = "Удалить всё";
             this.tsmiDeleteAll.Click += new System.EventHandler(this.tsmiDeleteAll_Click);
             // 
+            // btnBezier
+            // 
+            this.btnBezier.BackColor = System.Drawing.Color.White;
+            this.btnBezier.Image = ((System.Drawing.Image)(resources.GetObject("btnBezier.Image")));
+            this.btnBezier.Location = new System.Drawing.Point(10, 529);
+            this.btnBezier.Name = "btnBezier";
+            this.btnBezier.Size = new System.Drawing.Size(55, 55);
+            this.btnBezier.TabIndex = 16;
+            this.btnBezier.UseVisualStyleBackColor = false;
+            this.btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -372,6 +385,7 @@
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "frmMain";
@@ -413,6 +427,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCancelCurrentFigure;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteLastFigure;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteAll;
+        private System.Windows.Forms.Button btnBezier;
     }
 }
 

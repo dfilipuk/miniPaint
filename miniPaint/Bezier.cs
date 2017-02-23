@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace miniPaint
 {
-    class CLine : CTwoDFigure
+    class CBezier : CTwoDFigure
     {
-        public CLine(Color color, Point[] points, Graphics canv) : base(color, points, canv)
+        public CBezier(Color color, Point[] points, Graphics canv) : base(color, points, canv)
         {
             Draw();
         }
@@ -22,7 +22,7 @@ namespace miniPaint
 
         public override void Draw()
         {
-            gCanvas.DrawLine(new Pen(brush, 3), coordinates[0], coordinates[1]);
+            gCanvas.DrawBezier(new Pen(brush, 3), coordinates[0], coordinates[2], coordinates[3], coordinates[1]);
         }
     }
 }

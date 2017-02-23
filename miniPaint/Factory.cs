@@ -131,4 +131,28 @@ namespace miniPaint
             return pointsAmo == 2;
         }
     }
+
+    class CBezierFactory : CTwoDFigureFactory
+    {
+        static CBezierFactory factory;
+
+        CBezierFactory()
+        { }
+
+        public static CBezierFactory getFactory()
+        {
+            if (factory == null)
+                factory = new CBezierFactory();
+            return factory;
+        }
+        public override CTwoDFigure CreateFigure(Color color, Point[] points, Graphics canv)
+        {
+            return new CBezier(color, points, canv);
+        }
+
+        public override bool isFigureFull(int pointsAmo)
+        {
+            return pointsAmo == 4;
+        }
+    }
 }

@@ -96,6 +96,7 @@ namespace miniPaint
             btnTriangle.BackColor = standartBtnColor;
             btnCircle.BackColor = standartBtnColor;
             btnEllipse.BackColor = standartBtnColor;
+            btnBezier.BackColor = standartBtnColor;
         }
 
         private void btnRectangle_Click(object sender, EventArgs e)
@@ -106,6 +107,7 @@ namespace miniPaint
             btnTriangle.BackColor = standartBtnColor;
             btnCircle.BackColor = standartBtnColor;
             btnEllipse.BackColor = standartBtnColor;
+            btnBezier.BackColor = standartBtnColor;
         }
 
         private void btnTriangle_Click(object sender, EventArgs e)
@@ -116,6 +118,7 @@ namespace miniPaint
             btnTriangle.BackColor = pressedBtnColor;
             btnCircle.BackColor = standartBtnColor;
             btnEllipse.BackColor = standartBtnColor;
+            btnBezier.BackColor = standartBtnColor;
         }
 
         private void btnCircle_Click(object sender, EventArgs e)
@@ -126,6 +129,7 @@ namespace miniPaint
             btnTriangle.BackColor = standartBtnColor;
             btnCircle.BackColor = pressedBtnColor;
             btnEllipse.BackColor = standartBtnColor;
+            btnBezier.BackColor = standartBtnColor;
         }
 
         private void btnEllipse_Click(object sender, EventArgs e)
@@ -136,6 +140,18 @@ namespace miniPaint
             btnTriangle.BackColor = standartBtnColor;
             btnCircle.BackColor = standartBtnColor;
             btnEllipse.BackColor = pressedBtnColor;
+            btnBezier.BackColor = standartBtnColor;
+        }
+
+        private void btnBezier_Click(object sender, EventArgs e)
+        {
+            picture.currentFigure = CBezierFactory.getFactory();
+            btnLine.BackColor = standartBtnColor;
+            btnRectangle.BackColor = standartBtnColor;
+            btnTriangle.BackColor = standartBtnColor;
+            btnCircle.BackColor = standartBtnColor;
+            btnEllipse.BackColor = standartBtnColor;
+            btnBezier.BackColor = pressedBtnColor;
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
