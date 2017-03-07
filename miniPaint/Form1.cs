@@ -14,11 +14,15 @@ namespace miniPaint
     {
         readonly Color standartBtnColor;
         readonly Color pressedBtnColor;
+
         CPicture picture;
+
         public frmMain()
         {
             InitializeComponent();
-            picture = new CPicture(PictureBox.CreateGraphics());
+
+            picture = new CPicture(PictureBox, CLineFactory.getFactory());
+
             standartBtnColor = Color.White;
             pressedBtnColor = Color.Bisque;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
@@ -181,11 +185,6 @@ namespace miniPaint
             {
                 timerRedraw.Enabled = true;
             }
-        }
-
-        private void PictureBox_Paint(object sender, PaintEventArgs e)
-        {
-            picture.Redraw();
         }
 
         private void timerRedraw_Tick(object sender, EventArgs e)

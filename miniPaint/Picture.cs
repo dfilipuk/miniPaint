@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace miniPaint
 {
@@ -12,22 +13,28 @@ namespace miniPaint
         List<CTwoDFigure> figures;
         List<Point> points;
         Graphics gCanvas;
+        Bitmap buffer;
+        PictureBox curPicture;
         CTwoDFigureFactory curFigure;
         Color curColor;
 
         int pointsAmo;
         readonly Color canvasColor;
-        
-        public CPicture(Graphics canv) 
+
+        public CPicture(PictureBox pb, CTwoDFigureFactory factory)
         {
             figures = new List<CTwoDFigure>();
             points = new List<Point>();
 
             currentColor = Color.Black;
             canvasColor = Color.White;
-            currentFigure = CLineFactory.getFactory();
+            currentFigure = factory;
             pointsAmo = 0;
-            gCanvas = canv;
+
+            curPicture = pb;
+            buffer = new Bitmap(curPicture.Width, curPicture.Height);
+            gCanvas = Graphics.FromImage(buffer);
+
         }
 
         public void addPoint(int x, int y)
@@ -36,13 +43,19 @@ namespace miniPaint
             pointsAmo++;
 
             if (curFigure.isFigureFull(pointsAmo))
-                addFigure(); 
+            {
+                addFigure();
+                Redraw();
+            }
+            else
+                drawPoint(x, y, curColor);
         }
 
         public void deletePoints()
         {
             points.Clear();
             pointsAmo = 0;
+            Redraw();
         }
 
         public void Clear()
@@ -60,6 +73,17 @@ namespace miniPaint
             Redraw();
         }
 
+        public void Redraw()
+        {
+            if (gCanvas != null)
+            {
+                gCanvas.Clear(canvasColor);
+                for (int i = 0; i < figures.Count; i++)
+                    figures[i].Draw();
+                curPicture.Image = buffer;
+            }
+        }
+
         void addFigure()
         {
             figures.Add(currentFigure.CreateFigure(curColor, points.ToArray(), gCanvas));
@@ -67,11 +91,10 @@ namespace miniPaint
             pointsAmo = 0;
         }
 
-        public void Redraw()
+        void drawPoint(int x, int y, Color color)
         {
-            gCanvas.Clear(canvasColor);
-            for (int i = 0; i < figures.Count; i++)
-                figures[i].Draw();
+            gCanvas.FillEllipse(new SolidBrush(color), x - 3, y - 3, 6, 6);
+            curPicture.Image = buffer;
         }
 
         public CTwoDFigureFactory currentFigure

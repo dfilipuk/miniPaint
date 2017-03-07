@@ -9,10 +9,7 @@ namespace miniPaint
 {
     class CTriangle : CTwoDFigure
     {
-        public CTriangle(Color color, Point[] points, Graphics canv) : base(color, points, canv)
-        {
-            Draw();
-        }
+        public CTriangle(Color color, Point[] points, Graphics canv) : base(color, points, canv) { }
         public override double getPerimeter()
         {
             double res = 0;

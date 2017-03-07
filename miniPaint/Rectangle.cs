@@ -15,7 +15,6 @@ namespace miniPaint
             deltX = Math.Abs(coordinates[0].X - coordinates[1].X);
             deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
             changeCoordinates();
-            Draw();
         }
         public override double getPerimeter()
         {

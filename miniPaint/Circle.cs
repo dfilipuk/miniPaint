@@ -15,7 +15,6 @@ namespace miniPaint
             int deltX = Math.Abs(coordinates[0].X - coordinates[1].X);
             int deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
             radius = (int)Math.Sqrt(deltX * deltX + deltY * deltY);
-            Draw();
         }
         public override double getPerimeter()
         {

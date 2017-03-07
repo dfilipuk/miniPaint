@@ -9,10 +9,7 @@ namespace miniPaint
 {
     class CLine : CTwoDFigure
     {
-        public CLine(Color color, Point[] points, Graphics canv) : base(color, points, canv)
-        {
-            Draw();
-        }
+        public CLine(Color color, Point[] points, Graphics canv) : base(color, points, canv) { }
         public override double getPerimeter()
         {
             int deltX = Math.Abs(coordinates[0].X - coordinates[1].X);
