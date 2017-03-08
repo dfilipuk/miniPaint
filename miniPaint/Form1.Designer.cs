@@ -57,6 +57,15 @@
             this.tsmiDeleteLastFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAll = new System.Windows.Forms.ToolStripMenuItem();
             this.timerRedraw = new System.Windows.Forms.Timer(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -336,6 +345,13 @@
             // tsmiFile
             // 
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNew,
+            this.toolStripSeparator1,
+            this.tsmiOpen,
+            this.toolStripSeparator2,
+            this.tsmiSave,
+            this.tsmiSaveAs,
+            this.toolStripSeparator3,
             this.tsmiExit});
             this.tsmiFile.Name = "tsmiFile";
             this.tsmiFile.Size = new System.Drawing.Size(57, 24);
@@ -345,7 +361,7 @@
             // 
             this.tsmiExit.Name = "tsmiExit";
             this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.tsmiExit.Size = new System.Drawing.Size(181, 26);
+            this.tsmiExit.Size = new System.Drawing.Size(193, 26);
             this.tsmiExit.Text = "Выход";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -387,6 +403,62 @@
             // 
             this.timerRedraw.Tick += new System.EventHandler(this.timerRedraw_Tick);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(190, 6);
+            // 
+            // tsmiNew
+            // 
+            this.tsmiNew.Name = "tsmiNew";
+            this.tsmiNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tsmiNew.Size = new System.Drawing.Size(245, 26);
+            this.tsmiNew.Text = "Новый";
+            this.tsmiNew.Click += new System.EventHandler(this.tsmiNew_Click);
+            // 
+            // tsmiOpen
+            // 
+            this.tsmiOpen.Name = "tsmiOpen";
+            this.tsmiOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiOpen.Size = new System.Drawing.Size(245, 26);
+            this.tsmiOpen.Text = "Открыть";
+            this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(190, 6);
+            // 
+            // tsmiSave
+            // 
+            this.tsmiSave.Name = "tsmiSave";
+            this.tsmiSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiSave.Size = new System.Drawing.Size(245, 26);
+            this.tsmiSave.Text = "Сохранить";
+            this.tsmiSave.Click += new System.EventHandler(this.tsmiSave_Click);
+            // 
+            // tsmiSaveAs
+            // 
+            this.tsmiSaveAs.Name = "tsmiSaveAs";
+            this.tsmiSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.tsmiSaveAs.Size = new System.Drawing.Size(245, 26);
+            this.tsmiSaveAs.Text = "Сохранить как...";
+            this.tsmiSaveAs.Click += new System.EventHandler(this.tsmiSaveAs_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(190, 6);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.FileName = "Picture1";
+            this.saveFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -404,6 +476,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "miniPaint";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.pColors.ResumeLayout(false);
@@ -443,6 +516,15 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteAll;
         private System.Windows.Forms.Button btnBezier;
         private System.Windows.Forms.Timer timerRedraw;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNew;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpen;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSave;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaveAs;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 

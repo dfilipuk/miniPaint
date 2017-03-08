@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace miniPaint
 {
+    [DataContract]
     class CCircle : CTwoDFigure
     {
+        [DataMember]
         int radius;
         public CCircle(Color color, Point[] points, Graphics canv) : base(color, points, canv)
         {
@@ -23,6 +27,14 @@ namespace miniPaint
 
         public override void Draw()
         {
+            gCanvas.FillEllipse(brush, coordinates[0].X - radius, coordinates[0].Y - radius, 2 * radius, 2 * radius);
+        }
+
+        public override void Draw(Graphics canv)
+        {
+            gCanvas = canv;
+            brush = new SolidBrush(curColor);
+
             gCanvas.FillEllipse(brush, coordinates[0].X - radius, coordinates[0].Y - radius, 2 * radius, 2 * radius);
         }
     }

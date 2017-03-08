@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace miniPaint
 {
+    [DataContract]
     class CLine : CTwoDFigure
     {
         public CLine(Color color, Point[] points, Graphics canv) : base(color, points, canv) { }
@@ -19,6 +22,14 @@ namespace miniPaint
 
         public override void Draw()
         {
+            gCanvas.DrawLine(new Pen(brush, 3), coordinates[0], coordinates[1]);
+        }
+
+        public override void Draw(Graphics canv)
+        {
+            gCanvas = canv;
+            brush = new SolidBrush(curColor);
+
             gCanvas.DrawLine(new Pen(brush, 3), coordinates[0], coordinates[1]);
         }
     }

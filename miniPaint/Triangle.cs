@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace miniPaint
 {
+    [DataContract]
     class CTriangle : CTwoDFigure
     {
         public CTriangle(Color color, Point[] points, Graphics canv) : base(color, points, canv) { }
@@ -27,6 +30,14 @@ namespace miniPaint
 
         public override void Draw()
         {
+            gCanvas.FillPolygon(brush, coordinates);
+        }
+
+        public override void Draw(Graphics canv)
+        {
+            gCanvas = canv;
+            brush = new SolidBrush(curColor);
+
             gCanvas.FillPolygon(brush, coordinates);
         }
     }

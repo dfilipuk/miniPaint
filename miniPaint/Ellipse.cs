@@ -4,12 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 
 namespace miniPaint
 {
+    [DataContract]
     class CEllipse : CTwoDFigure
     {
-        int deltX, deltY;
+        [DataMember]
+        int deltX;
+        [DataMember]
+        int deltY;
         public CEllipse(Color color, Point[] points, Graphics canv) : base(color, points, canv)
         {
             deltX = Math.Abs(coordinates[0].X - coordinates[1].X);
@@ -23,6 +29,14 @@ namespace miniPaint
 
         public override void Draw()
         {
+            gCanvas.FillEllipse(brush, coordinates[0].X, coordinates[0].Y, deltX, deltY);
+        }
+
+        public override void Draw(Graphics canv)
+        {
+            gCanvas = canv;
+            brush = new SolidBrush(curColor);
+
             gCanvas.FillEllipse(brush, coordinates[0].X, coordinates[0].Y, deltX, deltY);
         }
 
