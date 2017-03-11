@@ -165,6 +165,7 @@ namespace miniPaint
 
         private void setStandartColorForAllButtons()
         {
+            btnEdit.BackColor = standartBtnColor;
             btnLine.BackColor = standartBtnColor;
             btnRectangle.BackColor = standartBtnColor;
             btnTriangle.BackColor = standartBtnColor;
@@ -178,71 +179,21 @@ namespace miniPaint
             btn.BackColor = pressedBtnColor;
         }
 
-        private void PictureBox_MouseClick(object sender, MouseEventArgs e)
+        private void btnColor_Click(object sender, EventArgs e)
         {
-            picture.addPoint(e.X, e.Y);
-            projectManager.isSaved = false;
-            updateWindowCaption();
+            Button pressedBtn = sender as Button;
+            if (pressedBtn != null)
+            {
+                lCurColor.BackColor = pressedBtn.BackColor;
+                picture.currentColor = pressedBtn.BackColor;
+            }
         }
 
-        private void btnBlack_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            lCurColor.BackColor = btnBlack.BackColor;
-            picture.currentColor = btnBlack.BackColor;
-        }
-
-        private void btnWhite_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnWhite.BackColor;
-            picture.currentColor = btnWhite.BackColor;
-        }
-
-        private void btnRed_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnRed.BackColor;
-            picture.currentColor = btnRed.BackColor;
-        }
-
-        private void btnOrange_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnOrange.BackColor;
-            picture.currentColor = btnOrange.BackColor;
-        }
-
-        private void btnYellow_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnYellow.BackColor;
-            picture.currentColor = btnYellow.BackColor;
-        }
-
-        private void btnLime_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnLime.BackColor;
-            picture.currentColor = btnLime.BackColor;
-        }
-
-        private void btnAqua_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnAqua.BackColor;
-            picture.currentColor = btnAqua.BackColor;
-        }
-
-        private void btnBlue_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnBlue.BackColor;
-            picture.currentColor = btnBlue.BackColor;
-        }
-
-        private void btnPink_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnPink.BackColor;
-            picture.currentColor = btnPink.BackColor;
-        }
-
-        private void btnBrown_Click(object sender, EventArgs e)
-        {
-            lCurColor.BackColor = btnBrown.BackColor;
-            picture.currentColor = btnBrown.BackColor;
+            picture.isEditMode = true;
+            setStandartColorForAllButtons();
+            setPressedColorForButton(btnEdit);
         }
 
         private void btnLine_Click(object sender, EventArgs e)
@@ -360,6 +311,24 @@ namespace miniPaint
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = !projectManager.canContinue();
+        }
+
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (!picture.isEditMode)
+                {
+                    picture.addPoint(e.X, e.Y);
+                }
+                else
+                {
+                    picture.selectFigure(e.X, e.Y);
+                }
+
+                projectManager.isSaved = false;
+                updateWindowCaption();
+            }
         }
     }
 }

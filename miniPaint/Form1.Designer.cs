@@ -51,21 +51,22 @@
             this.btnBlack = new System.Windows.Forms.Button();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCancelCurrentFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteLastFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAll = new System.Windows.Forms.ToolStripMenuItem();
             this.timerRedraw = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -82,12 +83,13 @@
             this.PictureBox.Size = new System.Drawing.Size(1372, 749);
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
-            this.PictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
+            this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
             // 
             // pColors
             // 
             this.pColors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pColors.Controls.Add(this.btnEdit);
             this.pColors.Controls.Add(this.btnBezier);
             this.pColors.Controls.Add(this.btnEllipse);
             this.pColors.Controls.Add(this.btnCircle);
@@ -203,7 +205,7 @@
             this.btnBrown.Size = new System.Drawing.Size(25, 25);
             this.btnBrown.TabIndex = 9;
             this.btnBrown.UseVisualStyleBackColor = false;
-            this.btnBrown.Click += new System.EventHandler(this.btnBrown_Click);
+            this.btnBrown.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnPink
             // 
@@ -217,7 +219,7 @@
             this.btnPink.Size = new System.Drawing.Size(25, 25);
             this.btnPink.TabIndex = 8;
             this.btnPink.UseVisualStyleBackColor = false;
-            this.btnPink.Click += new System.EventHandler(this.btnPink_Click);
+            this.btnPink.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnBlue
             // 
@@ -231,7 +233,7 @@
             this.btnBlue.Size = new System.Drawing.Size(25, 25);
             this.btnBlue.TabIndex = 7;
             this.btnBlue.UseVisualStyleBackColor = false;
-            this.btnBlue.Click += new System.EventHandler(this.btnBlue_Click);
+            this.btnBlue.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnAqua
             // 
@@ -245,7 +247,7 @@
             this.btnAqua.Size = new System.Drawing.Size(25, 25);
             this.btnAqua.TabIndex = 6;
             this.btnAqua.UseVisualStyleBackColor = false;
-            this.btnAqua.Click += new System.EventHandler(this.btnAqua_Click);
+            this.btnAqua.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnLime
             // 
@@ -259,7 +261,7 @@
             this.btnLime.Size = new System.Drawing.Size(25, 25);
             this.btnLime.TabIndex = 5;
             this.btnLime.UseVisualStyleBackColor = false;
-            this.btnLime.Click += new System.EventHandler(this.btnLime_Click);
+            this.btnLime.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnYellow
             // 
@@ -273,7 +275,7 @@
             this.btnYellow.Size = new System.Drawing.Size(25, 25);
             this.btnYellow.TabIndex = 4;
             this.btnYellow.UseVisualStyleBackColor = false;
-            this.btnYellow.Click += new System.EventHandler(this.btnYellow_Click);
+            this.btnYellow.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnOrange
             // 
@@ -287,7 +289,7 @@
             this.btnOrange.Size = new System.Drawing.Size(25, 25);
             this.btnOrange.TabIndex = 3;
             this.btnOrange.UseVisualStyleBackColor = false;
-            this.btnOrange.Click += new System.EventHandler(this.btnOrange_Click);
+            this.btnOrange.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnRed
             // 
@@ -301,7 +303,7 @@
             this.btnRed.Size = new System.Drawing.Size(25, 25);
             this.btnRed.TabIndex = 2;
             this.btnRed.UseVisualStyleBackColor = false;
-            this.btnRed.Click += new System.EventHandler(this.btnRed_Click);
+            this.btnRed.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnWhite
             // 
@@ -315,7 +317,7 @@
             this.btnWhite.Size = new System.Drawing.Size(25, 25);
             this.btnWhite.TabIndex = 1;
             this.btnWhite.UseVisualStyleBackColor = false;
-            this.btnWhite.Click += new System.EventHandler(this.btnWhite_Click);
+            this.btnWhite.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnBlack
             // 
@@ -329,7 +331,7 @@
             this.btnBlack.Size = new System.Drawing.Size(25, 25);
             this.btnBlack.TabIndex = 0;
             this.btnBlack.UseVisualStyleBackColor = false;
-            this.btnBlack.Click += new System.EventHandler(this.btnBlack_Click);
+            this.btnBlack.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // msMenu
             // 
@@ -357,11 +359,58 @@
             this.tsmiFile.Size = new System.Drawing.Size(57, 24);
             this.tsmiFile.Text = "Файл";
             // 
+            // tsmiNew
+            // 
+            this.tsmiNew.Name = "tsmiNew";
+            this.tsmiNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tsmiNew.Size = new System.Drawing.Size(245, 26);
+            this.tsmiNew.Text = "Новый";
+            this.tsmiNew.Click += new System.EventHandler(this.tsmiNew_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(242, 6);
+            // 
+            // tsmiOpen
+            // 
+            this.tsmiOpen.Name = "tsmiOpen";
+            this.tsmiOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.tsmiOpen.Size = new System.Drawing.Size(245, 26);
+            this.tsmiOpen.Text = "Открыть";
+            this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(242, 6);
+            // 
+            // tsmiSave
+            // 
+            this.tsmiSave.Name = "tsmiSave";
+            this.tsmiSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiSave.Size = new System.Drawing.Size(245, 26);
+            this.tsmiSave.Text = "Сохранить";
+            this.tsmiSave.Click += new System.EventHandler(this.tsmiSave_Click);
+            // 
+            // tsmiSaveAs
+            // 
+            this.tsmiSaveAs.Name = "tsmiSaveAs";
+            this.tsmiSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.tsmiSaveAs.Size = new System.Drawing.Size(245, 26);
+            this.tsmiSaveAs.Text = "Сохранить как...";
+            this.tsmiSaveAs.Click += new System.EventHandler(this.tsmiSaveAs_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(242, 6);
+            // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
             this.tsmiExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.tsmiExit.Size = new System.Drawing.Size(193, 26);
+            this.tsmiExit.Size = new System.Drawing.Size(245, 26);
             this.tsmiExit.Text = "Выход";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -403,53 +452,6 @@
             // 
             this.timerRedraw.Tick += new System.EventHandler(this.timerRedraw_Tick);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(190, 6);
-            // 
-            // tsmiNew
-            // 
-            this.tsmiNew.Name = "tsmiNew";
-            this.tsmiNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.tsmiNew.Size = new System.Drawing.Size(245, 26);
-            this.tsmiNew.Text = "Новый";
-            this.tsmiNew.Click += new System.EventHandler(this.tsmiNew_Click);
-            // 
-            // tsmiOpen
-            // 
-            this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.tsmiOpen.Size = new System.Drawing.Size(245, 26);
-            this.tsmiOpen.Text = "Открыть";
-            this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(190, 6);
-            // 
-            // tsmiSave
-            // 
-            this.tsmiSave.Name = "tsmiSave";
-            this.tsmiSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.tsmiSave.Size = new System.Drawing.Size(245, 26);
-            this.tsmiSave.Text = "Сохранить";
-            this.tsmiSave.Click += new System.EventHandler(this.tsmiSave_Click);
-            // 
-            // tsmiSaveAs
-            // 
-            this.tsmiSaveAs.Name = "tsmiSaveAs";
-            this.tsmiSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.tsmiSaveAs.Size = new System.Drawing.Size(245, 26);
-            this.tsmiSaveAs.Text = "Сохранить как...";
-            this.tsmiSaveAs.Click += new System.EventHandler(this.tsmiSaveAs_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(190, 6);
-            // 
             // saveFileDialog
             // 
             this.saveFileDialog.FileName = "Picture1";
@@ -458,6 +460,18 @@
             // openFileDialog
             // 
             this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEdit.BackColor = System.Drawing.Color.White;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(10, 338);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(55, 55);
+            this.btnEdit.TabIndex = 17;
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // frmMain
             // 
@@ -525,6 +539,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button btnEdit;
     }
 }
 

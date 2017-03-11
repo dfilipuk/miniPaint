@@ -14,6 +14,13 @@ namespace miniPaint
         double getPerimeter();
     }
 
+    interface ISelectable
+    {
+        bool isSelected { get; set; }
+        bool isPointWithinFigure(int x, int y);
+        void drawEditFrame();
+    }
+
     [KnownType(typeof(CLine))]
     [KnownType(typeof(CRectangle))]
     [KnownType(typeof(CTriangle))]

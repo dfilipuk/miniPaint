@@ -20,6 +20,9 @@ namespace miniPaint
         PictureBox curPicture;
         CTwoDFigureFactory curFigure;
         Color curColor;
+        ISelectable selectedFigure;
+
+        bool editMode;
 
         int pointsAmo;
         readonly Color canvasColor;
@@ -33,6 +36,7 @@ namespace miniPaint
             canvasColor = Color.White;
             currentFigure = factory;
             pointsAmo = 0;
+            editMode = false;
 
             curPicture = pb;
             buffer = new Bitmap(curPicture.Width, curPicture.Height);
@@ -50,12 +54,45 @@ namespace miniPaint
             canvasColor = Color.White;
             currentFigure = factory;
             pointsAmo = 0;
+            editMode = false;
 
             curPicture = pb;
             buffer = new Bitmap(curPicture.Width, curPicture.Height);
             gCanvas = Graphics.FromImage(buffer);
 
             Redraw(gCanvas);
+        }
+
+        public void selectFigure(int x, int y)
+        {
+            unsetSelection();
+
+            int i = figures.Count - 1;
+            while ((selectedFigure == null) && (i >= 0))
+            {
+                ISelectable curFigure = figures[i] as ISelectable;
+                if (curFigure != null)
+                {
+                    if (curFigure.isPointWithinFigure(x, y))
+                    {
+                        selectedFigure = curFigure;
+                        selectedFigure.isSelected = true;
+                    }
+                }
+                i--;
+            }
+
+            Redraw();
+        }
+
+        void unsetSelection()
+        {
+            if (selectedFigure != null)
+            {
+                selectedFigure.isSelected = false;
+                selectedFigure = null;
+            }
+            Redraw();
         }
 
         public void addPoint(int x, int y)
@@ -88,6 +125,7 @@ namespace miniPaint
 
         public void deleteLastFigure()
         {
+            unsetSelection();
             deletePoints();
             if (figures.Count > 0)
                 figures.RemoveAt(figures.Count - 1);
@@ -101,6 +139,8 @@ namespace miniPaint
                 gCanvas.Clear(canvasColor);
                 for (int i = 0; i < figures.Count; i++)
                     figures[i].Draw();
+                if (selectedFigure != null)
+                    selectedFigure.drawEditFrame();
                 curPicture.Image = buffer;
             }
         }
@@ -110,6 +150,8 @@ namespace miniPaint
             gCanvas.Clear(canvasColor);
             for (int i = 0; i < figures.Count; i++)
                 figures[i].Draw(canv);
+            if (selectedFigure != null)
+                selectedFigure.drawEditFrame();
             curPicture.Image = buffer;
         }
 
@@ -159,6 +201,7 @@ namespace miniPaint
             set
             {
                 curFigure = value;
+                isEditMode = false;
                 deletePoints();
             }
         }
@@ -173,6 +216,19 @@ namespace miniPaint
             {
                 curColor = value;
                 deletePoints();
+            }
+        }
+
+        public bool isEditMode
+        {
+            get
+            {
+                return editMode;
+            }
+            set
+            {
+                editMode = value;
+                unsetSelection();
             }
         }
     }
