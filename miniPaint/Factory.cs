@@ -17,7 +17,7 @@ namespace miniPaint
     {
         static CLineFactory factory;
 
-        CLineFactory() { }
+        private CLineFactory() { }
 
         public static CLineFactory getFactory()
         {
@@ -40,8 +40,7 @@ namespace miniPaint
     {
         static CRectangleFactory factory;
 
-        CRectangleFactory()
-        { }
+        private CRectangleFactory() { }
 
         public static CRectangleFactory getFactory()
         {
@@ -64,8 +63,7 @@ namespace miniPaint
     {
         static CTriangleFactory factory;
 
-        CTriangleFactory()
-        { }
+        private CTriangleFactory() { }
 
         public static CTriangleFactory getFactory()
         {
@@ -88,8 +86,7 @@ namespace miniPaint
     {
         static CCircleFactory factory;
 
-        CCircleFactory()
-        { }
+        private CCircleFactory() { }
 
         public static CCircleFactory getFactory()
         {
@@ -112,8 +109,7 @@ namespace miniPaint
     {
         static CEllipseFactory factory;
 
-        CEllipseFactory()
-        { }
+        private CEllipseFactory() { }
 
         public static CEllipseFactory getFactory()
         {
@@ -136,8 +132,7 @@ namespace miniPaint
     {
         static CBezierFactory factory;
 
-        CBezierFactory()
-        { }
+        private CBezierFactory() { }
 
         public static CBezierFactory getFactory()
         {

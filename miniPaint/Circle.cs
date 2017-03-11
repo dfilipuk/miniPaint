@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace miniPaint
 {
     [DataContract]
-    class CCircle : CTwoDFigure, ISelectable
+    class CCircle : CTwoDFigure, IPerimeter, ISelectable, IEditable
     {
         public bool isSelected { get; set; }
         [DataMember]
@@ -21,10 +21,6 @@ namespace miniPaint
             int deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
             radius = (int)Math.Sqrt(deltX * deltX + deltY * deltY);
             isSelected = false;
-        }
-        public override double getPerimeter()
-        {
-            return 2 * Math.PI * radius;
         }
 
         public override void Draw()
@@ -40,6 +36,13 @@ namespace miniPaint
             gCanvas.FillEllipse(brush, coordinates[0].X - radius, coordinates[0].Y - radius, 2 * radius, 2 * radius);
         }
 
+        /* Реализация интерфеса IPerimeter */
+        public double getPerimeter()
+        {
+            return 2 * Math.PI * radius;
+        }
+
+        /* Реализация интерфеса ISelectable */
         public bool isPointWithinFigure(int x, int y)
         {
             if (isPointInRect(x, y, coordinates[0].X - radius, coordinates[0].Y - radius, 
@@ -65,6 +68,22 @@ namespace miniPaint
         private bool isPointInRect(int x, int y, int x0, int y0, int x1, int y1)
         {
             return (((x >= x0) && (x <= x1)) && ((y >= y0) && (y <= y1)));
+        }
+
+        /* Реализация интерфеса IEditable */
+        public void changeColor(Color newColor)
+        {
+            curColor = newColor;
+            brush = new SolidBrush(curColor);
+        }
+
+        public void changePosition(int deltX, int deltY)
+        {
+            for (int i = 0; i < coordinates.Length; i++)
+            {
+                coordinates[i].X += deltX;
+                coordinates[i].Y += deltY;
+            }
         }
     }
 }

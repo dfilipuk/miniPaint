@@ -21,6 +21,12 @@ namespace miniPaint
         void drawEditFrame();
     }
 
+    interface IEditable
+    {
+        void changeColor(Color newColor);
+        void changePosition(int deltX, int deltY);
+    }
+
     [KnownType(typeof(CLine))]
     [KnownType(typeof(CRectangle))]
     [KnownType(typeof(CTriangle))]
@@ -28,7 +34,7 @@ namespace miniPaint
     [KnownType(typeof(CCircle))]
     [KnownType(typeof(CBezier))]
     [DataContract]
-    abstract class CTwoDFigure : IPerimeter
+    abstract class CTwoDFigure
     {
         [DataMember]
         protected Point[] coordinates;
@@ -36,7 +42,6 @@ namespace miniPaint
         protected Graphics gCanvas;
         [DataMember]
         protected Color curColor;
-        public abstract double getPerimeter();
         public abstract void Draw();
         public abstract void Draw(Graphics canv);
 

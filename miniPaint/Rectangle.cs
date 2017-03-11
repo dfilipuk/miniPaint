@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace miniPaint
 {
     [DataContract]
-    class CRectangle : CTwoDFigure, ISelectable
+    class CRectangle : CTwoDFigure, IPerimeter, ISelectable, IEditable
     {
         public bool isSelected { get; set; }
         [DataMember]
@@ -23,10 +23,6 @@ namespace miniPaint
             deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
             changeCoordinates();
             isSelected = false;
-        }
-        public override double getPerimeter()
-        {
-            return 2 * deltX + 2 * deltY;
         }
 
         public override void Draw()
@@ -42,7 +38,7 @@ namespace miniPaint
             gCanvas.FillRectangle(brush, coordinates[0].X, coordinates[0].Y, deltX, deltY);
         }
 
-        void changeCoordinates()
+        private void changeCoordinates()
         {
             int x1 = coordinates[0].X;
             int x2 = coordinates[1].X;
@@ -56,6 +52,13 @@ namespace miniPaint
             coordinates[1].Y = y1 > y2 ? y1 : y2;
         }
 
+        /* Реализация интерфейса IPerimeter */
+        public double getPerimeter()
+        {
+            return 2 * deltX + 2 * deltY;
+        }
+
+        /* Реализация интерфейса ISelectable */
         public bool isPointWithinFigure(int x, int y)
         {
             return (isPointInRect(x, y, coordinates[0].X, coordinates[0].Y, coordinates[1].X, coordinates[1].Y));
@@ -72,6 +75,22 @@ namespace miniPaint
         private bool isPointInRect(int x, int y, int x0, int y0, int x1, int y1)
         {
             return (((x >= x0) && (x <= x1)) && ((y >= y0) && (y <= y1)));
+        }
+
+        /* Реализация интерфейса IEditable */
+        public void changeColor(Color newColor)
+        {
+            curColor = newColor;
+            brush = new SolidBrush(curColor);
+        }
+
+        public void changePosition(int deltX, int deltY)
+        {
+            for (int i = 0; i < coordinates.Length; i++)
+            {
+                coordinates[i].X += deltX;
+                coordinates[i].Y += deltY;
+            }
         }
     }
 }

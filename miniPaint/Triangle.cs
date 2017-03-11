@@ -10,24 +10,10 @@ using System.Runtime.Serialization;
 namespace miniPaint
 {
     [DataContract]
-    class CTriangle : CTwoDFigure, ISelectable
+    class CTriangle : CTwoDFigure, IPerimeter, ISelectable, IEditable
     {
         public bool isSelected { get; set; }
         public CTriangle(Color color, Point[] points, Graphics canv) : base(color, points, canv) { }
-        public override double getPerimeter()
-        {
-            double res = 0;
-            int deltX, deltY;
-
-            for (int i = 0; i < coordinates.Length - 1; i++)
-            {
-                deltX = Math.Abs(coordinates[i].X - coordinates[i + 1].X);
-                deltY = Math.Abs(coordinates[i].Y - coordinates[i + 1].Y);
-                res = res + Math.Sqrt(deltX * deltX + deltY * deltY);
-            }
-
-            return res;
-        }
 
         public override void Draw()
         {
@@ -42,6 +28,23 @@ namespace miniPaint
             gCanvas.FillPolygon(brush, coordinates);
         }
 
+        /* Реализация интерфейса IPerimeter */
+        public double getPerimeter()
+        {
+            double res = 0;
+            int deltX, deltY;
+
+            for (int i = 0; i < coordinates.Length - 1; i++)
+            {
+                deltX = Math.Abs(coordinates[i].X - coordinates[i + 1].X);
+                deltY = Math.Abs(coordinates[i].Y - coordinates[i + 1].Y);
+                res = res + Math.Sqrt(deltX * deltX + deltY * deltY);
+            }
+
+            return res;
+        }
+
+        /* Реализация интерфейса ISelectable */
         public bool isPointWithinFigure(int x, int y)
         {
             int x0, y0, x1, y1;
@@ -167,6 +170,22 @@ namespace miniPaint
         private bool isPointInRect(int x, int y, int x0, int y0, int x1, int y1)
         {
             return (((x >= x0) && (x <= x1)) && ((y >= y0) && (y <= y1)));
+        }
+
+        /* Реализация интерфейса IEditable */
+        public void changeColor(Color newColor)
+        {
+            curColor = newColor;
+            brush = new SolidBrush(curColor);
+        }
+
+        public void changePosition(int deltX, int deltY)
+        {
+            for (int i = 0; i < coordinates.Length; i++)
+            {
+                coordinates[i].X += deltX;
+                coordinates[i].Y += deltY;
+            }
         }
     }
 }

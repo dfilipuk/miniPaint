@@ -20,6 +20,7 @@ namespace miniPaint
         PictureBox curPicture;
         CTwoDFigureFactory curFigure;
         Color curColor;
+        Point prevSelectedPoint;
         ISelectable selectedFigure;
 
         bool editMode;
@@ -27,7 +28,7 @@ namespace miniPaint
         int pointsAmo;
         readonly Color canvasColor;
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory)
+        public CPicture(PictureBox pb, CTwoDFigureFactory factory, bool edit)
         {
             figures = new List<CTwoDFigure>();
             points = new List<Point>();
@@ -36,7 +37,7 @@ namespace miniPaint
             canvasColor = Color.White;
             currentFigure = factory;
             pointsAmo = 0;
-            editMode = false;
+            editMode = edit;
 
             curPicture = pb;
             buffer = new Bitmap(curPicture.Width, curPicture.Height);
@@ -45,7 +46,7 @@ namespace miniPaint
             Redraw();
         }
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory, string filepath)
+        public CPicture(PictureBox pb, CTwoDFigureFactory factory, bool edit, string filepath)
         {
             figures = new List<CTwoDFigure>(loadPictureFromFile(filepath));
             points = new List<Point>();
@@ -54,7 +55,7 @@ namespace miniPaint
             canvasColor = Color.White;
             currentFigure = factory;
             pointsAmo = 0;
-            editMode = false;
+            editMode = edit;
 
             curPicture = pb;
             buffer = new Bitmap(curPicture.Width, curPicture.Height);
@@ -66,6 +67,7 @@ namespace miniPaint
         public void selectFigure(int x, int y)
         {
             unsetSelection();
+            prevSelectedPoint = new Point(x, y);
 
             int i = figures.Count - 1;
             while ((selectedFigure == null) && (i >= 0))
@@ -85,7 +87,7 @@ namespace miniPaint
             Redraw();
         }
 
-        void unsetSelection()
+        private void unsetSelection()
         {
             if (selectedFigure != null)
             {
@@ -132,6 +134,39 @@ namespace miniPaint
             Redraw();
         }
 
+        public void changeColorOfSelectedFigure(Color color)
+        {
+            if (selectedFigure != null)
+            {
+                IEditable editFigure = selectedFigure as IEditable;
+                if (editFigure != null)
+                {
+                    editFigure.changeColor(color);
+                    Redraw();
+                }
+            }
+        }
+
+        public void changePoitionOfSelectedFigure(int x, int y)
+        {
+            if (selectedFigure != null)
+            {
+                IEditable editFigure = selectedFigure as IEditable;
+                if (editFigure != null)
+                {
+                    x = x < 0 ? 0 : x;
+                    x = x > curPicture.Width ? curPicture.Width : x;
+                    y = y < 0 ? 0 : y;
+                    y = y > curPicture.Height ? curPicture.Height : y;
+
+                    editFigure.changePosition(x - prevSelectedPoint.X, y - prevSelectedPoint.Y);
+                    prevSelectedPoint.X = x;
+                    prevSelectedPoint.Y = y;
+                    Redraw();
+                }
+            }
+        }
+
         public void Redraw()
         {
             if (gCanvas != null)
@@ -145,7 +180,7 @@ namespace miniPaint
             }
         }
 
-        void Redraw(Graphics canv)
+        private void Redraw(Graphics canv)
         {
             gCanvas.Clear(canvasColor);
             for (int i = 0; i < figures.Count; i++)
@@ -166,7 +201,7 @@ namespace miniPaint
             }
         }
 
-        CTwoDFigure[] loadPictureFromFile(string filepath)
+        private CTwoDFigure[] loadPictureFromFile(string filepath)
         {
             CTwoDFigure[] result;
             var jsonSerializer = new DataContractJsonSerializer(typeof(CTwoDFigure[]));
@@ -179,14 +214,14 @@ namespace miniPaint
             return result;
         }
 
-        void addFigure()
+        private void addFigure()
         {
             figures.Add(currentFigure.CreateFigure(curColor, points.ToArray(), gCanvas));
             points.Clear();
             pointsAmo = 0;
         }
 
-        void drawPoint(int x, int y, Color color)
+        private void drawPoint(int x, int y, Color color)
         {
             gCanvas.FillEllipse(new SolidBrush(color), x - 3, y - 3, 6, 6);
             curPicture.Image = buffer;

@@ -32,7 +32,7 @@ namespace miniPaint
             filePath = String.Empty;
         }
 
-        string getFileName(string path)
+        private string getFileName(string path)
         {
             int start = path.LastIndexOf('\\');
             int end = path.LastIndexOf('.');

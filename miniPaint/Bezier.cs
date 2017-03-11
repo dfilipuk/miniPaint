@@ -10,18 +10,12 @@ using System.Runtime.Serialization;
 namespace miniPaint
 {
     [DataContract]
-    class CBezier : CTwoDFigure, ISelectable
+    class CBezier : CTwoDFigure, IPerimeter, ISelectable, IEditable
     {
         public bool isSelected { get; set; }
         public CBezier(Color color, Point[] points, Graphics canv) : base(color, points, canv)
         {
             isSelected = false;
-        }
-        public override double getPerimeter()
-        {
-            int deltX = Math.Abs(coordinates[0].X - coordinates[1].X);
-            int deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
-            return Math.Sqrt(deltX * deltX + deltY * deltY);
         }
 
         public override void Draw()
@@ -37,6 +31,15 @@ namespace miniPaint
             gCanvas.DrawBezier(new Pen(brush, 3), coordinates[0], coordinates[2], coordinates[3], coordinates[1]);
         }
 
+        /* Реализация интерфейса IPerimeter */
+        public double getPerimeter()
+        {
+            int deltX = Math.Abs(coordinates[0].X - coordinates[1].X);
+            int deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
+            return Math.Sqrt(deltX * deltX + deltY * deltY);
+        }
+
+        /* Реализация интерфейса ISelectable */
         public bool isPointWithinFigure(int x, int y)
         {
             int x0, y0, x1, y1;
@@ -90,6 +93,22 @@ namespace miniPaint
         private bool isPointInRect(int x, int y, int x0, int y0, int x1, int y1)
         {
             return (((x >= x0) && (x <= x1)) && ((y >= y0) && (y <= y1)));
+        }
+
+        /* Реализация интерфейса IEditable */
+        public void changeColor(Color newColor)
+        {
+            curColor = newColor;
+            brush = new SolidBrush(curColor);
+        }
+
+        public void changePosition(int deltX, int deltY)
+        {
+            for (int i = 0; i < coordinates.Length; i++)
+            {
+                coordinates[i].X += deltX;
+                coordinates[i].Y += deltY;
+            }
         }
     }
 }

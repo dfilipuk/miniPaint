@@ -25,6 +25,9 @@ namespace miniPaint
         const string CAPTION_NOT_SAVED = "*{0} - miniPaint";
         const string CAPTION_SAVED = "{0} - miniPaint";
 
+        const bool EDIT_MODE = true;
+        const bool NOT_EDIT_MODE = false;
+
         CPicture picture;
         CViewer userInterface;
         CProjectInfo projectManager;
@@ -35,12 +38,13 @@ namespace miniPaint
 
             userInterface = new CViewer(this);
             projectManager = new CProjectInfo(userInterface);
-            picture = new CPicture(PictureBox, CLineFactory.getFactory());
+            picture = new CPicture(PictureBox, CLineFactory.getFactory(), EDIT_MODE);
 
             standartBtnColor = Color.White;
             pressedBtnColor = Color.Bisque;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
 
+            setStandartSettings();
             updateWindowCaption();
         }
 
@@ -115,7 +119,7 @@ namespace miniPaint
         {
             try
             {
-                var newPicture = new CPicture(PictureBox, CLineFactory.getFactory(), path);
+                var newPicture = new CPicture(PictureBox, CLineFactory.getFactory(), EDIT_MODE, path);
                 picture = newPicture;
                 setStandartSettings();
                 return true;
@@ -159,7 +163,7 @@ namespace miniPaint
         private void setStandartSettings()
         {
             setStandartColorForAllButtons();
-            setPressedColorForButton(btnLine);
+            setPressedColorForButton(btnEdit);
             lCurColor.BackColor = btnBlack.BackColor;
         }
 
@@ -184,8 +188,17 @@ namespace miniPaint
             Button pressedBtn = sender as Button;
             if (pressedBtn != null)
             {
-                lCurColor.BackColor = pressedBtn.BackColor;
-                picture.currentColor = pressedBtn.BackColor;
+                if (!picture.isEditMode)
+                {
+                    lCurColor.BackColor = pressedBtn.BackColor;
+                    picture.currentColor = pressedBtn.BackColor;
+                }
+                else
+                {
+                    picture.changeColorOfSelectedFigure(pressedBtn.BackColor);
+                    projectManager.isSaved = false;
+                    updateWindowCaption();
+                }
             }
         }
 
@@ -301,7 +314,7 @@ namespace miniPaint
         {
             if (projectManager.canContinue())
             {
-                picture = new CPicture(PictureBox, CLineFactory.getFactory());
+                picture = new CPicture(PictureBox, CLineFactory.getFactory(), EDIT_MODE);
                 setStandartSettings();
                 projectManager.resetProjectInfo();
                 updateWindowCaption();
@@ -320,14 +333,23 @@ namespace miniPaint
                 if (!picture.isEditMode)
                 {
                     picture.addPoint(e.X, e.Y);
+                    projectManager.isSaved = false;
+                    updateWindowCaption();
                 }
                 else
                 {
                     picture.selectFigure(e.X, e.Y);
                 }
+            }
+        }
 
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
                 projectManager.isSaved = false;
                 updateWindowCaption();
+                picture.changePoitionOfSelectedFigure(e.X, e.Y);
             }
         }
     }

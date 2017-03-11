@@ -78,12 +78,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PictureBox.BackColor = System.Drawing.Color.White;
+            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
             this.PictureBox.Location = new System.Drawing.Point(12, 42);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(1372, 749);
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
+            this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             // 
             // pColors
             // 
@@ -175,7 +177,7 @@
             // btnLine
             // 
             this.btnLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLine.BackColor = System.Drawing.Color.Bisque;
+            this.btnLine.BackColor = System.Drawing.Color.White;
             this.btnLine.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnLine.Image")));
             this.btnLine.Location = new System.Drawing.Point(10, 399);
