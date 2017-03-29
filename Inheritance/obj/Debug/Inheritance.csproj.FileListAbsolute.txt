@@ -1,0 +1,9 @@
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V7\Inheritance\bin\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V7\Inheritance\bin\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V7\Inheritance\obj\Debug\Inheritance.csprojResolveAssemblyReference.cache
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V7\Inheritance\obj\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V7\Inheritance\obj\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Inheritance\bin\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Inheritance\bin\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Inheritance\obj\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Inheritance\obj\Debug\Inheritance.pdb

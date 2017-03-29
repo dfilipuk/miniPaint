@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Inheritance;
 
 namespace miniPaint
 {
@@ -15,6 +16,9 @@ namespace miniPaint
     {
         readonly Color standartBtnColor;
         readonly Color pressedBtnColor;
+
+        const int BTN_FIGURE_SIZE_PX = 41;
+        const int BTN_FIGURE_DELIMITER_SIZE_PX = 1;
 
         const string ERROR_CAPTION = "Ошибка!";
         const string FAIL_TO_SAVE_MESSG = "Не удалось сохранить рисунок!";
@@ -31,14 +35,29 @@ namespace miniPaint
         CPicture picture;
         CViewer userInterface;
         CProjectInfo projectManager;
+        CFiguresLoader figuresLoader;
+        List<Button> figuresBtns;
+        int curBtnX, curBtnY;
 
         public frmMain()
         {
             InitializeComponent();
+            curBtnX = 8;
+            curBtnY = 325;
+            figuresBtns = new List<Button>();
 
             userInterface = new CViewer(this);
             projectManager = new CProjectInfo(userInterface);
-            picture = new CPicture(PictureBox, CLineFactory.getFactory(), EDIT_MODE);
+            figuresLoader = new CFiguresLoader(userInterface);
+            figuresLoader.LoadFigures();
+            CTwoDFigureFactory.LoadedFactories = figuresLoader.LoadedMethods;
+            CTwoDFigure.KnownTypes = figuresLoader.LoadedTypes;
+
+            CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
+            if (factory != null)
+            {
+                picture = new CPicture(PictureBox, factory, EDIT_MODE);
+            }
 
             standartBtnColor = Color.White;
             pressedBtnColor = Color.Bisque;
@@ -105,8 +124,15 @@ namespace miniPaint
         {
             try
             {
-                picture.savePictureToFile(path);
-                return true;
+                if (picture != null)
+                {
+                    picture.savePictureToFile(path);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception)
             {
@@ -119,10 +145,18 @@ namespace miniPaint
         {
             try
             {
-                var newPicture = new CPicture(PictureBox, CLineFactory.getFactory(), EDIT_MODE, path);
-                picture = newPicture;
-                setStandartSettings();
-                return true;
+                CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
+                if (factory != null)
+                {
+                    var newPicture = new CPicture(PictureBox, factory, EDIT_MODE, path);
+                    picture = newPicture;
+                    setStandartSettings();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception)
             {
@@ -130,6 +164,39 @@ namespace miniPaint
                 showErrorMessageBox(FAIL_TO_LOAD_MESSG);
                 return false;
             }
+        }
+
+        public void CreateButton(string name, Image picture)
+        {
+            Button newBtn = new Button();
+            newBtn.Name = name;
+            newBtn.Location = new Point(curBtnX, curBtnY);
+            newBtn.Width = BTN_FIGURE_SIZE_PX;
+            newBtn.Height = BTN_FIGURE_SIZE_PX;
+            newBtn.Image = picture;
+            newBtn.Click += new EventHandler(btnFigure_Click);
+
+            pColors.Controls.Add(newBtn);
+            figuresBtns.Add(newBtn);
+
+            curBtnY += BTN_FIGURE_SIZE_PX + BTN_FIGURE_DELIMITER_SIZE_PX;
+        }
+
+        public void CreateButton(string name, string text)
+        {
+            Button newBtn = new Button();
+            newBtn.Name = name;
+            newBtn.Text = text;
+            newBtn.Font = new Font("Arial", (float)6);
+            newBtn.Location = new Point(curBtnX, curBtnY);
+            newBtn.Width = BTN_FIGURE_SIZE_PX;
+            newBtn.Height = BTN_FIGURE_SIZE_PX;
+            newBtn.Click += new EventHandler(btnFigure_Click);
+
+            pColors.Controls.Add(newBtn);
+            figuresBtns.Add(newBtn);
+
+            curBtnY += BTN_FIGURE_SIZE_PX + BTN_FIGURE_DELIMITER_SIZE_PX;
         }
 
         private void updateWindowCaption()
@@ -170,12 +237,10 @@ namespace miniPaint
         private void setStandartColorForAllButtons()
         {
             btnEdit.BackColor = standartBtnColor;
-            btnLine.BackColor = standartBtnColor;
-            btnRectangle.BackColor = standartBtnColor;
-            btnTriangle.BackColor = standartBtnColor;
-            btnCircle.BackColor = standartBtnColor;
-            btnEllipse.BackColor = standartBtnColor;
-            btnBezier.BackColor = standartBtnColor;
+            for (int i = 0; i < figuresBtns.Count; i++)
+            {
+                figuresBtns[i].BackColor = standartBtnColor;
+            }
         }
 
         private void setPressedColorForButton(Button btn)
@@ -188,67 +253,39 @@ namespace miniPaint
             Button pressedBtn = sender as Button;
             if (pressedBtn != null)
             {
-                if (!picture.isEditMode)
+                if (picture != null)
                 {
-                    lCurColor.BackColor = pressedBtn.BackColor;
-                    picture.currentColor = pressedBtn.BackColor;
-                }
-                else
-                {
-                    picture.changeColorOfSelectedFigure(pressedBtn.BackColor);
-                    projectManager.isSaved = false;
-                    updateWindowCaption();
+                    if (!picture.isEditMode)
+                    {
+                        lCurColor.BackColor = pressedBtn.BackColor;
+                        picture.currentColor = pressedBtn.BackColor;
+                    }
+                    else
+                    {
+                        picture.changeColorOfSelectedFigure(pressedBtn.BackColor);
+                        projectManager.isSaved = false;
+                        updateWindowCaption();
+                    }
                 }
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            picture.isEditMode = true;
-            setStandartColorForAllButtons();
-            setPressedColorForButton(btnEdit);
+            if (picture != null)
+            {
+                picture.isEditMode = true;
+                setStandartColorForAllButtons();
+                setPressedColorForButton(btnEdit);
+            }
         }
 
-        private void btnLine_Click(object sender, EventArgs e)
+        private void btnFigure_Click(object sender, EventArgs e)
         {
-            picture.currentFigure = CLineFactory.getFactory();
+            Button curBtn = (Button)sender;
+            picture.currentFigure = CTwoDFigureFactory.GetFactory(figuresLoader.GetBtnNumber(curBtn.Name));
             setStandartColorForAllButtons();
-            setPressedColorForButton(btnLine);
-        }
-
-        private void btnRectangle_Click(object sender, EventArgs e)
-        {
-            picture.currentFigure = CRectangleFactory.getFactory();
-            setStandartColorForAllButtons();
-            setPressedColorForButton(btnRectangle);
-        }
-
-        private void btnTriangle_Click(object sender, EventArgs e)
-        {
-            picture.currentFigure = CTriangleFactory.getFactory();
-            setStandartColorForAllButtons();
-            setPressedColorForButton(btnTriangle);
-        }
-
-        private void btnCircle_Click(object sender, EventArgs e)
-        {
-            picture.currentFigure = CCircleFactory.getFactory();
-            setStandartColorForAllButtons();
-            setPressedColorForButton(btnCircle);
-        }
-
-        private void btnEllipse_Click(object sender, EventArgs e)
-        {
-            picture.currentFigure = CEllipseFactory.getFactory();
-            setStandartColorForAllButtons();
-            setPressedColorForButton(btnEllipse);
-        }
-
-        private void btnBezier_Click(object sender, EventArgs e)
-        {
-            picture.currentFigure = CBezierFactory.getFactory();
-            setStandartColorForAllButtons();
-            setPressedColorForButton(btnBezier);
+            setPressedColorForButton(curBtn);
         }
 
         private void tsmiExit_Click(object sender, EventArgs e)
@@ -258,21 +295,30 @@ namespace miniPaint
 
         private void tsmiCancelCurrentFigure_Click(object sender, EventArgs e)
         {
-            picture.deletePoints();
+            if (picture != null)
+            {
+                picture.deletePoints();
+            }
         }
 
         private void tsmiDeleteAll_Click(object sender, EventArgs e)
         {
-            picture.Clear();
-            projectManager.isSaved = false;
-            updateWindowCaption();
+            if (picture != null)
+            {
+                picture.Clear();
+                projectManager.isSaved = false;
+                updateWindowCaption();
+            }
         }
 
         private void tsmiDeleteLastFigure_Click(object sender, EventArgs e)
         {
-            picture.deleteLastFigure();
-            projectManager.isSaved = false;
-            updateWindowCaption();
+            if (picture != null)
+            {
+                picture.deleteLastFigure();
+                projectManager.isSaved = false;
+                updateWindowCaption();
+            }
         }
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
@@ -285,8 +331,11 @@ namespace miniPaint
 
         private void timerRedraw_Tick(object sender, EventArgs e)
         {
-            picture.Redraw();
-            timerRedraw.Enabled = false;
+            if (picture != null)
+            {
+                picture.Redraw();
+                timerRedraw.Enabled = false;
+            }
         }
 
         private void tsmiOpen_Click(object sender, EventArgs e)
@@ -314,10 +363,14 @@ namespace miniPaint
         {
             if (projectManager.canContinue())
             {
-                picture = new CPicture(PictureBox, CLineFactory.getFactory(), EDIT_MODE);
-                setStandartSettings();
-                projectManager.resetProjectInfo();
-                updateWindowCaption();
+                CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
+                if (factory != null)
+                {
+                    picture = new CPicture(PictureBox, factory, EDIT_MODE);
+                    setStandartSettings();
+                    projectManager.resetProjectInfo();
+                    updateWindowCaption();
+                }
             }
         }
 
@@ -328,28 +381,34 @@ namespace miniPaint
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (picture != null)
             {
-                if (!picture.isEditMode)
+                if (e.Button == MouseButtons.Left)
                 {
-                    picture.addPoint(e.X, e.Y);
-                    projectManager.isSaved = false;
-                    updateWindowCaption();
-                }
-                else
-                {
-                    picture.selectFigure(e.X, e.Y);
+                    if (!picture.isEditMode)
+                    {
+                        picture.addPoint(e.X, e.Y);
+                        projectManager.isSaved = false;
+                        updateWindowCaption();
+                    }
+                    else
+                    {
+                        picture.selectFigure(e.X, e.Y);
+                    }
                 }
             }
         }
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (picture != null)
             {
-                projectManager.isSaved = false;
-                updateWindowCaption();
-                picture.changePoitionOfSelectedFigure(e.X, e.Y);
+                if (e.Button == MouseButtons.Left)
+                {
+                    projectManager.isSaved = false;
+                    updateWindowCaption();
+                    picture.changePoitionOfSelectedFigure(e.X, e.Y);
+                }
             }
         }
     }

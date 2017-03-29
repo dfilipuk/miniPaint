@@ -1,0 +1,7 @@
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Ellipse\bin\Debug\Ellipse.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Ellipse\bin\Debug\Ellipse.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Ellipse\bin\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Ellipse\bin\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Ellipse\obj\Debug\Ellipse.csprojResolveAssemblyReference.cache
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Ellipse\obj\Debug\Ellipse.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Ellipse\obj\Debug\Ellipse.pdb

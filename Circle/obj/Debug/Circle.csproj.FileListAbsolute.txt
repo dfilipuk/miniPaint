@@ -1,0 +1,7 @@
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Circle\bin\Debug\Circle.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Circle\bin\Debug\Circle.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Circle\bin\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Circle\bin\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Circle\obj\Debug\Circle.csprojResolveAssemblyReference.cache
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Circle\obj\Debug\Circle.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Circle\obj\Debug\Circle.pdb

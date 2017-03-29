@@ -32,12 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.pColors = new System.Windows.Forms.Panel();
-            this.btnBezier = new System.Windows.Forms.Button();
-            this.btnEllipse = new System.Windows.Forms.Button();
-            this.btnCircle = new System.Windows.Forms.Button();
-            this.btnTriangle = new System.Windows.Forms.Button();
-            this.btnRectangle = new System.Windows.Forms.Button();
-            this.btnLine = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.lCurColor = new System.Windows.Forms.Label();
             this.btnBrown = new System.Windows.Forms.Button();
             this.btnPink = new System.Windows.Forms.Button();
@@ -66,7 +61,6 @@
             this.timerRedraw = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -92,12 +86,6 @@
             this.pColors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pColors.Controls.Add(this.btnEdit);
-            this.pColors.Controls.Add(this.btnBezier);
-            this.pColors.Controls.Add(this.btnEllipse);
-            this.pColors.Controls.Add(this.btnCircle);
-            this.pColors.Controls.Add(this.btnTriangle);
-            this.pColors.Controls.Add(this.btnRectangle);
-            this.pColors.Controls.Add(this.btnLine);
             this.pColors.Controls.Add(this.lCurColor);
             this.pColors.Controls.Add(this.btnBrown);
             this.pColors.Controls.Add(this.btnPink);
@@ -114,78 +102,17 @@
             this.pColors.Size = new System.Drawing.Size(70, 749);
             this.pColors.TabIndex = 1;
             // 
-            // btnBezier
+            // btnEdit
             // 
-            this.btnBezier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBezier.BackColor = System.Drawing.Color.White;
-            this.btnBezier.Image = ((System.Drawing.Image)(resources.GetObject("btnBezier.Image")));
-            this.btnBezier.Location = new System.Drawing.Point(10, 679);
-            this.btnBezier.Name = "btnBezier";
-            this.btnBezier.Size = new System.Drawing.Size(55, 55);
-            this.btnBezier.TabIndex = 16;
-            this.btnBezier.UseVisualStyleBackColor = false;
-            this.btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
-            // 
-            // btnEllipse
-            // 
-            this.btnEllipse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEllipse.BackColor = System.Drawing.Color.White;
-            this.btnEllipse.Image = ((System.Drawing.Image)(resources.GetObject("btnEllipse.Image")));
-            this.btnEllipse.Location = new System.Drawing.Point(10, 623);
-            this.btnEllipse.Name = "btnEllipse";
-            this.btnEllipse.Size = new System.Drawing.Size(55, 55);
-            this.btnEllipse.TabIndex = 15;
-            this.btnEllipse.UseVisualStyleBackColor = false;
-            this.btnEllipse.Click += new System.EventHandler(this.btnEllipse_Click);
-            // 
-            // btnCircle
-            // 
-            this.btnCircle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCircle.BackColor = System.Drawing.Color.White;
-            this.btnCircle.Image = ((System.Drawing.Image)(resources.GetObject("btnCircle.Image")));
-            this.btnCircle.Location = new System.Drawing.Point(10, 567);
-            this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(55, 55);
-            this.btnCircle.TabIndex = 14;
-            this.btnCircle.UseVisualStyleBackColor = false;
-            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
-            // 
-            // btnTriangle
-            // 
-            this.btnTriangle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTriangle.BackColor = System.Drawing.Color.White;
-            this.btnTriangle.Image = ((System.Drawing.Image)(resources.GetObject("btnTriangle.Image")));
-            this.btnTriangle.Location = new System.Drawing.Point(10, 511);
-            this.btnTriangle.Name = "btnTriangle";
-            this.btnTriangle.Size = new System.Drawing.Size(55, 55);
-            this.btnTriangle.TabIndex = 13;
-            this.btnTriangle.UseVisualStyleBackColor = false;
-            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
-            // 
-            // btnRectangle
-            // 
-            this.btnRectangle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRectangle.BackColor = System.Drawing.Color.White;
-            this.btnRectangle.Image = ((System.Drawing.Image)(resources.GetObject("btnRectangle.Image")));
-            this.btnRectangle.Location = new System.Drawing.Point(10, 455);
-            this.btnRectangle.Name = "btnRectangle";
-            this.btnRectangle.Size = new System.Drawing.Size(55, 55);
-            this.btnRectangle.TabIndex = 12;
-            this.btnRectangle.UseVisualStyleBackColor = false;
-            this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
-            // 
-            // btnLine
-            // 
-            this.btnLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLine.BackColor = System.Drawing.Color.White;
-            this.btnLine.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnLine.Image = ((System.Drawing.Image)(resources.GetObject("btnLine.Image")));
-            this.btnLine.Location = new System.Drawing.Point(10, 399);
-            this.btnLine.Name = "btnLine";
-            this.btnLine.Size = new System.Drawing.Size(55, 55);
-            this.btnLine.TabIndex = 11;
-            this.btnLine.UseVisualStyleBackColor = false;
-            this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEdit.BackColor = System.Drawing.Color.White;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(10, 338);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(55, 55);
+            this.btnEdit.TabIndex = 17;
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // lCurColor
             // 
@@ -463,18 +390,6 @@
             // 
             this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEdit.BackColor = System.Drawing.Color.White;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(10, 338);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(55, 55);
-            this.btnEdit.TabIndex = 17;
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -518,11 +433,6 @@
         private System.Windows.Forms.Button btnOrange;
         private System.Windows.Forms.Button btnRed;
         private System.Windows.Forms.Label lCurColor;
-        private System.Windows.Forms.Button btnLine;
-        private System.Windows.Forms.Button btnEllipse;
-        private System.Windows.Forms.Button btnCircle;
-        private System.Windows.Forms.Button btnTriangle;
-        private System.Windows.Forms.Button btnRectangle;
         private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
@@ -530,7 +440,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCancelCurrentFigure;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteLastFigure;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteAll;
-        private System.Windows.Forms.Button btnBezier;
         private System.Windows.Forms.Timer timerRedraw;
         private System.Windows.Forms.ToolStripMenuItem tsmiNew;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

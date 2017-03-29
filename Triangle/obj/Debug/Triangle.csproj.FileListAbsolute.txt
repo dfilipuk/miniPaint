@@ -1,0 +1,7 @@
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Triangle\bin\Debug\Triangle.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Triangle\bin\Debug\Triangle.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Triangle\bin\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Triangle\bin\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Triangle\obj\Debug\Triangle.csprojResolveAssemblyReference.cache
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Triangle\obj\Debug\Triangle.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Triangle\obj\Debug\Triangle.pdb

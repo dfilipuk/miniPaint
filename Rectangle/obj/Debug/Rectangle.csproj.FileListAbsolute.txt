@@ -1,0 +1,7 @@
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Rectangle\bin\Debug\Rectangle.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Rectangle\bin\Debug\Rectangle.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Rectangle\bin\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Rectangle\bin\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Rectangle\obj\Debug\Rectangle.csprojResolveAssemblyReference.cache
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Rectangle\obj\Debug\Rectangle.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Paint\V8\Rectangle\obj\Debug\Rectangle.pdb

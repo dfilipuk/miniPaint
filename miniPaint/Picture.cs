@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
+using Inheritance;
 
 namespace miniPaint
 {

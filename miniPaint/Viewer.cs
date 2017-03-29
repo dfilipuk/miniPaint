@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace miniPaint
 {
@@ -43,6 +44,16 @@ namespace miniPaint
         public EResponse askQuestion(string question, string caption)
         {
             return form.showQuestionMessageBox(question, caption);
+        }
+
+        public void CreateButton(string name, Image picture)
+        {
+            form.CreateButton(name, picture);
+        }
+
+        public void CreateButton(string name, string text)
+        {
+            form.CreateButton(name, text);
         }
     }
 }
