@@ -15,6 +15,8 @@ namespace miniPaint
     {
         public List<Type> LoadedTypes { get; set; }
         public List<MethodInfo> LoadedMethods { get; set; }
+        public List<string> TypesNames { get; set; }
+        public List<string> NamespacesNames { get; set; }
 
         const string FIGURES_DIR = "figures";
         const string PICTURE_FILE_TEMPLATE = "pics/{0}.png";
@@ -27,6 +29,8 @@ namespace miniPaint
             UI = curUI;
             LoadedTypes = new List<Type>();
             LoadedMethods = new List<MethodInfo>();
+            TypesNames = new List<string>();
+            NamespacesNames = new List<string>();
         }
 
         public void LoadFigures()
@@ -134,6 +138,10 @@ namespace miniPaint
                 {
                     UI.CreateButton(String.Format(BUTTON_NAME_TEMPLATE, figureNum), figure.Name);
                 }
+
+                string[] typeDeclar = figure.FullName.Split('.');
+                NamespacesNames.Add(typeDeclar[0]);
+                TypesNames.Add(typeDeclar[1]);
 
                 return true;
             }

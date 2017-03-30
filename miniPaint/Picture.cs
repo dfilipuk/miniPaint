@@ -49,7 +49,7 @@ namespace miniPaint
 
         public CPicture(PictureBox pb, CTwoDFigureFactory factory, bool edit, string filepath)
         {
-            figures = new List<CTwoDFigure>(loadPictureFromFile(filepath));
+            figures = new List<CTwoDFigure>(loadPicture(filepath));
             points = new List<Point>();
 
             currentColor = Color.Black;
@@ -202,14 +202,15 @@ namespace miniPaint
             }
         }
 
-        private CTwoDFigure[] loadPictureFromFile(string filepath)
+        private CTwoDFigure[] loadPicture(string content)
         {
             CTwoDFigure[] result;
             var jsonSerializer = new DataContractJsonSerializer(typeof(CTwoDFigure[]));
 
-            using (var fs = new FileStream(filepath, FileMode.Open))
+            byte[] buffer = Encoding.UTF8.GetBytes(content);
+            using (var ms = new MemoryStream(buffer))
             {
-                result = (CTwoDFigure[]) jsonSerializer.ReadObject(fs);
+                result = (CTwoDFigure[]) jsonSerializer.ReadObject(ms);
             }
 
             return result;

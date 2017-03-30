@@ -148,7 +148,13 @@ namespace miniPaint
                 CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
                 if (factory != null)
                 {
-                    var newPicture = new CPicture(PictureBox, factory, EDIT_MODE, path);
+                    CJSONparser parser = new CJSONparser(figuresLoader.TypesNames, figuresLoader.NamespacesNames);
+                    string content = parser.ParseFile(path);
+                    if (content == null)
+                    {
+                        throw new Exception();
+                    }
+                    var newPicture = new CPicture(PictureBox, factory, EDIT_MODE, content);
                     picture = newPicture;
                     setStandartSettings();
                     return true;
@@ -158,7 +164,7 @@ namespace miniPaint
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 picture.Redraw();
                 showErrorMessageBox(FAIL_TO_LOAD_MESSG);
