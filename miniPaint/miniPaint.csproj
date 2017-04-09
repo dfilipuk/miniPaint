@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FiguresGroupManager.cs" />
     <Compile Include="FiguresLoader.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

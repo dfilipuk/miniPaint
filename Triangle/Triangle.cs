@@ -10,10 +10,15 @@ using System.Runtime.Serialization;
 namespace Triangle
 {
     [DataContract]
-    class CTriangle : CTwoDFigure, IPerimeter, ISelectable, IEditable
+    class CTriangle : CTwoDFigure, IPerimeter, ISelectable, IEditable, IGroupable
     {
         public bool isSelected { get; set; }
-        public CTriangle(Color color, Point[] points, Graphics canv) : base(color, points, canv) { }
+        public bool IsInGroup { get; set; }
+        public CTriangle(Color color, Point[] points, Graphics canv) : base(color, points, canv)
+        {
+            isSelected = false;
+            IsInGroup = false;
+        }
 
         public override void Draw()
         {
@@ -185,6 +190,18 @@ namespace Triangle
             {
                 coordinates[i].X += deltX;
                 coordinates[i].Y += deltY;
+            }
+        }
+
+        /* Реализация интерфейса IGroupable */
+
+        public void GetParams(out Point[] coords, out Color color)
+        {
+            color = curColor;
+            coords = new Point[coordinates.Length];
+            for (int i = 0; i < coords.Length; i++)
+            {
+                coords[i] = new Point(coordinates[i].X, coordinates[i].Y);
             }
         }
     }

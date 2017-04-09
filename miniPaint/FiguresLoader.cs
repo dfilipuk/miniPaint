@@ -17,6 +17,7 @@ namespace miniPaint
         public List<MethodInfo> LoadedMethods { get; set; }
         public List<string> TypesNames { get; set; }
         public List<string> NamespacesNames { get; set; }
+        public Type FiguresGroupType { get; set; }
 
         const string FIGURES_DIR = "figures";
         const string PICTURE_FILE_TEMPLATE = "pics/{0}.png";
@@ -27,6 +28,7 @@ namespace miniPaint
         public CFiguresLoader(CViewer curUI)
         {
             UI = curUI;
+            FiguresGroupType = null;
             LoadedTypes = new List<Type>();
             LoadedMethods = new List<MethodInfo>();
             TypesNames = new List<string>();
@@ -57,6 +59,20 @@ namespace miniPaint
         {
             string[] substrs = name.Split('_');
             return int.Parse(substrs[2]);
+        }
+
+        public CTwoDFigureFactory GetFactoryOfType(Type type)
+        {
+            for (int i = 0; i < LoadedTypes.Count; i++)
+            {
+                if (LoadedTypes[i].Equals(type))
+                {
+                    object obj = new object();
+                    object[] objArr = new object[0];
+                    return (CTwoDFigureFactory)LoadedMethods[i].Invoke(obj, objArr);
+                }
+            }
+            return null;
         }
 
         private string GetAssemblyName(string name)
@@ -117,6 +133,18 @@ namespace miniPaint
 
                 LoadedTypes.Add(figure);
                 LoadedMethods.Add(goodMethods[0]);
+
+                if (FiguresGroupType == null)
+                {
+                    Type[] interfaces = figure.GetInterfaces();
+                    foreach (Type t in interfaces)
+                    {
+                        if (t.Equals(typeof(IFiguresGroup)))
+                        {
+                            FiguresGroupType = figure;
+                        }
+                    }
+                }
 
                 bool isPictureLoaded;
                 Image pic = null;

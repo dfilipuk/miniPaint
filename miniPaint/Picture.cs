@@ -24,16 +24,18 @@ namespace miniPaint
         Color curColor;
         Point prevSelectedPoint;
         ISelectable selectedFigure;
+        CFiguresGroupManager figuresGroupManager;
 
         PictureMode mode;
 
         int pointsAmo;
         readonly Color canvasColor;
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode)
+        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, CFiguresGroupManager groupManager)
         {
             figures = new List<CTwoDFigure>();
             points = new List<Point>();
+            figuresGroupManager = groupManager;
 
             currentColor = Color.Black;
             canvasColor = Color.White;
@@ -48,10 +50,11 @@ namespace miniPaint
             Redraw();
         }
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, string filepath)
+        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, CFiguresGroupManager groupManager, string filepath)
         {
             figures = new List<CTwoDFigure>(loadPicture(filepath));
             points = new List<Point>();
+            figuresGroupManager = groupManager;
 
             currentColor = Color.Black;
             canvasColor = Color.White;
@@ -96,6 +99,20 @@ namespace miniPaint
                 selectedFigure.isSelected = false;
                 selectedFigure = null;
             }
+            Redraw();
+        }
+
+        public void AddFigureToGroup(int x, int y)
+        {
+            selectFigure(x, y);
+            if (selectedFigure != null)
+            {
+                if (selectedFigure is IGroupable)
+                {
+                    figuresGroupManager.AddFigure(selectedFigure as IGroupable);
+                }
+            }
+            selectedFigure = null;
             Redraw();
         }
 
@@ -186,6 +203,9 @@ namespace miniPaint
                             selectedFigure.drawEditFrame();
                         }
                         break;
+                    case PictureMode.pmGroup:
+                        figuresGroupManager.DrawGroup();
+                        break;
                 }
 
                 curPicture.Image = buffer;
@@ -250,7 +270,11 @@ namespace miniPaint
 
         private void addFigure()
         {
-            figures.Add(currentFigure.CreateFigure(curColor, points.ToArray(), gCanvas));
+            CTwoDFigure newFigure = currentFigure.CreateFigure(curColor, points.ToArray(), gCanvas);
+            if (newFigure != null)
+            {
+                figures.Add(newFigure);
+            }
             points.Clear();
             pointsAmo = 0;
         }
@@ -298,6 +322,15 @@ namespace miniPaint
             {
                 mode = value;
                 unsetSelection();
+                figuresGroupManager.ClearGroup();
+            }
+        }
+
+        public ISelectable SelectedFigure
+        {
+            get
+            {
+                return selectedFigure;
             }
         }
     }

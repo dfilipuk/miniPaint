@@ -56,12 +56,16 @@
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCancelCurrentFigure = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteSelectedFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteLastFigure = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiGroups = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteLastFigureInGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaveGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.timerRedraw = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.tsmiDeleteSelectedFigure = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -108,7 +112,7 @@
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(10, 338);
+            this.btnEdit.Location = new System.Drawing.Point(10, 258);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(55, 55);
             this.btnEdit.TabIndex = 17;
@@ -268,7 +272,8 @@
             this.msMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
-            this.tsmiEdit});
+            this.tsmiEdit,
+            this.tsmiGroups});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(1482, 28);
@@ -363,6 +368,14 @@
             this.tsmiCancelCurrentFigure.Text = "Отменить текущую фигуру";
             this.tsmiCancelCurrentFigure.Click += new System.EventHandler(this.tsmiCancelCurrentFigure_Click);
             // 
+            // tsmiDeleteSelectedFigure
+            // 
+            this.tsmiDeleteSelectedFigure.Name = "tsmiDeleteSelectedFigure";
+            this.tsmiDeleteSelectedFigure.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiDeleteSelectedFigure.Size = new System.Drawing.Size(329, 26);
+            this.tsmiDeleteSelectedFigure.Text = "Удалить выбранную фигуру";
+            this.tsmiDeleteSelectedFigure.Click += new System.EventHandler(this.tsmiDeleteSelectedFigure_Click);
+            // 
             // tsmiDeleteLastFigure
             // 
             this.tsmiDeleteLastFigure.Name = "tsmiDeleteLastFigure";
@@ -379,6 +392,37 @@
             this.tsmiDeleteAll.Text = "Удалить всё";
             this.tsmiDeleteAll.Click += new System.EventHandler(this.tsmiDeleteAll_Click);
             // 
+            // tsmiGroups
+            // 
+            this.tsmiGroups.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNewGroup,
+            this.tsmiDeleteLastFigureInGroup,
+            this.tsmiSaveGroup});
+            this.tsmiGroups.Name = "tsmiGroups";
+            this.tsmiGroups.Size = new System.Drawing.Size(73, 24);
+            this.tsmiGroups.Text = "Группы";
+            // 
+            // tsmiNewGroup
+            // 
+            this.tsmiNewGroup.Name = "tsmiNewGroup";
+            this.tsmiNewGroup.Size = new System.Drawing.Size(342, 26);
+            this.tsmiNewGroup.Text = "Новая группа";
+            this.tsmiNewGroup.Click += new System.EventHandler(this.tsmiNewGroup_Click);
+            // 
+            // tsmiDeleteLastFigureInGroup
+            // 
+            this.tsmiDeleteLastFigureInGroup.Name = "tsmiDeleteLastFigureInGroup";
+            this.tsmiDeleteLastFigureInGroup.Size = new System.Drawing.Size(342, 26);
+            this.tsmiDeleteLastFigureInGroup.Text = "Удалить последнюю фигуру в группе";
+            this.tsmiDeleteLastFigureInGroup.Click += new System.EventHandler(this.tsmiDeleteLastFigureInGroup_Click);
+            // 
+            // tsmiSaveGroup
+            // 
+            this.tsmiSaveGroup.Name = "tsmiSaveGroup";
+            this.tsmiSaveGroup.Size = new System.Drawing.Size(342, 26);
+            this.tsmiSaveGroup.Text = "Сохранить группу";
+            this.tsmiSaveGroup.Click += new System.EventHandler(this.tsmiSaveGroup_Click);
+            // 
             // timerRedraw
             // 
             this.timerRedraw.Tick += new System.EventHandler(this.timerRedraw_Tick);
@@ -391,14 +435,6 @@
             // openFileDialog
             // 
             this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
-            // 
-            // tsmiDeleteSelectedFigure
-            // 
-            this.tsmiDeleteSelectedFigure.Name = "tsmiDeleteSelectedFigure";
-            this.tsmiDeleteSelectedFigure.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.tsmiDeleteSelectedFigure.Size = new System.Drawing.Size(329, 26);
-            this.tsmiDeleteSelectedFigure.Text = "Удалить выбранную фигуру";
-            this.tsmiDeleteSelectedFigure.Click += new System.EventHandler(this.tsmiDeleteSelectedFigure_Click);
             // 
             // frmMain
             // 
@@ -462,6 +498,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteSelectedFigure;
+        private System.Windows.Forms.ToolStripMenuItem tsmiGroups;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNewGroup;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteLastFigureInGroup;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaveGroup;
     }
 }
 

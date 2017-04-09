@@ -26,6 +26,17 @@ namespace Inheritance
         void changePosition(int deltX, int deltY);
     }
 
+    public interface IGroupable
+    {
+        bool IsInGroup { get; set; }
+        void GetParams(out Point[] coords, out Color color);
+    }
+
+    public interface IFiguresGroup
+    {
+        void LoadGroupTemplate(List<CGroupFigureInfo> template);
+    }
+
     /*
     [KnownType(typeof(CLine))]
     [KnownType(typeof(CRectangle))]

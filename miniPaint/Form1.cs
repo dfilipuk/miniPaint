@@ -33,14 +33,16 @@ namespace miniPaint
         CViewer userInterface;
         CProjectInfo projectManager;
         CFiguresLoader figuresLoader;
+        CFiguresGroupManager figuresGroupManager;
         List<Button> figuresBtns;
+        PictureMode prevMode;
         int curBtnX, curBtnY;
 
         public frmMain()
         {
             InitializeComponent();
             curBtnX = 8;
-            curBtnY = 325;
+            curBtnY = 260;
             figuresBtns = new List<Button>();
 
             userInterface = new CViewer(this);
@@ -49,15 +51,17 @@ namespace miniPaint
             figuresLoader.LoadFigures();
             CTwoDFigureFactory.LoadedFactories = figuresLoader.LoadedMethods;
             CTwoDFigure.KnownTypes = figuresLoader.LoadedTypes;
+            figuresGroupManager = new CFiguresGroupManager(userInterface, figuresLoader);
 
             CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
             if (factory != null)
             {
-                picture = new CPicture(PictureBox, factory, PictureMode.pmEdit);
+                picture = new CPicture(PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
             }
 
             standartBtnColor = Color.White;
             pressedBtnColor = Color.Bisque;
+            prevMode = PictureMode.pmEdit;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
 
             setStandartSettings();
@@ -151,7 +155,7 @@ namespace miniPaint
                     {
                         throw new Exception();
                     }
-                    var newPicture = new CPicture(PictureBox, factory, PictureMode.pmEdit, content);
+                    var newPicture = new CPicture(PictureBox, factory, PictureMode.pmEdit, figuresGroupManager, content);
                     picture = newPicture;
                     setStandartSettings();
                     return true;
@@ -370,7 +374,7 @@ namespace miniPaint
                 CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
                 if (factory != null)
                 {
-                    picture = new CPicture(PictureBox, factory, PictureMode.pmEdit);
+                    picture = new CPicture(PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
                     setStandartSettings();
                     projectManager.resetProjectInfo();
                     updateWindowCaption();
@@ -399,6 +403,9 @@ namespace miniPaint
                             projectManager.isSaved = false;
                             updateWindowCaption();
                             break;
+                        case PictureMode.pmGroup:
+                            picture.AddFigureToGroup(e.X, e.Y);
+                            break;
                     }
                 }
             }
@@ -410,6 +417,24 @@ namespace miniPaint
             {
                 picture.DeleteSelectedFigure();
             }
+        }
+
+        private void tsmiNewGroup_Click(object sender, EventArgs e)
+        {
+            prevMode = picture.Mode;
+            picture.Mode = PictureMode.pmGroup;
+        }
+
+        private void tsmiDeleteLastFigureInGroup_Click(object sender, EventArgs e)
+        {
+            figuresGroupManager.RemoveLastFigure();
+            picture.Redraw();
+        }
+
+        private void tsmiSaveGroup_Click(object sender, EventArgs e)
+        {
+            figuresGroupManager.SaveGroup();
+            picture.Mode = prevMode;
         }
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)

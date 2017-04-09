@@ -10,9 +10,10 @@ using System.Runtime.Serialization;
 namespace Circle
 {
     [DataContract]
-    class CCircle : CTwoDFigure, IPerimeter, ISelectable, IEditable
+    class CCircle : CTwoDFigure, IPerimeter, ISelectable, IEditable, IGroupable
     {
         public bool isSelected { get; set; }
+        public bool IsInGroup { get; set; }
         [DataMember]
         int radius;
         public CCircle(Color color, Point[] points, Graphics canv) : base(color, points, canv)
@@ -21,6 +22,7 @@ namespace Circle
             int deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
             radius = (int)Math.Sqrt(deltX * deltX + deltY * deltY);
             isSelected = false;
+            IsInGroup = false;
         }
 
         public override void Draw()
@@ -83,6 +85,18 @@ namespace Circle
             {
                 coordinates[i].X += deltX;
                 coordinates[i].Y += deltY;
+            }
+        }
+
+        /* Реализация интерфейса IGroupable */
+
+        public void GetParams(out Point[] coords, out Color color)
+        {
+            color = curColor;
+            coords = new Point[coordinates.Length];
+            for (int i = 0; i < coords.Length; i++)
+            {
+                coords[i] = new Point(coordinates[i].X, coordinates[i].Y);
             }
         }
     }

@@ -1,0 +1,7 @@
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Лабораторная работа №1\GroupOfFigures\bin\Debug\GroupOfFigures.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Лабораторная работа №1\GroupOfFigures\bin\Debug\GroupOfFigures.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Лабораторная работа №1\GroupOfFigures\bin\Debug\Inheritance.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Лабораторная работа №1\GroupOfFigures\bin\Debug\Inheritance.pdb
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Лабораторная работа №1\GroupOfFigures\obj\Debug\GroupOfFigures.csprojResolveAssemblyReference.cache
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Лабораторная работа №1\GroupOfFigures\obj\Debug\GroupOfFigures.dll
+D:\Документы\Учёба\ООТПиСП\Лабораторные работы\Разработки\Лабораторная работа №1\GroupOfFigures\obj\Debug\GroupOfFigures.pdb

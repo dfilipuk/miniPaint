@@ -10,9 +10,10 @@ using System.Runtime.Serialization;
 namespace Ellipse
 {
     [DataContract]
-    class CEllipse : CTwoDFigure, IPerimeter, ISelectable, IEditable
+    class CEllipse : CTwoDFigure, IPerimeter, ISelectable, IEditable, IGroupable
     {
         public bool isSelected { get; set; }
+        public bool IsInGroup { get; set; }
         [DataMember]
         int deltX;
         [DataMember]
@@ -23,6 +24,7 @@ namespace Ellipse
             deltY = Math.Abs(coordinates[0].Y - coordinates[1].Y);
             changeCoordinates();
             isSelected = false;
+            IsInGroup = false;
         }
 
         public override void Draw()
@@ -103,6 +105,18 @@ namespace Ellipse
             {
                 coordinates[i].X += deltX;
                 coordinates[i].Y += deltY;
+            }
+        }
+
+        /* Реализация интерфейса IGroupable */
+
+        public void GetParams(out Point[] coords, out Color color)
+        {
+            color = curColor;
+            coords = new Point[coordinates.Length];
+            for (int i = 0; i < coords.Length; i++)
+            {
+                coords[i] = new Point(coordinates[i].X, coordinates[i].Y);
             }
         }
     }
