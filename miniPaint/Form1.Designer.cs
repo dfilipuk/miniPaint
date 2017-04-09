@@ -61,6 +61,7 @@
             this.timerRedraw = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.tsmiDeleteSelectedFigure = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -347,6 +348,7 @@
             // 
             this.tsmiEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCancelCurrentFigure,
+            this.tsmiDeleteSelectedFigure,
             this.tsmiDeleteLastFigure,
             this.tsmiDeleteAll});
             this.tsmiEdit.Name = "tsmiEdit";
@@ -389,6 +391,14 @@
             // openFileDialog
             // 
             this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            // 
+            // tsmiDeleteSelectedFigure
+            // 
+            this.tsmiDeleteSelectedFigure.Name = "tsmiDeleteSelectedFigure";
+            this.tsmiDeleteSelectedFigure.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.tsmiDeleteSelectedFigure.Size = new System.Drawing.Size(329, 26);
+            this.tsmiDeleteSelectedFigure.Text = "Удалить выбранную фигуру";
+            this.tsmiDeleteSelectedFigure.Click += new System.EventHandler(this.tsmiDeleteSelectedFigure_Click);
             // 
             // frmMain
             // 
@@ -451,6 +461,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteSelectedFigure;
     }
 }
 

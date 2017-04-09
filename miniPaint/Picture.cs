@@ -12,6 +12,7 @@ using Inheritance;
 
 namespace miniPaint
 {
+    enum PictureMode { pmDraw, pmEdit, pmGroup }
     class CPicture
     {
         List<CTwoDFigure> figures;
@@ -24,12 +25,12 @@ namespace miniPaint
         Point prevSelectedPoint;
         ISelectable selectedFigure;
 
-        bool editMode;
+        PictureMode mode;
 
         int pointsAmo;
         readonly Color canvasColor;
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory, bool edit)
+        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode)
         {
             figures = new List<CTwoDFigure>();
             points = new List<Point>();
@@ -38,7 +39,7 @@ namespace miniPaint
             canvasColor = Color.White;
             currentFigure = factory;
             pointsAmo = 0;
-            editMode = edit;
+            mode = startMode;
 
             curPicture = pb;
             buffer = new Bitmap(curPicture.Width, curPicture.Height);
@@ -47,7 +48,7 @@ namespace miniPaint
             Redraw();
         }
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory, bool edit, string filepath)
+        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, string filepath)
         {
             figures = new List<CTwoDFigure>(loadPicture(filepath));
             points = new List<Point>();
@@ -56,7 +57,7 @@ namespace miniPaint
             canvasColor = Color.White;
             currentFigure = factory;
             pointsAmo = 0;
-            editMode = edit;
+            mode = startMode;
 
             curPicture = pb;
             buffer = new Bitmap(curPicture.Width, curPicture.Height);
@@ -173,10 +174,20 @@ namespace miniPaint
             if (gCanvas != null)
             {
                 gCanvas.Clear(canvasColor);
+
                 for (int i = 0; i < figures.Count; i++)
                     figures[i].Draw();
-                if (selectedFigure != null)
-                    selectedFigure.drawEditFrame();
+
+                switch (this.Mode)
+                {
+                    case PictureMode.pmEdit:
+                        if (selectedFigure != null)
+                        {
+                            selectedFigure.drawEditFrame();
+                        }
+                        break;
+                }
+
                 curPicture.Image = buffer;
             }
         }
@@ -184,10 +195,20 @@ namespace miniPaint
         private void Redraw(Graphics canv)
         {
             gCanvas.Clear(canvasColor);
+
             for (int i = 0; i < figures.Count; i++)
                 figures[i].Draw(canv);
-            if (selectedFigure != null)
-                selectedFigure.drawEditFrame();
+
+            switch (this.Mode)
+            {
+                case PictureMode.pmEdit:
+                    if (selectedFigure != null)
+                    {
+                        selectedFigure.drawEditFrame();
+                    }
+                    break;
+            }
+
             curPicture.Image = buffer;
         }
 
@@ -199,6 +220,17 @@ namespace miniPaint
             using (var fs = new FileStream(filepath, FileMode.Create))
             {
                 jsonSerializer.WriteObject(fs, figuresForSave);
+            }
+        }
+
+        public void DeleteSelectedFigure()
+        {
+            if (selectedFigure != null)
+            {
+                CTwoDFigure fig = (CTwoDFigure)selectedFigure;
+                figures.Remove(fig);
+                selectedFigure = null;
+                Redraw();
             }
         }
 
@@ -238,7 +270,7 @@ namespace miniPaint
             set
             {
                 curFigure = value;
-                isEditMode = false;
+                Mode = PictureMode.pmDraw;
                 deletePoints();
             }
         }
@@ -256,15 +288,15 @@ namespace miniPaint
             }
         }
 
-        public bool isEditMode
+        public PictureMode Mode
         {
             get
             {
-                return editMode;
+                return mode;
             }
             set
             {
-                editMode = value;
+                mode = value;
                 unsetSelection();
             }
         }

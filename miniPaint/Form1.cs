@@ -29,9 +29,6 @@ namespace miniPaint
         const string CAPTION_NOT_SAVED = "*{0} - miniPaint";
         const string CAPTION_SAVED = "{0} - miniPaint";
 
-        const bool EDIT_MODE = true;
-        const bool NOT_EDIT_MODE = false;
-
         CPicture picture;
         CViewer userInterface;
         CProjectInfo projectManager;
@@ -56,7 +53,7 @@ namespace miniPaint
             CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
             if (factory != null)
             {
-                picture = new CPicture(PictureBox, factory, EDIT_MODE);
+                picture = new CPicture(PictureBox, factory, PictureMode.pmEdit);
             }
 
             standartBtnColor = Color.White;
@@ -154,7 +151,7 @@ namespace miniPaint
                     {
                         throw new Exception();
                     }
-                    var newPicture = new CPicture(PictureBox, factory, EDIT_MODE, content);
+                    var newPicture = new CPicture(PictureBox, factory, PictureMode.pmEdit, content);
                     picture = newPicture;
                     setStandartSettings();
                     return true;
@@ -261,16 +258,17 @@ namespace miniPaint
             {
                 if (picture != null)
                 {
-                    if (!picture.isEditMode)
+                    switch (picture.Mode)
                     {
-                        lCurColor.BackColor = pressedBtn.BackColor;
-                        picture.currentColor = pressedBtn.BackColor;
-                    }
-                    else
-                    {
-                        picture.changeColorOfSelectedFigure(pressedBtn.BackColor);
-                        projectManager.isSaved = false;
-                        updateWindowCaption();
+                        case PictureMode.pmEdit:
+                            picture.changeColorOfSelectedFigure(pressedBtn.BackColor);
+                            projectManager.isSaved = false;
+                            updateWindowCaption();
+                            break;
+                        case PictureMode.pmDraw:
+                            lCurColor.BackColor = pressedBtn.BackColor;
+                            picture.currentColor = pressedBtn.BackColor;
+                            break;
                     }
                 }
             }
@@ -280,7 +278,7 @@ namespace miniPaint
         {
             if (picture != null)
             {
-                picture.isEditMode = true;
+                picture.Mode = PictureMode.pmEdit;
                 setStandartColorForAllButtons();
                 setPressedColorForButton(btnEdit);
             }
@@ -372,7 +370,7 @@ namespace miniPaint
                 CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
                 if (factory != null)
                 {
-                    picture = new CPicture(PictureBox, factory, EDIT_MODE);
+                    picture = new CPicture(PictureBox, factory, PictureMode.pmEdit);
                     setStandartSettings();
                     projectManager.resetProjectInfo();
                     updateWindowCaption();
@@ -391,17 +389,26 @@ namespace miniPaint
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    if (!picture.isEditMode)
+                    switch (picture.Mode)
                     {
-                        picture.addPoint(e.X, e.Y);
-                        projectManager.isSaved = false;
-                        updateWindowCaption();
-                    }
-                    else
-                    {
-                        picture.selectFigure(e.X, e.Y);
+                        case PictureMode.pmEdit:
+                            picture.selectFigure(e.X, e.Y);
+                            break;
+                        case PictureMode.pmDraw:
+                            picture.addPoint(e.X, e.Y);
+                            projectManager.isSaved = false;
+                            updateWindowCaption();
+                            break;
                     }
                 }
+            }
+        }
+
+        private void tsmiDeleteSelectedFigure_Click(object sender, EventArgs e)
+        {
+            if (picture.Mode == PictureMode.pmEdit)
+            {
+                picture.DeleteSelectedFigure();
             }
         }
 
