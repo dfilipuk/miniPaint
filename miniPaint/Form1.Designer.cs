@@ -405,21 +405,24 @@
             // tsmiNewGroup
             // 
             this.tsmiNewGroup.Name = "tsmiNewGroup";
-            this.tsmiNewGroup.Size = new System.Drawing.Size(342, 26);
+            this.tsmiNewGroup.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.tsmiNewGroup.Size = new System.Drawing.Size(393, 26);
             this.tsmiNewGroup.Text = "Новая группа";
             this.tsmiNewGroup.Click += new System.EventHandler(this.tsmiNewGroup_Click);
             // 
             // tsmiDeleteLastFigureInGroup
             // 
             this.tsmiDeleteLastFigureInGroup.Name = "tsmiDeleteLastFigureInGroup";
-            this.tsmiDeleteLastFigureInGroup.Size = new System.Drawing.Size(342, 26);
+            this.tsmiDeleteLastFigureInGroup.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.tsmiDeleteLastFigureInGroup.Size = new System.Drawing.Size(393, 26);
             this.tsmiDeleteLastFigureInGroup.Text = "Удалить последнюю фигуру в группе";
             this.tsmiDeleteLastFigureInGroup.Click += new System.EventHandler(this.tsmiDeleteLastFigureInGroup_Click);
             // 
             // tsmiSaveGroup
             // 
             this.tsmiSaveGroup.Name = "tsmiSaveGroup";
-            this.tsmiSaveGroup.Size = new System.Drawing.Size(342, 26);
+            this.tsmiSaveGroup.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.tsmiSaveGroup.Size = new System.Drawing.Size(393, 26);
             this.tsmiSaveGroup.Text = "Сохранить группу";
             this.tsmiSaveGroup.Click += new System.EventHandler(this.tsmiSaveGroup_Click);
             // 

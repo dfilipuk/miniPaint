@@ -93,11 +93,13 @@ namespace Circle
         public void GetParams(out Point[] coords, out Color color)
         {
             color = curColor;
-            coords = new Point[coordinates.Length];
-            for (int i = 0; i < coords.Length; i++)
+            coords = new Point[4];
+            for (int i = 0; i < 2; i++)
             {
                 coords[i] = new Point(coordinates[i].X, coordinates[i].Y);
             }
+            coords[2] = new Point(coordinates[0].X - radius, coordinates[0].Y - radius);
+            coords[3] = new Point(coordinates[0].X + radius, coordinates[0].Y + radius);
         }
     }
 }

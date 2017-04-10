@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace GroupOfFigures
 {
     [DataContract]
-    class CGroupOfFigures : CTwoDFigure, IFiguresGroup
+    class CGroupOfFigures : CTwoDFigure, ISelectable, IEditable, IFiguresGroup
     {
         public static List<CGroupFigureInfo> GroupTemplate { get; set; }
         public static bool IsTemplateLoaded { get; set; }
@@ -19,15 +19,24 @@ namespace GroupOfFigures
         private static int groupHeight;
         private static Point groupCenter;
 
+        public bool isSelected { get; set; }
+
+        int selectedFigureInd;
         [DataMember]
         CTwoDFigure[] figures;
         [DataMember]
         Point center;
+        [DataMember]
+        int curGroupWidth;
+        [DataMember]
+        int curGroupHeight;
 
         public CGroupOfFigures(Color color, Point[] points, Graphics canv) : base(color, points, canv)
         {
             if (points.Length != 0)
             {
+                isSelected = false;
+                selectedFigureInd = -1;
                 center = new Point();
                 center.X = points[0].X;
                 center.Y = points[0].Y;
@@ -73,6 +82,8 @@ namespace GroupOfFigures
                 newFigure = GroupTemplate[i].Factory.CreateFigure(GroupTemplate[i].Color, coordinates, gCanvas);
                 figures[i] = newFigure;
             }
+            curGroupHeight = groupHeight;
+            curGroupWidth = groupWidth;
         }
 
         /* Реализация интерфейса IFiguresGroup */
@@ -101,6 +112,99 @@ namespace GroupOfFigures
             groupWidth = maxX - minX;
             groupHeight = maxY - minY;
             groupCenter = new Point(minX + (groupWidth / 2), minY + (groupHeight / 2));
+        }
+
+        /* Реализация интерфейса ISelectable */
+
+        public bool isPointWithinFigure(int x, int y)
+        {
+            ISelectable selectedFigure;
+            for (int i = figures.Length; i > 0; i--)
+            {
+                selectedFigure = figures[i - 1] as ISelectable;
+                if (selectedFigure.isPointWithinFigure(x, y))
+                {
+                    selectedFigureInd = i - 1;
+                    return true;
+                }
+            }
+            selectedFigureInd = -1;
+            return false;
+        }
+
+        public void drawEditFrame()
+        {
+            SolidBrush frameBrush = new SolidBrush(Color.Green);
+            Pen framePen = new Pen(frameBrush, 3);
+            framePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            gCanvas.DrawRectangle(framePen, center.X - curGroupWidth / 2 - 3, center.Y - curGroupHeight / 2 - 3, 
+                curGroupWidth + 5, curGroupHeight + 5);
+            (figures[selectedFigureInd] as ISelectable).drawEditFrame();
+        }
+
+        /* Реализация интерфейса IEditable */
+
+        public void changeColor(Color newColor)
+        {
+            if (selectedFigureInd != -1)
+            {
+                if (figures[selectedFigureInd] is IEditable)
+                {
+                    (figures[selectedFigureInd] as IEditable).changeColor(newColor);
+                }
+                else
+                {
+                    MakeFigureWithNewColor(newColor);
+                }
+            }
+        }
+
+        public void changePosition(int deltX, int deltY)
+        {
+            if (isSelected)
+            {
+                for (int i = 0; i < figures.Length; i++)
+                {
+                    if (figures[i] is IEditable)
+                    {
+                        (figures[i] as IEditable).changePosition(deltX, deltY);
+                    }
+                    else
+                    {
+                        MakeFigureWithNewPosition(i, deltX, deltY);
+                    }
+                }
+                center.X += deltX;
+                center.Y += deltY;
+            }
+        }
+
+        private void MakeFigureWithNewColor(Color newColor)
+        {
+            Color color;
+            Point[] coordinates;
+            (figures[selectedFigureInd] as IGroupable).GetParams(out coordinates, out color);
+            color = newColor;
+            Type figType = figures[selectedFigureInd].GetType();
+            object[] args = new object[] { color, coordinates, gCanvas };
+            figures[selectedFigureInd] = (CTwoDFigure)Activator.CreateInstance(figType, args);
+        }
+
+        private void MakeFigureWithNewPosition(int ind, int deltX, int deltY)
+        {
+            Color color;
+            Point[] coordinates;
+            (figures[ind] as IGroupable).GetParams(out coordinates, out color);
+
+            for (int i = 0; i < coordinates.Length; i++)
+            {
+                coordinates[i].X += deltX;
+                coordinates[i].Y += deltY;
+            }
+
+            Type figType = figures[ind].GetType();
+            object[] args = new object[] { color, coordinates, gCanvas };
+            figures[ind] = (CTwoDFigure)Activator.CreateInstance(figType, args);
         }
     }
 }
