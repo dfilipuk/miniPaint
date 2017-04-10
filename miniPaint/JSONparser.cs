@@ -11,11 +11,22 @@ namespace miniPaint
     {
         private List<string> loadedTypes;
         private List<string> loadedNamespaces;
+        private string figuresGroupTypeName;
 
-        public CJSONparser(List<string> types, List<string> namespaces)
+        public CJSONparser(List<string> types, List<string> namespaces, Type figuresGroupType)
         {
             loadedTypes = types;
             loadedNamespaces = namespaces;
+
+            if (figuresGroupType != null)
+            {
+                string[] declar = figuresGroupType.FullName.Split('.');
+                figuresGroupTypeName = declar[1];
+            }
+            else
+            {
+                figuresGroupTypeName = null;
+            }
         }
 
         public string ParseFile(string path)
@@ -28,6 +39,13 @@ namespace miniPaint
                     content = String.Concat(content, sr.ReadLine());
                 }
             }
+
+            return ParseString(content);
+        }
+
+        private string ParseString(string content)
+        {
+            string resContent = String.Empty;
 
             if (!CheckBrackets(content))
             {
@@ -42,7 +60,7 @@ namespace miniPaint
 
             elems = DeleteUnnecessaryElems(elems);
 
-            string resContent = MakeFinalContent(elems);
+            resContent = MakeFinalContent(elems);
 
             return resContent;
         }
@@ -160,7 +178,8 @@ namespace miniPaint
                 return null;
             }
             string typeDeclar = elem.Substring(startInd + 1, endInd - startInd - 1);
-            typeDeclar = CheckTypeDeclaration(typeDeclar);
+            bool isFiguresGroupType;
+            typeDeclar = CheckTypeDeclaration(typeDeclar, out isFiguresGroupType);
             if (typeDeclar == null)
             {
                 return null;
@@ -168,11 +187,58 @@ namespace miniPaint
 
             elem = elem.Remove(startInd + 1, endInd - startInd - 1);
             elem = elem.Insert(startInd + 1, typeDeclar);
+
+            if (isFiguresGroupType)
+            {
+                if (IsFiguresGroupEmpty(ref elem))
+                {
+                    return null;
+                }
+            }
+
             return elem;
         }
 
-        private string CheckTypeDeclaration(string declar)
+        private bool IsFiguresGroupEmpty(ref string figuresGroup)
         {
+            int coordinatesArrayStartInd = figuresGroup.IndexOf('[') + 1;
+            if (coordinatesArrayStartInd == -1)
+            {
+                return true;
+            }
+            int figuresArrayStartInd = figuresGroup.IndexOf('[', coordinatesArrayStartInd + 1);
+            if (figuresArrayStartInd == -1)
+            {
+                return true;
+            }
+            int figuresArrayEndInd = figuresGroup.LastIndexOf(']');
+            if ((figuresArrayEndInd == -1) || (figuresArrayStartInd >= figuresArrayEndInd))
+            {
+                return true;
+            }
+
+            string figuresArray = figuresGroup.Substring(figuresArrayStartInd, figuresArrayEndInd - figuresArrayStartInd + 1);
+            string newFiguresArray = ParseString(figuresArray);
+
+            if (newFiguresArray == null)
+            {
+                return true;
+            }
+
+            if (newFiguresArray.Equals("[]"))
+            {
+                return true;
+            }
+
+            figuresGroup = figuresGroup.Remove(figuresArrayStartInd, figuresArrayEndInd - figuresArrayStartInd + 1);
+            figuresGroup = figuresGroup.Insert(figuresArrayStartInd, newFiguresArray);
+
+            return false;
+        }
+
+        private string CheckTypeDeclaration(string declar, out bool isFiguresGroupType)
+        {
+            isFiguresGroupType = false;
             int delim = declar.IndexOf(':');
             if (delim == -1)
             {
@@ -185,6 +251,14 @@ namespace miniPaint
             if (!IsTypeLoaded(type, out namespaceName))
             {
                 return null;
+            }
+
+            if (figuresGroupTypeName != null)
+            {
+                if (figuresGroupTypeName.Equals(type))
+                {
+                    isFiguresGroupType = true;
+                }
             }
 
             string res = String.Empty;

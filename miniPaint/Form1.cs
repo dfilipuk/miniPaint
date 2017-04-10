@@ -149,7 +149,8 @@ namespace miniPaint
                 CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
                 if (factory != null)
                 {
-                    CJSONparser parser = new CJSONparser(figuresLoader.TypesNames, figuresLoader.NamespacesNames);
+                    CJSONparser parser = new CJSONparser(figuresLoader.TypesNames, figuresLoader.NamespacesNames, 
+                        figuresLoader.FiguresGroupType);
                     string content = parser.ParseFile(path);
                     if (content == null)
                     {
