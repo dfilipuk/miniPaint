@@ -239,7 +239,7 @@ namespace miniPaint
         {
             setStandartColorForAllButtons();
             setPressedColorForButton(btnEdit);
-            lCurColor.BackColor = btnBlack.BackColor;
+            lCurColor.BackColor = Color.Black;
         }
 
         private void setStandartColorForAllButtons()
@@ -256,25 +256,47 @@ namespace miniPaint
             btn.BackColor = pressedBtnColor;
         }
 
+        private void ChangeColor(Color newColor)
+        {
+            if (picture != null)
+            {
+                switch (picture.Mode)
+                {
+                    case PictureMode.pmEdit:
+                        picture.changeColorOfSelectedFigure(newColor);
+                        projectManager.isSaved = false;
+                        updateWindowCaption();
+                        break;
+                    case PictureMode.pmDraw:
+                        lCurColor.BackColor = newColor;
+                        picture.currentColor = newColor;
+                        break;
+                }
+            }
+        }
+
         private void btnColor_Click(object sender, EventArgs e)
         {
-            Button pressedBtn = sender as Button;
+            Label pressedBtn = sender as Label;
             if (pressedBtn != null)
             {
-                if (picture != null)
+                ChangeColor(pressedBtn.BackColor);
+            }
+        }
+
+        private void btnColor_DoubleClick(object sender, EventArgs e)
+        {
+            Label pressedBtn = sender as Label;
+            if (pressedBtn != null)
+            {
+                if (colorDialog.ShowDialog() == DialogResult.Cancel)
                 {
-                    switch (picture.Mode)
-                    {
-                        case PictureMode.pmEdit:
-                            picture.changeColorOfSelectedFigure(pressedBtn.BackColor);
-                            projectManager.isSaved = false;
-                            updateWindowCaption();
-                            break;
-                        case PictureMode.pmDraw:
-                            lCurColor.BackColor = pressedBtn.BackColor;
-                            picture.currentColor = pressedBtn.BackColor;
-                            break;
-                    }
+                    return;
+                }
+                else
+                {
+                    pressedBtn.BackColor = colorDialog.Color;
+                    lCurColor.BackColor = colorDialog.Color;
                 }
             }
         }
@@ -436,6 +458,18 @@ namespace miniPaint
         {
             figuresGroupManager.SaveGroup();
             picture.Mode = prevMode;
+        }
+
+        private void lCurColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
+            else
+            {
+                ChangeColor(colorDialog.Color);
+            }
         }
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
