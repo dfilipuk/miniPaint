@@ -29,16 +29,16 @@ namespace miniPaint
         PictureMode mode;
 
         int pointsAmo;
-        readonly Color canvasColor;
+        Color backgroundColor;
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, CFiguresGroupManager groupManager)
+        public CPicture(Color canvColor, PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, CFiguresGroupManager groupManager)
         {
             figures = new List<CTwoDFigure>();
             points = new List<Point>();
             figuresGroupManager = groupManager;
 
             currentColor = Color.Black;
-            canvasColor = Color.White;
+            BackgroundColor = canvColor;
             currentFigure = factory;
             pointsAmo = 0;
             mode = startMode;
@@ -50,14 +50,14 @@ namespace miniPaint
             Redraw();
         }
 
-        public CPicture(PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, CFiguresGroupManager groupManager, string filepath)
+        public CPicture(Color canvColor, PictureBox pb, CTwoDFigureFactory factory, PictureMode startMode, CFiguresGroupManager groupManager, string filepath)
         {
             figures = new List<CTwoDFigure>(loadPicture(filepath));
             points = new List<Point>();
             figuresGroupManager = groupManager;
 
             currentColor = Color.Black;
-            canvasColor = Color.White;
+            BackgroundColor = canvColor;
             currentFigure = factory;
             pointsAmo = 0;
             mode = startMode;
@@ -141,7 +141,7 @@ namespace miniPaint
         {
             deletePoints();
             figures.Clear();
-            gCanvas.Clear(canvasColor);
+            gCanvas.Clear(BackgroundColor);
         }
 
         public void deleteLastFigure()
@@ -190,7 +190,7 @@ namespace miniPaint
         {
             if (gCanvas != null)
             {
-                gCanvas.Clear(canvasColor);
+                gCanvas.Clear(BackgroundColor);
 
                 for (int i = 0; i < figures.Count; i++)
                     figures[i].Draw();
@@ -214,7 +214,7 @@ namespace miniPaint
 
         private void Redraw(Graphics canv)
         {
-            gCanvas.Clear(canvasColor);
+            gCanvas.Clear(BackgroundColor);
 
             for (int i = 0; i < figures.Count; i++)
                 figures[i].Draw(canv);
@@ -309,6 +309,19 @@ namespace miniPaint
             {
                 curColor = value;
                 deletePoints();
+            }
+        }
+
+        public Color BackgroundColor
+        {
+            get
+            {
+                return backgroundColor;
+            }
+            set
+            {
+                backgroundColor = value;
+                Redraw();
             }
         }
 

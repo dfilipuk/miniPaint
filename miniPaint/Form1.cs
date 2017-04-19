@@ -16,7 +16,8 @@ namespace miniPaint
     {
         readonly Color standartBtnColor;
         readonly Color pressedBtnColor;
-
+        readonly Color STANDART_CANVAS_COLOR = Color.White;
+        
         const int BTN_FIGURE_SIZE_PX = 41;
         const int BTN_FIGURE_DELIMITER_SIZE_PX = 1;
 
@@ -36,18 +37,24 @@ namespace miniPaint
         CFiguresGroupManager figuresGroupManager;
         List<Button> figuresBtns;
         PictureMode prevMode;
+        CAppParams standartParams, currentParams;
         int curBtnX, curBtnY;
 
         public frmMain()
         {
             InitializeComponent();
+
             curBtnX = 8;
             curBtnY = 260;
-            figuresBtns = new List<Button>();
 
+            figuresBtns = new List<Button>();
             userInterface = new CViewer(this);
             projectManager = new CProjectInfo(userInterface);
             figuresLoader = new CFiguresLoader(userInterface);
+
+            standartParams = GetApplicationParametrs();
+            currentParams = GetApplicationParametrs();
+
             figuresLoader.LoadFigures();
             CTwoDFigureFactory.LoadedFactories = figuresLoader.LoadedMethods;
             CTwoDFigure.KnownTypes = figuresLoader.LoadedTypes;
@@ -56,7 +63,7 @@ namespace miniPaint
             CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
             if (factory != null)
             {
-                picture = new CPicture(PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
+                picture = new CPicture(currentParams.PictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
             }
 
             standartBtnColor = Color.White;
@@ -156,7 +163,7 @@ namespace miniPaint
                     {
                         throw new Exception();
                     }
-                    var newPicture = new CPicture(PictureBox, factory, PictureMode.pmEdit, figuresGroupManager, content);
+                    var newPicture = new CPicture(currentParams.PictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager, content);
                     picture = newPicture;
                     setStandartSettings();
                     return true;
@@ -235,6 +242,28 @@ namespace miniPaint
             this.Text = newCaption;
         }
 
+        private CAppParams GetApplicationParametrs()
+        {
+            CAppParams res = new CAppParams();
+
+            res.IsMaximized = (this.WindowState == FormWindowState.Maximized);
+            res.WindowLocation = new Point(this.Location.X, this.Location.Y);
+            res.WindowSize = new Size(this.Size.Width, this.Size.Height);
+            res.PictureBackgroundColor = STANDART_CANVAS_COLOR;
+            res.Color1 = lColor1.BackColor;
+            res.Color2 = lColor2.BackColor;
+            res.Color3 = lColor3.BackColor;
+            res.Color4 = lColor4.BackColor;
+            res.Color5 = lColor5.BackColor;
+            res.Color6 = lColor6.BackColor;
+            res.Color7 = lColor7.BackColor;
+            res.Color8 = lColor8.BackColor;
+            res.Color9 = lColor9.BackColor;
+            res.Color10 = lColor10.BackColor;
+
+            return res;
+        }
+
         private void setStandartSettings()
         {
             setStandartColorForAllButtons();
@@ -277,26 +306,40 @@ namespace miniPaint
 
         private void btnColor_Click(object sender, EventArgs e)
         {
+            MouseEventArgs mouse = (MouseEventArgs)e; 
             Label pressedBtn = sender as Label;
-            if (pressedBtn != null)
+            if ((pressedBtn != null) && (picture != null))
             {
-                ChangeColor(pressedBtn.BackColor);
+                switch (mouse.Button)
+                {
+                    case MouseButtons.Left:
+                        ChangeColor(pressedBtn.BackColor);
+                        break;
+                    case MouseButtons.Right:
+                        currentParams.PictureBackgroundColor = pressedBtn.BackColor;
+                        picture.BackgroundColor = pressedBtn.BackColor;
+                        break;
+                }
             }
         }
 
         private void btnColor_DoubleClick(object sender, EventArgs e)
         {
+            MouseEventArgs mouse = (MouseEventArgs)e;
             Label pressedBtn = sender as Label;
             if (pressedBtn != null)
             {
-                if (colorDialog.ShowDialog() == DialogResult.Cancel)
+                if (mouse.Button == MouseButtons.Left)
                 {
-                    return;
-                }
-                else
-                {
-                    pressedBtn.BackColor = colorDialog.Color;
-                    lCurColor.BackColor = colorDialog.Color;
+                    if (colorDialog.ShowDialog() == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        pressedBtn.BackColor = colorDialog.Color;
+                        lCurColor.BackColor = colorDialog.Color;
+                    }
                 }
             }
         }
@@ -354,10 +397,12 @@ namespace miniPaint
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
         {
+            /*
             if (((this.WindowState == FormWindowState.Maximized) || (this.WindowState == FormWindowState.Normal)) && (picture != null))
             {
                 timerRedraw.Enabled = true;
             }
+            */
         }
 
         private void timerRedraw_Tick(object sender, EventArgs e)
@@ -397,7 +442,7 @@ namespace miniPaint
                 CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
                 if (factory != null)
                 {
-                    picture = new CPicture(PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
+                    picture = new CPicture(currentParams.PictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
                     setStandartSettings();
                     projectManager.resetProjectInfo();
                     updateWindowCaption();

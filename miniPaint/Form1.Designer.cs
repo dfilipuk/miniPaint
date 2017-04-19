@@ -32,6 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.pColors = new System.Windows.Forms.Panel();
+            this.lColor10 = new System.Windows.Forms.Label();
+            this.lColor9 = new System.Windows.Forms.Label();
+            this.lColor8 = new System.Windows.Forms.Label();
+            this.lColor7 = new System.Windows.Forms.Label();
+            this.lColor6 = new System.Windows.Forms.Label();
+            this.lColor5 = new System.Windows.Forms.Label();
+            this.lColor4 = new System.Windows.Forms.Label();
+            this.lColor3 = new System.Windows.Forms.Label();
+            this.lColor2 = new System.Windows.Forms.Label();
+            this.lColor1 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.lCurColor = new System.Windows.Forms.Label();
             this.msMenu = new System.Windows.Forms.MenuStrip();
@@ -57,16 +67,6 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.lBlack = new System.Windows.Forms.Label();
-            this.lWhite = new System.Windows.Forms.Label();
-            this.lRed = new System.Windows.Forms.Label();
-            this.lOrange = new System.Windows.Forms.Label();
-            this.lYellow = new System.Windows.Forms.Label();
-            this.lLime = new System.Windows.Forms.Label();
-            this.lAqua = new System.Windows.Forms.Label();
-            this.lBlue = new System.Windows.Forms.Label();
-            this.lFuchsia = new System.Windows.Forms.Label();
-            this.lMaroon = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -91,22 +91,123 @@
             // 
             this.pColors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pColors.Controls.Add(this.lMaroon);
-            this.pColors.Controls.Add(this.lFuchsia);
-            this.pColors.Controls.Add(this.lBlue);
-            this.pColors.Controls.Add(this.lAqua);
-            this.pColors.Controls.Add(this.lLime);
-            this.pColors.Controls.Add(this.lYellow);
-            this.pColors.Controls.Add(this.lOrange);
-            this.pColors.Controls.Add(this.lRed);
-            this.pColors.Controls.Add(this.lWhite);
-            this.pColors.Controls.Add(this.lBlack);
+            this.pColors.Controls.Add(this.lColor10);
+            this.pColors.Controls.Add(this.lColor9);
+            this.pColors.Controls.Add(this.lColor8);
+            this.pColors.Controls.Add(this.lColor7);
+            this.pColors.Controls.Add(this.lColor6);
+            this.pColors.Controls.Add(this.lColor5);
+            this.pColors.Controls.Add(this.lColor4);
+            this.pColors.Controls.Add(this.lColor3);
+            this.pColors.Controls.Add(this.lColor2);
+            this.pColors.Controls.Add(this.lColor1);
             this.pColors.Controls.Add(this.btnEdit);
             this.pColors.Controls.Add(this.lCurColor);
             this.pColors.Location = new System.Drawing.Point(1400, 42);
             this.pColors.Name = "pColors";
             this.pColors.Size = new System.Drawing.Size(70, 749);
             this.pColors.TabIndex = 1;
+            // 
+            // lColor10
+            // 
+            this.lColor10.BackColor = System.Drawing.Color.Maroon;
+            this.lColor10.Location = new System.Drawing.Point(40, 134);
+            this.lColor10.Name = "lColor10";
+            this.lColor10.Size = new System.Drawing.Size(25, 25);
+            this.lColor10.TabIndex = 27;
+            this.lColor10.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor10.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor9
+            // 
+            this.lColor9.BackColor = System.Drawing.Color.Fuchsia;
+            this.lColor9.Location = new System.Drawing.Point(10, 134);
+            this.lColor9.Name = "lColor9";
+            this.lColor9.Size = new System.Drawing.Size(25, 25);
+            this.lColor9.TabIndex = 26;
+            this.lColor9.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor9.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor8
+            // 
+            this.lColor8.BackColor = System.Drawing.Color.Blue;
+            this.lColor8.Location = new System.Drawing.Point(40, 103);
+            this.lColor8.Name = "lColor8";
+            this.lColor8.Size = new System.Drawing.Size(25, 25);
+            this.lColor8.TabIndex = 25;
+            this.lColor8.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor8.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor7
+            // 
+            this.lColor7.BackColor = System.Drawing.Color.Aqua;
+            this.lColor7.Location = new System.Drawing.Point(9, 103);
+            this.lColor7.Name = "lColor7";
+            this.lColor7.Size = new System.Drawing.Size(25, 25);
+            this.lColor7.TabIndex = 24;
+            this.lColor7.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor7.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor6
+            // 
+            this.lColor6.BackColor = System.Drawing.Color.Lime;
+            this.lColor6.Location = new System.Drawing.Point(40, 72);
+            this.lColor6.Name = "lColor6";
+            this.lColor6.Size = new System.Drawing.Size(25, 25);
+            this.lColor6.TabIndex = 23;
+            this.lColor6.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor6.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor5
+            // 
+            this.lColor5.BackColor = System.Drawing.Color.Yellow;
+            this.lColor5.Location = new System.Drawing.Point(10, 72);
+            this.lColor5.Name = "lColor5";
+            this.lColor5.Size = new System.Drawing.Size(25, 25);
+            this.lColor5.TabIndex = 22;
+            this.lColor5.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor5.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor4
+            // 
+            this.lColor4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lColor4.Location = new System.Drawing.Point(40, 41);
+            this.lColor4.Name = "lColor4";
+            this.lColor4.Size = new System.Drawing.Size(25, 25);
+            this.lColor4.TabIndex = 21;
+            this.lColor4.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor4.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor3
+            // 
+            this.lColor3.BackColor = System.Drawing.Color.Red;
+            this.lColor3.Location = new System.Drawing.Point(10, 41);
+            this.lColor3.Name = "lColor3";
+            this.lColor3.Size = new System.Drawing.Size(25, 25);
+            this.lColor3.TabIndex = 20;
+            this.lColor3.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor3.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor2
+            // 
+            this.lColor2.BackColor = System.Drawing.Color.White;
+            this.lColor2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lColor2.Location = new System.Drawing.Point(40, 10);
+            this.lColor2.Name = "lColor2";
+            this.lColor2.Size = new System.Drawing.Size(25, 25);
+            this.lColor2.TabIndex = 19;
+            this.lColor2.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor2.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
+            // 
+            // lColor1
+            // 
+            this.lColor1.BackColor = System.Drawing.Color.Black;
+            this.lColor1.Location = new System.Drawing.Point(10, 10);
+            this.lColor1.Name = "lColor1";
+            this.lColor1.Size = new System.Drawing.Size(25, 25);
+            this.lColor1.TabIndex = 18;
+            this.lColor1.Click += new System.EventHandler(this.btnColor_Click);
+            this.lColor1.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
             // 
             // btnEdit
             // 
@@ -305,107 +406,6 @@
             // 
             this.colorDialog.FullOpen = true;
             // 
-            // lBlack
-            // 
-            this.lBlack.BackColor = System.Drawing.Color.Black;
-            this.lBlack.Location = new System.Drawing.Point(10, 10);
-            this.lBlack.Name = "lBlack";
-            this.lBlack.Size = new System.Drawing.Size(25, 25);
-            this.lBlack.TabIndex = 18;
-            this.lBlack.Click += new System.EventHandler(this.btnColor_Click);
-            this.lBlack.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lWhite
-            // 
-            this.lWhite.BackColor = System.Drawing.Color.White;
-            this.lWhite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lWhite.Location = new System.Drawing.Point(40, 10);
-            this.lWhite.Name = "lWhite";
-            this.lWhite.Size = new System.Drawing.Size(25, 25);
-            this.lWhite.TabIndex = 19;
-            this.lWhite.Click += new System.EventHandler(this.btnColor_Click);
-            this.lWhite.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lRed
-            // 
-            this.lRed.BackColor = System.Drawing.Color.Red;
-            this.lRed.Location = new System.Drawing.Point(10, 41);
-            this.lRed.Name = "lRed";
-            this.lRed.Size = new System.Drawing.Size(25, 25);
-            this.lRed.TabIndex = 20;
-            this.lRed.Click += new System.EventHandler(this.btnColor_Click);
-            this.lRed.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lOrange
-            // 
-            this.lOrange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lOrange.Location = new System.Drawing.Point(40, 41);
-            this.lOrange.Name = "lOrange";
-            this.lOrange.Size = new System.Drawing.Size(25, 25);
-            this.lOrange.TabIndex = 21;
-            this.lOrange.Click += new System.EventHandler(this.btnColor_Click);
-            this.lOrange.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lYellow
-            // 
-            this.lYellow.BackColor = System.Drawing.Color.Yellow;
-            this.lYellow.Location = new System.Drawing.Point(10, 72);
-            this.lYellow.Name = "lYellow";
-            this.lYellow.Size = new System.Drawing.Size(25, 25);
-            this.lYellow.TabIndex = 22;
-            this.lYellow.Click += new System.EventHandler(this.btnColor_Click);
-            this.lYellow.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lLime
-            // 
-            this.lLime.BackColor = System.Drawing.Color.Lime;
-            this.lLime.Location = new System.Drawing.Point(40, 72);
-            this.lLime.Name = "lLime";
-            this.lLime.Size = new System.Drawing.Size(25, 25);
-            this.lLime.TabIndex = 23;
-            this.lLime.Click += new System.EventHandler(this.btnColor_Click);
-            this.lLime.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lAqua
-            // 
-            this.lAqua.BackColor = System.Drawing.Color.Aqua;
-            this.lAqua.Location = new System.Drawing.Point(9, 103);
-            this.lAqua.Name = "lAqua";
-            this.lAqua.Size = new System.Drawing.Size(25, 25);
-            this.lAqua.TabIndex = 24;
-            this.lAqua.Click += new System.EventHandler(this.btnColor_Click);
-            this.lAqua.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lBlue
-            // 
-            this.lBlue.BackColor = System.Drawing.Color.Blue;
-            this.lBlue.Location = new System.Drawing.Point(40, 103);
-            this.lBlue.Name = "lBlue";
-            this.lBlue.Size = new System.Drawing.Size(25, 25);
-            this.lBlue.TabIndex = 25;
-            this.lBlue.Click += new System.EventHandler(this.btnColor_Click);
-            this.lBlue.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lFuchsia
-            // 
-            this.lFuchsia.BackColor = System.Drawing.Color.Fuchsia;
-            this.lFuchsia.Location = new System.Drawing.Point(10, 134);
-            this.lFuchsia.Name = "lFuchsia";
-            this.lFuchsia.Size = new System.Drawing.Size(25, 25);
-            this.lFuchsia.TabIndex = 26;
-            this.lFuchsia.Click += new System.EventHandler(this.btnColor_Click);
-            this.lFuchsia.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
-            // lMaroon
-            // 
-            this.lMaroon.BackColor = System.Drawing.Color.Maroon;
-            this.lMaroon.Location = new System.Drawing.Point(40, 134);
-            this.lMaroon.Name = "lMaroon";
-            this.lMaroon.Size = new System.Drawing.Size(25, 25);
-            this.lMaroon.TabIndex = 27;
-            this.lMaroon.Click += new System.EventHandler(this.btnColor_Click);
-            this.lMaroon.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -463,16 +463,16 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteLastFigureInGroup;
         private System.Windows.Forms.ToolStripMenuItem tsmiSaveGroup;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.Label lBlack;
-        private System.Windows.Forms.Label lWhite;
-        private System.Windows.Forms.Label lRed;
-        private System.Windows.Forms.Label lOrange;
-        private System.Windows.Forms.Label lYellow;
-        private System.Windows.Forms.Label lLime;
-        private System.Windows.Forms.Label lAqua;
-        private System.Windows.Forms.Label lBlue;
-        private System.Windows.Forms.Label lFuchsia;
-        private System.Windows.Forms.Label lMaroon;
+        private System.Windows.Forms.Label lColor1;
+        private System.Windows.Forms.Label lColor2;
+        private System.Windows.Forms.Label lColor3;
+        private System.Windows.Forms.Label lColor4;
+        private System.Windows.Forms.Label lColor5;
+        private System.Windows.Forms.Label lColor6;
+        private System.Windows.Forms.Label lColor7;
+        private System.Windows.Forms.Label lColor8;
+        private System.Windows.Forms.Label lColor9;
+        private System.Windows.Forms.Label lColor10;
     }
 }
 
