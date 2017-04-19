@@ -69,6 +69,16 @@ namespace miniPaint
             Redraw(gCanvas);
         }
 
+        public void ChangeCanvasSize()
+        {
+            if ((curPicture.Width != 0) && (curPicture.Height != 0))
+            {
+                buffer = new Bitmap(curPicture.Width, curPicture.Height);
+                gCanvas = Graphics.FromImage(buffer);
+                Redraw(gCanvas);
+            }
+        }
+
         public void selectFigure(int x, int y)
         {
             unsetSelection();

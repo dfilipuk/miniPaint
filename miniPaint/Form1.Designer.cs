@@ -67,6 +67,8 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.SetStandartAppParams = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -211,7 +213,6 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
             this.btnEdit.Location = new System.Drawing.Point(10, 258);
@@ -236,7 +237,8 @@
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFile,
             this.tsmiEdit,
-            this.tsmiGroups});
+            this.tsmiGroups,
+            this.tsmiSettings});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(1482, 28);
@@ -406,6 +408,23 @@
             // 
             this.colorDialog.FullOpen = true;
             // 
+            // tsmiSettings
+            // 
+            this.tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SetStandartAppParams});
+            this.tsmiSettings.Name = "tsmiSettings";
+            this.tsmiSettings.Size = new System.Drawing.Size(96, 24);
+            this.tsmiSettings.Text = "Настройки";
+            // 
+            // SetStandartAppParams
+            // 
+            this.SetStandartAppParams.Name = "SetStandartAppParams";
+            this.SetStandartAppParams.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.D)));
+            this.SetStandartAppParams.Size = new System.Drawing.Size(462, 26);
+            this.SetStandartAppParams.Text = "Восстановить параметры по умолчанию";
+            this.SetStandartAppParams.Click += new System.EventHandler(this.SetStandartAppParams_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -416,14 +435,14 @@
             this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.msMenu);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMenu;
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1500, 850);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "miniPaint";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.pColors.ResumeLayout(false);
@@ -473,6 +492,8 @@
         private System.Windows.Forms.Label lColor8;
         private System.Windows.Forms.Label lColor9;
         private System.Windows.Forms.Label lColor10;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
+        private System.Windows.Forms.ToolStripMenuItem SetStandartAppParams;
     }
 }
 

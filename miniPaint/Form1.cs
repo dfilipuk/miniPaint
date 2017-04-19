@@ -37,7 +37,8 @@ namespace miniPaint
         CFiguresGroupManager figuresGroupManager;
         List<Button> figuresBtns;
         PictureMode prevMode;
-        CAppParams standartParams, currentParams;
+        CAppParams standartParams;
+        Color currentPictureBackgroundColor;
         int curBtnX, curBtnY;
 
         public frmMain()
@@ -46,14 +47,12 @@ namespace miniPaint
 
             curBtnX = 8;
             curBtnY = 260;
+            currentPictureBackgroundColor = STANDART_CANVAS_COLOR;
 
             figuresBtns = new List<Button>();
             userInterface = new CViewer(this);
             projectManager = new CProjectInfo(userInterface);
             figuresLoader = new CFiguresLoader(userInterface);
-
-            standartParams = GetApplicationParametrs();
-            currentParams = GetApplicationParametrs();
 
             figuresLoader.LoadFigures();
             CTwoDFigureFactory.LoadedFactories = figuresLoader.LoadedMethods;
@@ -63,7 +62,7 @@ namespace miniPaint
             CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
             if (factory != null)
             {
-                picture = new CPicture(currentParams.PictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
+                picture = new CPicture(currentPictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
             }
 
             standartBtnColor = Color.White;
@@ -163,7 +162,7 @@ namespace miniPaint
                     {
                         throw new Exception();
                     }
-                    var newPicture = new CPicture(currentParams.PictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager, content);
+                    var newPicture = new CPicture(currentPictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager, content);
                     picture = newPicture;
                     setStandartSettings();
                     return true;
@@ -249,7 +248,7 @@ namespace miniPaint
             res.IsMaximized = (this.WindowState == FormWindowState.Maximized);
             res.WindowLocation = new Point(this.Location.X, this.Location.Y);
             res.WindowSize = new Size(this.Size.Width, this.Size.Height);
-            res.PictureBackgroundColor = STANDART_CANVAS_COLOR;
+            res.PictureBackgroundColor = currentPictureBackgroundColor;
             res.Color1 = lColor1.BackColor;
             res.Color2 = lColor2.BackColor;
             res.Color3 = lColor3.BackColor;
@@ -262,6 +261,36 @@ namespace miniPaint
             res.Color10 = lColor10.BackColor;
 
             return res;
+        }
+
+        private void SetApplicationsParametrs(CAppParams appParams)
+        {
+            if (appParams.IsMaximized)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            this.Size = new Size(appParams.WindowSize.Width, appParams.WindowSize.Height);
+            this.Location = new Point(appParams.WindowLocation.X, appParams.WindowLocation.Y);
+            currentPictureBackgroundColor = appParams.PictureBackgroundColor;
+            lColor1.BackColor = appParams.Color1;
+            lColor2.BackColor = appParams.Color2;
+            lColor3.BackColor = appParams.Color3;
+            lColor4.BackColor = appParams.Color4;
+            lColor5.BackColor = appParams.Color5;
+            lColor6.BackColor = appParams.Color6;
+            lColor7.BackColor = appParams.Color7;
+            lColor8.BackColor = appParams.Color8;
+            lColor9.BackColor = appParams.Color9;
+            lColor10.BackColor = appParams.Color10;
+
+            if (picture != null)
+            {
+                picture.BackgroundColor = currentPictureBackgroundColor;
+            }
         }
 
         private void setStandartSettings()
@@ -316,7 +345,7 @@ namespace miniPaint
                         ChangeColor(pressedBtn.BackColor);
                         break;
                     case MouseButtons.Right:
-                        currentParams.PictureBackgroundColor = pressedBtn.BackColor;
+                        currentPictureBackgroundColor = pressedBtn.BackColor;
                         picture.BackgroundColor = pressedBtn.BackColor;
                         break;
                 }
@@ -397,6 +426,10 @@ namespace miniPaint
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
         {
+            if (picture != null)
+            {
+                picture.ChangeCanvasSize();
+            }
             /*
             if (((this.WindowState == FormWindowState.Maximized) || (this.WindowState == FormWindowState.Normal)) && (picture != null))
             {
@@ -442,7 +475,7 @@ namespace miniPaint
                 CTwoDFigureFactory factory = CTwoDFigureFactory.GetFactory(0);
                 if (factory != null)
                 {
-                    picture = new CPicture(currentParams.PictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
+                    picture = new CPicture(currentPictureBackgroundColor, PictureBox, factory, PictureMode.pmEdit, figuresGroupManager);
                     setStandartSettings();
                     projectManager.resetProjectInfo();
                     updateWindowCaption();
@@ -515,6 +548,16 @@ namespace miniPaint
             {
                 ChangeColor(colorDialog.Color);
             }
+        }
+
+        private void SetStandartAppParams_Click(object sender, EventArgs e)
+        {
+            SetApplicationsParametrs(standartParams);
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            standartParams = GetApplicationParametrs();
         }
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
