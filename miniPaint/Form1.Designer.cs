@@ -63,12 +63,12 @@
             this.tsmiNewGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteLastFigureInGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaveGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.SetStandartAppParams = new System.Windows.Forms.ToolStripMenuItem();
             this.timerRedraw = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.SetStandartAppParams = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -229,7 +229,8 @@
             this.lCurColor.Name = "lCurColor";
             this.lCurColor.Size = new System.Drawing.Size(50, 50);
             this.lCurColor.TabIndex = 10;
-            this.lCurColor.Click += new System.EventHandler(this.lCurColor_Click);
+            this.lCurColor.Click += new System.EventHandler(this.btnColor_Click);
+            this.lCurColor.DoubleClick += new System.EventHandler(this.btnColor_DoubleClick);
             // 
             // msMenu
             // 
@@ -391,23 +392,6 @@
             this.tsmiSaveGroup.Text = "Сохранить группу";
             this.tsmiSaveGroup.Click += new System.EventHandler(this.tsmiSaveGroup_Click);
             // 
-            // timerRedraw
-            // 
-            this.timerRedraw.Tick += new System.EventHandler(this.timerRedraw_Tick);
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.FileName = "Picture1";
-            this.saveFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
-            // 
-            // colorDialog
-            // 
-            this.colorDialog.FullOpen = true;
-            // 
             // tsmiSettings
             // 
             this.tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -424,6 +408,23 @@
             this.SetStandartAppParams.Size = new System.Drawing.Size(462, 26);
             this.SetStandartAppParams.Text = "Восстановить параметры по умолчанию";
             this.SetStandartAppParams.Click += new System.EventHandler(this.SetStandartAppParams_Click);
+            // 
+            // timerRedraw
+            // 
+            this.timerRedraw.Tick += new System.EventHandler(this.timerRedraw_Tick);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.FileName = "Picture1";
+            this.saveFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            // 
+            // colorDialog
+            // 
+            this.colorDialog.FullOpen = true;
             // 
             // frmMain
             // 

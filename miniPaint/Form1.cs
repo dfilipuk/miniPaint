@@ -316,6 +316,7 @@ namespace miniPaint
 
         private void ChangeColor(Color newColor)
         {
+            lCurColor.BackColor = newColor;
             if (picture != null)
             {
                 switch (picture.Mode)
@@ -326,7 +327,6 @@ namespace miniPaint
                         updateWindowCaption();
                         break;
                     case PictureMode.pmDraw:
-                        lCurColor.BackColor = newColor;
                         picture.currentColor = newColor;
                         break;
                 }
@@ -367,7 +367,6 @@ namespace miniPaint
                     else
                     {
                         pressedBtn.BackColor = colorDialog.Color;
-                        lCurColor.BackColor = colorDialog.Color;
                     }
                 }
             }
@@ -536,18 +535,6 @@ namespace miniPaint
         {
             figuresGroupManager.SaveGroup();
             picture.Mode = prevMode;
-        }
-
-        private void lCurColor_Click(object sender, EventArgs e)
-        {
-            if (colorDialog.ShowDialog() == DialogResult.Cancel)
-            {
-                return;
-            }
-            else
-            {
-                ChangeColor(colorDialog.Color);
-            }
         }
 
         private void SetStandartAppParams_Click(object sender, EventArgs e)
