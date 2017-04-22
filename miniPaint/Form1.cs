@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using Inheritance;
 
 namespace miniPaint
@@ -24,6 +25,8 @@ namespace miniPaint
         const string ERROR_CAPTION = "Ошибка!";
         const string FAIL_TO_SAVE_MESSG = "Не удалось сохранить рисунок!";
         const string FAIL_TO_LOAD_MESSG = "Не удалось загрузить рисунок!";
+        const string FAIL_TO_EXPORT_PARAMS = "Не удалось экспортировать параметры!";
+        const string FAIL_TO_IMPORTD_PARAMS = "Не удалось импортировать параметры!";
 
         const string CAPTION_NOT_SAVED_NEW = "*miniPaint";
         const string CAPTION_SAVED_NEW = "miniPaint";
@@ -39,7 +42,7 @@ namespace miniPaint
         PictureMode prevMode;
         CAppParams standartParams;
         Color currentPictureBackgroundColor;
-        int curBtnX, curBtnY;
+        int curBtnX, curBtnY, locationX, locationY, windowHeight, windowWidth;
 
         public frmMain()
         {
@@ -47,6 +50,8 @@ namespace miniPaint
 
             curBtnX = 8;
             curBtnY = 260;
+            locationX = 0;
+            locationY = 0;
             currentPictureBackgroundColor = STANDART_CANVAS_COLOR;
 
             figuresBtns = new List<Button>();
@@ -246,19 +251,19 @@ namespace miniPaint
             CAppParams res = new CAppParams();
 
             res.IsMaximized = (this.WindowState == FormWindowState.Maximized);
-            res.WindowLocation = new Point(this.Location.X, this.Location.Y);
-            res.WindowSize = new Size(this.Size.Width, this.Size.Height);
+            res.WindowLocation = new Point(locationX, locationY);
+            res.WindowSize = new Size(windowWidth, windowHeight);
             res.PictureBackgroundColor = currentPictureBackgroundColor;
-            res.Color1 = lColor1.BackColor;
-            res.Color2 = lColor2.BackColor;
-            res.Color3 = lColor3.BackColor;
-            res.Color4 = lColor4.BackColor;
-            res.Color5 = lColor5.BackColor;
-            res.Color6 = lColor6.BackColor;
-            res.Color7 = lColor7.BackColor;
-            res.Color8 = lColor8.BackColor;
-            res.Color9 = lColor9.BackColor;
-            res.Color10 = lColor10.BackColor;
+            res.Colors[0] = lColor1.BackColor;
+            res.Colors[1] = lColor2.BackColor;
+            res.Colors[2] = lColor3.BackColor;
+            res.Colors[3] = lColor4.BackColor;
+            res.Colors[4] = lColor5.BackColor;
+            res.Colors[5] = lColor6.BackColor;
+            res.Colors[6] = lColor7.BackColor;
+            res.Colors[7] = lColor8.BackColor;
+            res.Colors[8] = lColor9.BackColor;
+            res.Colors[9] = lColor10.BackColor;
 
             return res;
         }
@@ -276,21 +281,107 @@ namespace miniPaint
             this.Size = new Size(appParams.WindowSize.Width, appParams.WindowSize.Height);
             this.Location = new Point(appParams.WindowLocation.X, appParams.WindowLocation.Y);
             currentPictureBackgroundColor = appParams.PictureBackgroundColor;
-            lColor1.BackColor = appParams.Color1;
-            lColor2.BackColor = appParams.Color2;
-            lColor3.BackColor = appParams.Color3;
-            lColor4.BackColor = appParams.Color4;
-            lColor5.BackColor = appParams.Color5;
-            lColor6.BackColor = appParams.Color6;
-            lColor7.BackColor = appParams.Color7;
-            lColor8.BackColor = appParams.Color8;
-            lColor9.BackColor = appParams.Color9;
-            lColor10.BackColor = appParams.Color10;
+            lColor1.BackColor = appParams.Colors[0];
+            lColor2.BackColor = appParams.Colors[1];
+            lColor3.BackColor = appParams.Colors[2];
+            lColor4.BackColor = appParams.Colors[3];
+            lColor5.BackColor = appParams.Colors[4];
+            lColor6.BackColor = appParams.Colors[5];
+            lColor7.BackColor = appParams.Colors[6];
+            lColor8.BackColor = appParams.Colors[7];
+            lColor9.BackColor = appParams.Colors[8];
+            lColor10.BackColor = appParams.Colors[9];
 
             if (picture != null)
             {
                 picture.BackgroundColor = currentPictureBackgroundColor;
             }
+        }
+
+        private void MakeXMLfile(string path)
+        {
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Encoding = Encoding.UTF8;
+            XmlWriter writer = XmlWriter.Create(path, settings);
+
+            writer.WriteStartDocument();
+            writer.WriteStartElement("params");
+            writer.WriteEndElement();
+            writer.Close();
+        }
+
+        private bool SaveApplicationParametrsToFile(string path, CAppParams appParams)
+        {
+            try
+            {
+                MakeXMLfile(path);
+                XmlDocument document = new XmlDocument();
+                document.Load(path);
+
+                XmlNode elWindow = document.CreateElement("window");
+
+                XmlNode elLocation = document.CreateElement("location");
+
+                XmlNode elX = document.CreateElement("X");
+                XmlNode elY = document.CreateElement("Y");
+
+                elX.InnerText = appParams.WindowLocation.X.ToString();
+                elY.InnerText = appParams.WindowLocation.Y.ToString();
+                elLocation.AppendChild(elX);
+                elLocation.AppendChild(elY);
+                elWindow.AppendChild(elLocation);
+
+                XmlNode elIsmax = document.CreateElement("ismax");
+
+                elIsmax.InnerText = appParams.IsMaximized.ToString();
+                elWindow.AppendChild(elIsmax);
+
+                XmlNode elSize = document.CreateElement("size");
+
+                XmlNode elHeight = document.CreateElement("height");
+                XmlNode elWidth = document.CreateElement("width");
+
+                elHeight.InnerText = appParams.WindowSize.Height.ToString();
+                elWidth.InnerText = appParams.WindowSize.Width.ToString();
+                elSize.AppendChild(elHeight);
+                elSize.AppendChild(elWidth);
+                elWindow.AppendChild(elSize);
+                document.DocumentElement.AppendChild(elWindow);
+
+                XmlNode elWorkspace = document.CreateElement("workspace");
+
+                XmlNode elBackgroundcolor = document.CreateElement("backgroundcolor");
+
+                elBackgroundcolor.InnerText = appParams.PictureBackgroundColor.ToArgb().ToString();
+                elWorkspace.AppendChild(elBackgroundcolor);
+
+                XmlNode elPallete = document.CreateElement("pallete");
+
+                XmlNode elPalletecolor;
+
+                string elName;
+                for (int i = 0; i < appParams.Colors.Length; i++)
+                {
+                    elName = String.Format("color{0}", i);
+                    elPalletecolor = document.CreateElement(elName);
+                    elPalletecolor.InnerText = appParams.Colors[i].ToArgb().ToString();
+                    elPallete.AppendChild(elPalletecolor);
+                }
+
+                elWorkspace.AppendChild(elPallete);
+                document.DocumentElement.AppendChild(elWorkspace);
+                document.Save(path);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private CAppParams LoadApplicationParametrsFromFile(string path)
+        {
+            return null;
         }
 
         private void setStandartSettings()
@@ -425,6 +516,12 @@ namespace miniPaint
 
         private void frmMain_SizeChanged(object sender, EventArgs e)
         {
+            if (this.WindowState != FormWindowState.Maximized)
+            {
+                windowHeight = this.Size.Height;
+                windowWidth = this.Size.Width;
+            }
+
             if (picture != null)
             {
                 picture.ChangeCanvasSize();
@@ -545,6 +642,40 @@ namespace miniPaint
         private void frmMain_Shown(object sender, EventArgs e)
         {
             standartParams = GetApplicationParametrs();
+        }
+
+        private void frmMain_LocationChanged(object sender, EventArgs e)
+        {
+            locationX = this.Location.X < 0 ? locationX : this.Location.X;
+            locationY = this.Location.Y < 0 ? locationY : this.Location.Y;
+        }
+
+        private void tsmiExportAppParams_Click(object sender, EventArgs e)
+        {
+            if (XMLsaveFileDialog.ShowDialog() != DialogResult.Cancel)
+            {
+                CAppParams currentParams = GetApplicationParametrs();
+                if (!SaveApplicationParametrsToFile(XMLsaveFileDialog.FileName, currentParams))
+                {
+                    showErrorMessageBox(FAIL_TO_EXPORT_PARAMS);
+                }
+            }
+        }
+
+        private void tsmiImportAppParams_Click(object sender, EventArgs e)
+        {
+            if (XMLopenFileDialog.ShowDialog() != DialogResult.Cancel)
+            {
+                CAppParams loadedParams = LoadApplicationParametrsFromFile(XMLopenFileDialog.FileName);
+                if (loadedParams != null)
+                {
+                    SetApplicationsParametrs(loadedParams);
+                }
+                else
+                {
+                    showErrorMessageBox(FAIL_TO_IMPORTD_PARAMS);
+                }
+            }
         }
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)

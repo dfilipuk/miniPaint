@@ -69,6 +69,10 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.XMLsaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.XMLopenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.tsmiExportAppParams = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiImportAppParams = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.pColors.SuspendLayout();
             this.msMenu.SuspendLayout();
@@ -395,7 +399,9 @@
             // tsmiSettings
             // 
             this.tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SetStandartAppParams});
+            this.SetStandartAppParams,
+            this.tsmiExportAppParams,
+            this.tsmiImportAppParams});
             this.tsmiSettings.Name = "tsmiSettings";
             this.tsmiSettings.Size = new System.Drawing.Size(96, 24);
             this.tsmiSettings.Text = "Настройки";
@@ -405,7 +411,7 @@
             this.SetStandartAppParams.Name = "SetStandartAppParams";
             this.SetStandartAppParams.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.D)));
-            this.SetStandartAppParams.Size = new System.Drawing.Size(462, 26);
+            this.SetStandartAppParams.Size = new System.Drawing.Size(465, 26);
             this.SetStandartAppParams.Text = "Восстановить параметры по умолчанию";
             this.SetStandartAppParams.Click += new System.EventHandler(this.SetStandartAppParams_Click);
             // 
@@ -417,14 +423,45 @@
             // 
             this.saveFileDialog.FileName = "Picture1";
             this.saveFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            this.saveFileDialog.RestoreDirectory = true;
             // 
             // openFileDialog
             // 
             this.openFileDialog.Filter = "Рисунок miniPaint(*.mp)|*.mp";
+            this.openFileDialog.RestoreDirectory = true;
             // 
             // colorDialog
             // 
             this.colorDialog.FullOpen = true;
+            // 
+            // XMLsaveFileDialog
+            // 
+            this.XMLsaveFileDialog.FileName = "mpconfig";
+            this.XMLsaveFileDialog.Filter = "Файл конфигурации miniPaint(*.xml)|*.xml";
+            this.XMLsaveFileDialog.RestoreDirectory = true;
+            // 
+            // XMLopenFileDialog
+            // 
+            this.XMLopenFileDialog.Filter = "Файл конфигурации miniPaint(*.xml)|*.xml";
+            this.XMLopenFileDialog.RestoreDirectory = true;
+            // 
+            // tsmiExportAppParams
+            // 
+            this.tsmiExportAppParams.Name = "tsmiExportAppParams";
+            this.tsmiExportAppParams.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.tsmiExportAppParams.Size = new System.Drawing.Size(465, 26);
+            this.tsmiExportAppParams.Text = "Экспортировать параметры приложения";
+            this.tsmiExportAppParams.Click += new System.EventHandler(this.tsmiExportAppParams_Click);
+            // 
+            // tsmiImportAppParams
+            // 
+            this.tsmiImportAppParams.Name = "tsmiImportAppParams";
+            this.tsmiImportAppParams.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
+            this.tsmiImportAppParams.Size = new System.Drawing.Size(465, 26);
+            this.tsmiImportAppParams.Text = "Импортировать параметры приложения";
+            this.tsmiImportAppParams.Click += new System.EventHandler(this.tsmiImportAppParams_Click);
             // 
             // frmMain
             // 
@@ -444,6 +481,7 @@
             this.Text = "miniPaint";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
+            this.LocationChanged += new System.EventHandler(this.frmMain_LocationChanged);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.pColors.ResumeLayout(false);
@@ -495,6 +533,10 @@
         private System.Windows.Forms.Label lColor10;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
         private System.Windows.Forms.ToolStripMenuItem SetStandartAppParams;
+        private System.Windows.Forms.SaveFileDialog XMLsaveFileDialog;
+        private System.Windows.Forms.OpenFileDialog XMLopenFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExportAppParams;
+        private System.Windows.Forms.ToolStripMenuItem tsmiImportAppParams;
     }
 }
 
