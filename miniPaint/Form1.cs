@@ -21,11 +21,13 @@ namespace miniPaint
         const int BTN_FIGURE_SIZE_PX = 41;
         const int BTN_FIGURE_DELIMITER_SIZE_PX = 1;
 
+        const string CONFIG_FILE_PATH = "data/mpconfig.xml";
+
         const string ERROR_CAPTION = "Ошибка!";
         const string FAIL_TO_SAVE_MESSG = "Не удалось сохранить рисунок!";
         const string FAIL_TO_LOAD_MESSG = "Не удалось загрузить рисунок!";
         const string FAIL_TO_EXPORT_PARAMS = "Не удалось экспортировать параметры!";
-        const string FAIL_TO_IMPORTD_PARAMS = "Не удалось импортировать параметры!";
+        const string FAIL_TO_IMPORT_PARAMS = "Не удалось импортировать параметры!";
 
         const string CAPTION_NOT_SAVED_NEW = "*miniPaint";
         const string CAPTION_SAVED_NEW = "miniPaint";
@@ -269,10 +271,72 @@ namespace miniPaint
             return res;
         }
 
+        private void GetSizeAndLocation(Size size, Point location, out Size newSize, out Point newLocation)
+        {
+            int height, width, x, y;
+            bool sizeChanged = false;
+            Rectangle displayArea = Screen.PrimaryScreen.WorkingArea;
+            
+            if (size.Height > displayArea.Height)
+            {
+                height = displayArea.Height;
+                sizeChanged = true;
+            }
+            else
+            {
+                height = size.Height;
+            }
+
+            if (size.Width > displayArea.Width)
+            {
+                width = displayArea.Width;
+                sizeChanged = true;
+            }
+            else
+            {
+                width = size.Width;
+            }
+
+            if (sizeChanged)
+            {
+                x = 0;
+                y = 0;
+            }
+            else
+            {
+                if (((location.X < 0) && ((-location.X) > width - 20)) 
+                    || ((location.X > 0) && (location.X > displayArea.Width - 20)))
+                {
+                    x = 0;
+                }
+                else
+                {
+                    x = location.X;
+                }
+
+                if (((location.Y < 0) && ((-location.Y) > height - 20))
+                    || ((location.Y > 0) && (location.Y > displayArea.Height - 20)))
+                {
+                    y = 0;
+                }
+                else
+                {
+                    y = location.Y;
+                }
+            }
+
+            newSize = new Size(width, height);
+            newLocation = new Point(x, y);
+        }
+
         private void SetApplicationsParametrs(CAppParams appParams)
         {
-            this.Size = new Size(appParams.WindowSize.Width, appParams.WindowSize.Height);
-            this.Location = new Point(appParams.WindowLocation.X, appParams.WindowLocation.Y);
+            Point newLocation;
+            System.Drawing.Size newSize;
+            GetSizeAndLocation(appParams.WindowSize, appParams.WindowLocation, out newSize, out newLocation);
+
+            this.Size = newSize;
+            this.Location = newLocation;
             if (appParams.IsMaximized)
             {
                 this.WindowState = FormWindowState.Maximized;
@@ -336,6 +400,28 @@ namespace miniPaint
                         picture.currentColor = newColor;
                         break;
                 }
+            }
+        }
+
+        private void ExportParams(string filename)
+        {
+            CAppParams currentParams = GetApplicationParametrs();
+            if (!paramsXML.SaveApplicationParametrsToFile(filename, currentParams))
+            {
+                showErrorMessageBox(FAIL_TO_EXPORT_PARAMS);
+            }
+        }
+
+        private void ImportParams(string filename)
+        {
+            CAppParams loadedParams = paramsXML.LoadApplicationParametrsFromFile(filename);
+            if (loadedParams != null)
+            {
+                SetApplicationsParametrs(loadedParams);
+            }
+            else
+            {
+                showErrorMessageBox(FAIL_TO_IMPORT_PARAMS);
             }
         }
 
@@ -496,7 +582,14 @@ namespace miniPaint
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = !projectManager.canContinue();
+            if (!projectManager.canContinue())
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                ExportParams(CONFIG_FILE_PATH);
+            }
         }
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -557,6 +650,7 @@ namespace miniPaint
         private void frmMain_Shown(object sender, EventArgs e)
         {
             standartParams = GetApplicationParametrs();
+            ImportParams(CONFIG_FILE_PATH);
         }
 
         private void frmMain_LocationChanged(object sender, EventArgs e)
@@ -569,11 +663,7 @@ namespace miniPaint
         {
             if (XMLsaveFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                CAppParams currentParams = GetApplicationParametrs();
-                if (!paramsXML.SaveApplicationParametrsToFile(XMLsaveFileDialog.FileName, currentParams))
-                {
-                    showErrorMessageBox(FAIL_TO_EXPORT_PARAMS);
-                }
+                ExportParams(XMLsaveFileDialog.FileName);
             }
         }
 
@@ -581,15 +671,7 @@ namespace miniPaint
         {
             if (XMLopenFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                CAppParams loadedParams = paramsXML.LoadApplicationParametrsFromFile(XMLopenFileDialog.FileName);
-                if (loadedParams != null)
-                {
-                    SetApplicationsParametrs(loadedParams);
-                }
-                else
-                {
-                    showErrorMessageBox(FAIL_TO_IMPORTD_PARAMS);
-                }
+                ImportParams(XMLopenFileDialog.FileName); 
             }
         }
 
