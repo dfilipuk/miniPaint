@@ -60,6 +60,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="JSONparser.cs" />
+    <Compile Include="ParamsXML.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInfo.cs" />

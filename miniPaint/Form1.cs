@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using Inheritance;
 
 namespace miniPaint
@@ -42,6 +41,7 @@ namespace miniPaint
         PictureMode prevMode;
         CAppParams standartParams;
         Color currentPictureBackgroundColor;
+        CParamsXML paramsXML;
         int curBtnX, curBtnY, locationX, locationY, windowHeight, windowWidth;
 
         public frmMain()
@@ -58,6 +58,7 @@ namespace miniPaint
             userInterface = new CViewer(this);
             projectManager = new CProjectInfo(userInterface);
             figuresLoader = new CFiguresLoader(userInterface);
+            paramsXML = new CParamsXML();
 
             figuresLoader.LoadFigures();
             CTwoDFigureFactory.LoadedFactories = figuresLoader.LoadedMethods;
@@ -270,6 +271,8 @@ namespace miniPaint
 
         private void SetApplicationsParametrs(CAppParams appParams)
         {
+            this.Size = new Size(appParams.WindowSize.Width, appParams.WindowSize.Height);
+            this.Location = new Point(appParams.WindowLocation.X, appParams.WindowLocation.Y);
             if (appParams.IsMaximized)
             {
                 this.WindowState = FormWindowState.Maximized;
@@ -278,8 +281,6 @@ namespace miniPaint
             {
                 this.WindowState = FormWindowState.Normal;
             }
-            this.Size = new Size(appParams.WindowSize.Width, appParams.WindowSize.Height);
-            this.Location = new Point(appParams.WindowLocation.X, appParams.WindowLocation.Y);
             currentPictureBackgroundColor = appParams.PictureBackgroundColor;
             lColor1.BackColor = appParams.Colors[0];
             lColor2.BackColor = appParams.Colors[1];
@@ -296,92 +297,6 @@ namespace miniPaint
             {
                 picture.BackgroundColor = currentPictureBackgroundColor;
             }
-        }
-
-        private void MakeXMLfile(string path)
-        {
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Encoding = Encoding.UTF8;
-            XmlWriter writer = XmlWriter.Create(path, settings);
-
-            writer.WriteStartDocument();
-            writer.WriteStartElement("params");
-            writer.WriteEndElement();
-            writer.Close();
-        }
-
-        private bool SaveApplicationParametrsToFile(string path, CAppParams appParams)
-        {
-            try
-            {
-                MakeXMLfile(path);
-                XmlDocument document = new XmlDocument();
-                document.Load(path);
-
-                XmlNode elWindow = document.CreateElement("window");
-
-                XmlNode elLocation = document.CreateElement("location");
-
-                XmlNode elX = document.CreateElement("X");
-                XmlNode elY = document.CreateElement("Y");
-
-                elX.InnerText = appParams.WindowLocation.X.ToString();
-                elY.InnerText = appParams.WindowLocation.Y.ToString();
-                elLocation.AppendChild(elX);
-                elLocation.AppendChild(elY);
-                elWindow.AppendChild(elLocation);
-
-                XmlNode elIsmax = document.CreateElement("ismax");
-
-                elIsmax.InnerText = appParams.IsMaximized.ToString();
-                elWindow.AppendChild(elIsmax);
-
-                XmlNode elSize = document.CreateElement("size");
-
-                XmlNode elHeight = document.CreateElement("height");
-                XmlNode elWidth = document.CreateElement("width");
-
-                elHeight.InnerText = appParams.WindowSize.Height.ToString();
-                elWidth.InnerText = appParams.WindowSize.Width.ToString();
-                elSize.AppendChild(elHeight);
-                elSize.AppendChild(elWidth);
-                elWindow.AppendChild(elSize);
-                document.DocumentElement.AppendChild(elWindow);
-
-                XmlNode elWorkspace = document.CreateElement("workspace");
-
-                XmlNode elBackgroundcolor = document.CreateElement("backgroundcolor");
-
-                elBackgroundcolor.InnerText = appParams.PictureBackgroundColor.ToArgb().ToString();
-                elWorkspace.AppendChild(elBackgroundcolor);
-
-                XmlNode elPallete = document.CreateElement("pallete");
-
-                XmlNode elPalletecolor;
-
-                string elName;
-                for (int i = 0; i < appParams.Colors.Length; i++)
-                {
-                    elName = String.Format("color{0}", i);
-                    elPalletecolor = document.CreateElement(elName);
-                    elPalletecolor.InnerText = appParams.Colors[i].ToArgb().ToString();
-                    elPallete.AppendChild(elPalletecolor);
-                }
-
-                elWorkspace.AppendChild(elPallete);
-                document.DocumentElement.AppendChild(elWorkspace);
-                document.Save(path);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        private CAppParams LoadApplicationParametrsFromFile(string path)
-        {
-            return null;
         }
 
         private void setStandartSettings()
@@ -655,7 +570,7 @@ namespace miniPaint
             if (XMLsaveFileDialog.ShowDialog() != DialogResult.Cancel)
             {
                 CAppParams currentParams = GetApplicationParametrs();
-                if (!SaveApplicationParametrsToFile(XMLsaveFileDialog.FileName, currentParams))
+                if (!paramsXML.SaveApplicationParametrsToFile(XMLsaveFileDialog.FileName, currentParams))
                 {
                     showErrorMessageBox(FAIL_TO_EXPORT_PARAMS);
                 }
@@ -666,7 +581,7 @@ namespace miniPaint
         {
             if (XMLopenFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                CAppParams loadedParams = LoadApplicationParametrsFromFile(XMLopenFileDialog.FileName);
+                CAppParams loadedParams = paramsXML.LoadApplicationParametrsFromFile(XMLopenFileDialog.FileName);
                 if (loadedParams != null)
                 {
                     SetApplicationsParametrs(loadedParams);

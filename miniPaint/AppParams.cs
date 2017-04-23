@@ -9,6 +9,7 @@ namespace miniPaint
 {
     class CAppParams
     {
+        public static int ParamsAmo = 16;
         public bool IsMaximized { get; set; }
         public Size WindowSize { get; set; }
         public Point WindowLocation { get; set; }
