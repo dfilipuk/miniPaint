@@ -33,7 +33,7 @@ namespace miniPaint
         const string CAPTION_SAVED_NEW = "miniPaint";
         const string CAPTION_NOT_SAVED = "*{0} - miniPaint";
         const string CAPTION_SAVED = "{0} - miniPaint";
-
+        
         CPicture picture;
         CViewer userInterface;
         CProjectInfo projectManager;
