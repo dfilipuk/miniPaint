@@ -1,0 +1,1 @@
+[{"__type":"CLine:#miniPaint","coordinates":[{"x":381,"y":143},{"x":438,"y":373}],"curColor":{"knownColor":35,"name":null,"state":1,"value":0}},{"__type":"CLine:#miniPaint","coordinates":[{"x":438,"y":373},{"x":458,"y":456}],"curColor":{"knownColor":35,"name":null,"state":1,"value":0}}]

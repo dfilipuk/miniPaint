@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<params>
+  <window>
+    <location>
+      <x val="18" />
+      <y val="11" />
+    </location>
+    <ismax val="False" />
+    <size>
+      <height val="677" />
+      <width val="1502" />
+    </size>
+  </window>
+  <workspace>
+    <backgroundcolor val="-8224" />
+    <palette>
+      <color0 val="-8355585" />
+      <color1 val="-8224" />
+      <color2 val="-8388608" />
+      <color3 val="-65408" />
+      <color4 val="-4144960" />
+      <color5 val="-16744448" />
+      <color6 val="-9833220" />
+      <color7 val="-13462854" />
+      <color8 val="-256" />
+      <color9 val="-8060056" />
+    </palette>
+  </workspace>
+</params>

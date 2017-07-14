@@ -1,0 +1,1 @@
+[{"__type":"CCircle:#Circle","coordinates":[{"x":849,"y":108},{"x":810,"y":242}],"curColor":{"knownColor":37,"name":null,"state":1,"value":0},"radius":139},{"__type":"CLine:#Line","coordinates":[{"x":191,"y":101},{"x":349,"y":253}],"curColor":{"knownColor":166,"name":null,"state":1,"value":0}}]
