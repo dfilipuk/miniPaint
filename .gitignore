@@ -24,6 +24,14 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+!/miniPaint/bin/
+/miniPaint/bin/*
+!/miniPaint/bin/Debug/
+/miniPaint/bin/Debug/*
+!/miniPaint/bin/Debug/data/
+!/miniPaint/bin/Debug/figures/
+!/miniPaint/bin/Debug/pics/
+
 # Visual Studio 2015 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
